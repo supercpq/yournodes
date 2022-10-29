@@ -230,6 +230,7 @@ ul li {
   height: 800px;
   width: 430px;
   overflow: auto;
+  background-color: rgba(255, 255, 255, 0.15);
 }
 /* overflow-y:auto; */
 .ul-list-item {
