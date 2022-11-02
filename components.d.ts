@@ -20,7 +20,9 @@ declare module '@vue/runtime-core' {
     ElSubMenu: typeof import('element-plus/es')['ElSubMenu']
     ElSwitch: typeof import('element-plus/es')['ElSwitch']
     MainView: typeof import('./src/components/mainView.vue')['default']
+    NormalTools: typeof import('./src/components/normalTools.vue')['default']
     SearchGithub: typeof import('./src/components/searchGithub.vue')['default']
+    SearchInput: typeof import('./src/components/searchInput.vue')['default']
     SearchLocal: typeof import('./src/components/searchLocal.vue')['default']
   }
   export interface ComponentCustomProperties {
