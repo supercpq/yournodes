@@ -27,6 +27,7 @@ declare module '@vue/runtime-core' {
     SearchGithub: typeof import('./src/components/searchGithub.vue')['default']
     SearchInput: typeof import('./src/components/searchInput.vue')['default']
     SearchLocal: typeof import('./src/components/searchLocal.vue')['default']
+    ShowsearchInput: typeof import('./src/components/showsearchInput.vue')['default']
   }
   export interface ComponentCustomProperties {
     vInfiniteScroll: typeof import('element-plus/es')['ElInfiniteScroll']

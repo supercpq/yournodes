@@ -4,19 +4,19 @@ import {
   searchMoreByTitle,
   getarticle,
   getMorearticle,
-} from "src/api/mainface";
+} from "../../api/mainface";
 import axios from "axios";
 axios.defaults.timeout = 10000;
 interface searchInputItem {
   id: number;
-  name: string;
-  picUrl: string;
+  title: string;
+  url: string;
   description: string;
-  stars: number;
-  forks: number;
+  likes: number;
+  reads: number;
 }
 
-export const githubHotStore = defineStore("searchInput", {
+export const searchInputStore = defineStore("searchInput", {
   state: () => {
     return {
       list: <searchInputItem[]>[],
@@ -32,7 +32,22 @@ export const githubHotStore = defineStore("searchInput", {
     },
   },
   actions: {
-    searchInputOnce(lang: string = "vue") {},
+    searchInputOnce(input: string, url: string) {
+      if (!input.trim()) return;
+      if (url != "") {
+        window.open(url + input, "_blank");
+      } else {
+        var seIn = { input };
+        searchByTitle(seIn).then(
+          (res) => {
+            console.log(res);
+          },
+          (err) => {
+            console.log(err);
+          }
+        );
+      }
+    },
     searchInputMore() {},
     searchdefaultOnce() {},
     searchdefaultMore() {},

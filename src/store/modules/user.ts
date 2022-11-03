@@ -3,7 +3,7 @@ import { userType } from "./types";
 import { store } from "../index";
 //
 import { getToken, setToken, removeToken } from "../../utils/user";
-import { getLogin, refreshToken } from "src/api/user";
+import { getLogin, refreshToken } from "../../api/user";
 import { storageSession } from "@pureadmin/utils";
 // import { useMultiTagsStoreHook } from "/@/store/modules/multiTags";
 

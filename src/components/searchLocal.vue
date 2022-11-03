@@ -3,7 +3,9 @@
     <el-input
       v-model="inputSearch"
       placeholder="Enter your search term"
+      clearable="true"
       class="input-with-select"
+      @keyup.enter="hellogit(inputSearch, select)"
     >
       <template #prepend>
         <el-select v-model="select" placeholder="Select" style="width: 115px">
@@ -16,7 +18,7 @@
         </el-select>
       </template>
       <template #append>
-        <el-button :icon="Search" />
+        <el-button :icon="Search" @click="hellogit(inputSearch, select)" />
       </template>
     </el-input>
   </div>
@@ -24,6 +26,8 @@
 
 <script lang="ts" setup>
 import { ref, watch, onMounted } from "vue";
+import { searchInputStore } from "../store/modules/searchInputPinia";
+import _ from "lodash";
 import { Search } from "@element-plus/icons-vue";
 const inputSearch = ref("");
 const select = ref("https://www.google.com/search?q=");
@@ -59,6 +63,18 @@ const options = [
     label: "站内文章",
   },
 ];
+const inputStore = searchInputStore();
+const hellogit = _.debounce(
+  (input: string, url: string) => {
+    // inputStore.loading = true;
+    // localStorage.setItem("lang", lang);
+    inputStore.searchInputOnce(input, url);
+  },
+  200,
+  {
+    leading: true,
+  }
+);
 watch(select, (newV, oldV) => {
   localStorage.setItem("searchSelect", newV);
 });
