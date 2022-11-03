@@ -1,7 +1,16 @@
 <template>
-  <div></div>
+  <!-- interface searchInputItem {
+  id: number;
+  title: string;
+  url: string;
+  description: string;
+  likes: number;
+  reads: number;
+  pubTime: string;
+} -->
+  <div class="searchSelect"></div>
 </template>
 
-<script></script>
+<script lang="ts" setup></script>
 
 <style scoped></style>

@@ -14,6 +14,7 @@ interface searchInputItem {
   description: string;
   likes: number;
   reads: number;
+  pubTime: string;
 }
 
 export const searchInputStore = defineStore("searchInput", {

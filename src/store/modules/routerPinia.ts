@@ -11,5 +11,4 @@ export const routerStore = defineStore("routerP", {
       return state.routerPath;
     },
   },
-  //   actions: {},
 });
