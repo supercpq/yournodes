@@ -6,7 +6,7 @@
     style="background-color: rgba(255, 255, 255, 0.7)"
     @select="handleSelect"
   >
-    <el-menu-item index="title">首页</el-menu-item>
+    <el-menu-item index="">首页</el-menu-item>
     <el-menu-item index="myinfo">个人中心</el-menu-item>
     <el-sub-menu index="creator">
       <template #title
@@ -27,12 +27,12 @@
 
 <script lang="ts" setup>
 import { ref } from "vue";
-// import { useRouter, useRoute } from "vue-router";
-// const router = useRouter();
-// const route = useRoute();
-const activeIndex = ref("title");
+import { routerStore } from "../store/modules/routerPinia";
+const routerPath = routerStore();
+const activeIndex = ref("");
 const handleSelect = (key: string, keyPath: string[]) => {
   console.log(key, keyPath);
+  routerPath.routerPath = key;
 };
 </script>
 

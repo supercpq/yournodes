@@ -1,6 +1,8 @@
 <template>
-  <div class="wrapper">
-    <div class="searchInput"></div>
+  <div class="wrapperT">
+    <div class="searchInput">
+      <searchLocal />
+    </div>
     <div class="manyContents">
       <div class="two">
         <searchGithub />
@@ -14,24 +16,28 @@
 </template>
 
 <script setup lang="ts">
-import searchGithub from "./components/searchGithub.vue";
-import searchLocal from "./components/searchLocal.vue";
+import searchGithub from "../components/searchGithub.vue";
+import searchLocal from "../components/searchLocal.vue";
 </script>
 
 <style scoped>
-.wrapper {
+.wrapperT {
   display: grid;
-  grid-template-rows: 10% 90%;
+  grid-template-rows: 5% 90%;
   grid-gap: 10px;
-  grid-template-columns: 33% 34% 33%;
 }
 
 .searchInput {
   grid-row-start: 1;
+  width: 70%;
+  margin: auto;
 }
 
 .manyContents {
+  display: grid;
+  grid-gap: 10px;
   grid-row-start: 2;
+  grid-template-columns: 33% 34% 33%;
 }
 .innerwrapper {
   display: grid;

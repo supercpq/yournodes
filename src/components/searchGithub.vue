@@ -187,7 +187,9 @@ watch(value, (newValue, oldValue) => {
 onMounted(() => {
   // console.log("11111111111111111111111", localStorage.getItem("lang"));
   value.value = localStorage.getItem("lang") || "Vue";
-  hellogit(value.value);
+  if (!gitstore.show) {
+    hellogit(value.value);
+  }
 });
 </script>
 

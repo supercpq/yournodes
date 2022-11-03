@@ -10,7 +10,7 @@ interface githubHotItem {
   forks: number;
 }
 
-export const githubHotStore = defineStore("musicList", {
+export const githubHotStore = defineStore("githubHotS", {
   state: () => {
     return {
       list: <githubHotItem[]>[],
@@ -27,8 +27,6 @@ export const githubHotStore = defineStore("musicList", {
   },
   actions: {
     searchrepositories(lang: string = "vue") {
-      //按名字查找音乐列表
-      // console.log('searchMusicListByName1')
       lang = lang.trim().slice(0, 20);
       if (lang) {
         axios
