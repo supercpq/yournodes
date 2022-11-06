@@ -27,7 +27,15 @@
           v-for="item in searchinputStore.allList"
           :key="item.id"
         >
-          <div class="outsideIt-ar">
+          <div class="outsideIt-ar" @click="getfocus(item)">
+            <div class="imglinks">
+              <!-- TODO -->
+              <img
+                :src="item.imglink"
+                alt="img"
+                style="width: 90%; height: 90%; margin: auto; padding: auto"
+              />
+            </div>
             <div class="outseideItem-ar">
               <div class="itemTitle">
                 <h4>
@@ -47,6 +55,9 @@
                 </span>
                 <span>
                   &nbsp<el-icon><View /></el-icon> {{ item.reads }}
+                </span>
+                <span>
+                  &nbsp<el-icon><Clock /></el-icon> {{ item.pubTime }}
                 </span>
               </div>
             </div>
@@ -68,9 +79,15 @@ interface searchInputItem {
   likes: number;
   reads: number;
   pubTime: string;
+  imglink?: string;
 }
 
 const searchinputStore = searchInputStore();
+
+const getfocus = (item: searchInputItem) => {
+  // console.log("1aaaaaaaaaa1");
+  window.open(item.url, "_blank");
+};
 </script>
 
 <style scoped>
@@ -91,6 +108,7 @@ ul li {
   width: 3px;
   height: 3px;
 }
+
 .searchLi-ar {
   height: 800px;
   width: 430px;
@@ -119,13 +137,20 @@ ul li {
   word-break: break-word;
 }
 .outsideIt-ar {
+  display: grid;
+  /* grid-gap: 3px; */
+  grid-template-columns: 30% 70%;
   padding: 6px;
+  cursor: pointer;
+
   width: 350px;
 }
+
 .outseideItem-ar {
+  grid-column-start: 0;
   text-align: left;
   flex-grow: 1;
-  width: 350px;
+  /* width: 350px; */
   overflow: hidden;
   display: flex;
   padding: 2px;
@@ -133,7 +158,15 @@ ul li {
   background-color: rgba(255, 255, 255, 0.564);
   height: 100px;
 }
-.outsideItem:hover {
+.imglinks {
+  grid-column-start: 1;
+  background-color: rgba(255, 255, 255, 0.564);
+}
+.imglinks:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+}
+.outseideItem-ar:hover {
   background-color: rgba(255, 255, 255, 0.8);
   cursor: pointer;
 }

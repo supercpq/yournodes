@@ -15,6 +15,7 @@ interface searchInputItem {
   likes: number;
   reads: number;
   pubTime: string;
+  imglink?: string;
 }
 
 export const searchInputStore = defineStore("searchInput", {
@@ -23,6 +24,17 @@ export const searchInputStore = defineStore("searchInput", {
       list: <searchInputItem[]>[],
       inputSearch: "",
       loading: true,
+      a: {
+        // 没加载出来用的
+        id: 0,
+        title: "nothing",
+        url: "#",
+        description: "no data",
+        likes: 0,
+        reads: 0,
+        pubTime: "--",
+        imglink: "https://vitejs.dev/logo.svg",
+      },
     };
   },
   getters: {
@@ -42,10 +54,15 @@ export const searchInputStore = defineStore("searchInput", {
         var seIn = { input };
         searchByTitle(seIn).then(
           (res) => {
+            // TODO:
             console.log(res);
           },
           (err) => {
             console.log(err);
+            if (!this.show) {
+              this.list.push(this.a);
+            }
+            this.loading = false;
           }
         );
       }
@@ -58,6 +75,10 @@ export const searchInputStore = defineStore("searchInput", {
         },
         (err) => {
           console.log(err);
+          if (!this.show) {
+            this.list.push(this.a);
+          }
+          this.loading = false;
         }
       );
     },
@@ -69,6 +90,10 @@ export const searchInputStore = defineStore("searchInput", {
         },
         (err) => {
           console.log(err);
+          if (!this.show) {
+            this.list.push(this.a);
+          }
+          this.loading = false;
         }
       );
     },

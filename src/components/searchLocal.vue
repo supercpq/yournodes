@@ -3,7 +3,7 @@
     <el-input
       v-model="inputStore.inputSearch"
       placeholder="Enter your search term"
-      clearable="true"
+      :clearable="isclearable"
       class="input-with-select"
       @keyup.enter="hellogit(inputSearch, select)"
     >
@@ -33,6 +33,7 @@ import { searchInputStore } from "../store/modules/searchInputPinia";
 import _ from "lodash";
 import { Search } from "@element-plus/icons-vue";
 const inputSearch = ref("");
+const isclearable = true;
 const select = ref("https://www.google.com/search?q=");
 const value = ref("https://www.google.com/search?q=");
 const lable = ref("Google");
@@ -70,11 +71,8 @@ const inputStore = searchInputStore();
 inputStore.inputSearch = inputSearch.value;
 const hellogit = _.debounce(
   (input: string, url: string) => {
-    // inputStore.loading = true;
-    // localStorage.setItem("lang", lang);
+    inputStore.loading = true;
     inputStore.searchInputOnce(input, url);
-    inputStore.searchMore();
-    inputStore.searchdefaultOnce();
   },
   200,
   {
@@ -88,6 +86,9 @@ watch(select, (newV, oldV) => {
 onMounted(() => {
   select.value =
     localStorage.getItem("searchSelect") || "https://www.google.com/search?q=";
+  if (!inputStore.show) {
+    hellogit(value.value, "");
+  }
 });
 </script>
 
