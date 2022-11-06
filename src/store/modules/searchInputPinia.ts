@@ -48,9 +48,10 @@ export const searchInputStore = defineStore("searchInput", {
   actions: {
     searchInputOnce(input: string, url: string) {
       if (!input.trim()) return;
-      if (url != "") {
-        window.open(url + input, "_blank");
+      if (url.trim() != "") {
+        window.open(url.trim() + input, "_blank");
       } else {
+        this.loading = true;
         var seIn = { input };
         searchByTitle(seIn).then(
           (res) => {

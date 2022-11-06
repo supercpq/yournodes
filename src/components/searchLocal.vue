@@ -5,7 +5,7 @@
       placeholder="Enter your search term"
       :clearable="isclearable"
       class="input-with-select"
-      @keyup.enter="hellogit(inputSearch, select)"
+      @keyup.enter="hellogit(inputStore.inputSearch, select)"
     >
       <template #prepend>
         <el-select v-model="select" placeholder="Select" style="width: 115px">
@@ -63,7 +63,7 @@ const options = [
     label: "stackoverflow",
   },
   {
-    value: "",
+    value: " ",
     label: "站内文章",
   },
 ];
@@ -71,7 +71,6 @@ const inputStore = searchInputStore();
 inputStore.inputSearch = inputSearch.value;
 const hellogit = _.debounce(
   (input: string, url: string) => {
-    inputStore.loading = true;
     inputStore.searchInputOnce(input, url);
   },
   200,
