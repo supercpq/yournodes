@@ -7,7 +7,9 @@
       <div class="two">
         <searchGithub />
       </div>
-      <div class="three"></div>
+      <div class="three">
+        <showsearchInputVue />
+      </div>
       <div class="four"></div>
     </div>
 
@@ -18,6 +20,7 @@
 <script setup lang="ts">
 import searchGithub from "../components/searchGithub.vue";
 import searchLocal from "../components/searchLocal.vue";
+import showsearchInputVue from "../components/showsearchInput.vue";
 </script>
 
 <style scoped>

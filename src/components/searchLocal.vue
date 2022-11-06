@@ -1,7 +1,7 @@
 <template>
   <div class="mt-4">
     <el-input
-      v-model="inputSearch"
+      v-model="inputStore.inputSearch"
       placeholder="Enter your search term"
       clearable="true"
       class="input-with-select"
@@ -18,7 +18,10 @@
         </el-select>
       </template>
       <template #append>
-        <el-button :icon="Search" @click="hellogit(inputSearch, select)" />
+        <el-button
+          :icon="Search"
+          @click="hellogit(inputStore.inputSearch, select)"
+        />
       </template>
     </el-input>
   </div>
@@ -64,11 +67,14 @@ const options = [
   },
 ];
 const inputStore = searchInputStore();
+inputStore.inputSearch = inputSearch.value;
 const hellogit = _.debounce(
   (input: string, url: string) => {
     // inputStore.loading = true;
     // localStorage.setItem("lang", lang);
     inputStore.searchInputOnce(input, url);
+    inputStore.searchMore();
+    inputStore.searchdefaultOnce();
   },
   200,
   {

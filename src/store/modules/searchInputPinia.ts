@@ -3,7 +3,7 @@ import {
   searchByTitle,
   searchMoreByTitle,
   getarticle,
-  getMorearticle,
+  // getMorearticle,
 } from "../../api/mainface";
 import axios from "axios";
 axios.defaults.timeout = 10000;
@@ -21,6 +21,7 @@ export const searchInputStore = defineStore("searchInput", {
   state: () => {
     return {
       list: <searchInputItem[]>[],
+      inputSearch: "",
       loading: true,
     };
   },
@@ -49,8 +50,27 @@ export const searchInputStore = defineStore("searchInput", {
         );
       }
     },
-    searchInputMore() {},
-    searchdefaultOnce() {},
-    searchdefaultMore() {},
+    searchMore() {
+      searchMoreByTitle({ input: this.inputSearch }).then(
+        (res) => {
+          console.log(res);
+          this.loading = false;
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+    },
+    searchdefaultOnce() {
+      getarticle({ input: this.inputSearch }).then(
+        (res) => {
+          console.log(res);
+          this.loading = false;
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+    },
   },
 });
