@@ -171,12 +171,12 @@ ul li {
   cursor: pointer;
 }
 .itemTitle {
-  width: 330px;
+  width: 230px;
   height: 30px;
   margin: 2px;
 }
 .itemDecri {
-  width: 350px;
+  width: 250px;
   height: 70px;
   overflow: hidden;
   text-overflow: ellipsis;
