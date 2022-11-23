@@ -40,12 +40,7 @@ import showsearchInputVue from "../components/showsearchInput.vue";
   display: grid;
   grid-gap: 10px;
   grid-row-start: 2;
-  grid-template-columns: 33% 34% 33%;
-}
-.innerwrapper {
-  display: grid;
-  grid-gap: 10px;
-  grid-template-columns: 33% 34% 33%;
+  grid-template-columns: 33% 60% 7%;
 }
 
 .two {

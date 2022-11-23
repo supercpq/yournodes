@@ -254,6 +254,7 @@ ul li {
   text-overflow: ellipsis;
   overflow: hidden;
   word-break: break-word;
+  white-space: nowrap;
 }
 .outsideI {
   padding: 6px;

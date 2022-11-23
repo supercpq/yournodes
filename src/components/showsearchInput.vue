@@ -101,7 +101,7 @@ ul li {
 }
 .searchSelect-ar {
   height: 800px;
-  width: 430px;
+  width: 710px;
   padding: 20px;
 }
 ::-webkit-scrollbar {
@@ -111,18 +111,18 @@ ul li {
 
 .searchLi-ar {
   height: 800px;
-  width: 430px;
+  width: 730px;
   overflow: auto;
   background-color: rgba(255, 255, 255, 0.15);
 }
 /* overflow-y:auto; */
 .ul-list-item-ar {
-  width: 380px;
+  width: 690px;
   overflow: auto;
   /* display: none; */
 }
 .list-item-ar {
-  width: 350px;
+  width: 670px;
 }
 .descri {
   color: var(--jjext-color-secondary-app);
@@ -139,11 +139,10 @@ ul li {
 .outsideIt-ar {
   display: grid;
   /* grid-gap: 3px; */
-  grid-template-columns: 30% 70%;
+  grid-template-columns: 20% 80%;
   padding: 6px;
   cursor: pointer;
-
-  width: 350px;
+  width: 650px;
 }
 
 .outseideItem-ar {
@@ -156,7 +155,7 @@ ul li {
   padding: 2px;
   flex-direction: column;
   background-color: rgba(255, 255, 255, 0.564);
-  height: 100px;
+  height: 120px;
 }
 .imglinks {
   grid-column-start: 1;
@@ -171,12 +170,15 @@ ul li {
   cursor: pointer;
 }
 .itemTitle {
-  width: 230px;
+  width: 500px;
   height: 30px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   margin: 2px;
 }
 .itemDecri {
-  width: 250px;
+  width: 500px;
   height: 70px;
   overflow: hidden;
   text-overflow: ellipsis;
