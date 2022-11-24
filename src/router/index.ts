@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 
 const title = () => import("./title.vue");
+const myinfo = () => import("./myinfo.vue");
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -10,6 +11,12 @@ const routes: Array<RouteRecordRaw> = [
     meta: {
       keepAlive: true, // 需要被缓存
     },
+  },
+  {
+    path: "/myinfo",
+    name: "myinfo",
+    component: myinfo,
+    meta: {},
   },
 ];
 

@@ -172,6 +172,7 @@ ul li {
 .itemTitle {
   width: 500px;
   height: 30px;
+  font-size: large;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

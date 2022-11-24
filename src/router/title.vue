@@ -10,7 +10,9 @@
       <div class="three">
         <showsearchInputVue />
       </div>
-      <div class="four"></div>
+      <div class="four">
+        <nomalTool />
+      </div>
     </div>
 
     <!-- <searchLocal /> -->
@@ -21,10 +23,12 @@
 import searchGithub from "../components/searchGithub.vue";
 import searchLocal from "../components/searchLocal.vue";
 import showsearchInputVue from "../components/showsearchInput.vue";
+import nomalTool from "../components/normalTools.vue";
 </script>
 
 <style scoped>
 .wrapperT {
+  max-width: 1280px;
   display: grid;
   grid-template-rows: 5% 90%;
   grid-gap: 10px;
