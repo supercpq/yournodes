@@ -1,7 +1,11 @@
 <template>
-  <div></div>
+  <div>
+    <userLikesListVue />
+  </div>
 </template>
 
-<script></script>
+<script setup lang="ts">
+import userLikesListVue from "../components/userLikesList.vue";
+</script>
 
 <style scoped></style>

@@ -26,14 +26,18 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import { routerStore } from "../store/modules/routerPinia";
 const routerPath = routerStore();
 const activeIndex = ref("");
 const handleSelect = (key: string, keyPath: string[]) => {
-  console.log(key, keyPath);
+  // console.log(key, keyPath);
   routerPath.routerPath = key;
 };
+onMounted(() => {
+  routerPath.routerPath = localStorage.getItem("router") || "";
+  activeIndex.value = routerPath.routerPath;
+});
 </script>
 
 <style></style>

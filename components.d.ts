@@ -7,6 +7,7 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    BaicInfo: typeof import('./src/components/baicInfo.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElCard: typeof import('element-plus/es')['ElCard']
     ElDrawer: typeof import('element-plus/es')['ElDrawer']
@@ -29,6 +30,7 @@ declare module '@vue/runtime-core' {
     SearchInput: typeof import('./src/components/searchInput.vue')['default']
     SearchLocal: typeof import('./src/components/searchLocal.vue')['default']
     ShowsearchInput: typeof import('./src/components/showsearchInput.vue')['default']
+    UserLikesList: typeof import('./src/components/userLikesList.vue')['default']
   }
   export interface ComponentCustomProperties {
     vInfiniteScroll: typeof import('element-plus/es')['ElInfiniteScroll']
