@@ -20,7 +20,13 @@
         </el-skeleton>
       </el-space>
     </div>
-    <div class="searchLi-ar" v-show="!searchinputStore.loading">
+    <div
+      class="searchLi-ar"
+      v-show="!searchinputStore.loading"
+      id="articleScroll"
+      @scroll="handleScroll"
+      ref="myList"
+    >
       <ul class="ul-list-item-ar">
         <li
           class="list-item-ar"
@@ -69,7 +75,9 @@
 </template>
 
 <script lang="ts" setup>
+import { ref, onMounted, computed } from "vue";
 import { searchInputStore } from "../store/modules/searchInputPinia";
+import _ from "lodash"; //防抖节流
 
 interface searchInputItem {
   id: number;
@@ -81,13 +89,59 @@ interface searchInputItem {
   pubTime: string;
   imglink?: string;
 }
-
+const arcticelEnd = ref(false);
 const searchinputStore = searchInputStore();
+
+const screenHeight = ref(0);
+const start = ref(0);
+const end = ref(0);
+const myList = ref<any>(null);
+const itemSize = 120;
+//可显示的列表项数
+let visibleCount = computed(() => {
+  return Math.ceil(screenHeight.value / itemSize);
+});
+
+//获取真实显示列表数据
+onMounted(() => {
+  screenHeight.value = document.body.clientHeight;
+  start.value = 0;
+  end.value = start.value + visibleCount.value;
+});
+function scrollEvent() {
+  let scrollTop = Math.floor(myList.value.scrollTop);
+  //此时的开始索引
+  start.value = Math.floor(scrollTop / itemSize!);
+  //此时的结束索引
+  end.value = start.value + visibleCount.value;
+  if (end.value - searchinputStore.allList.length > 3) {
+    lazySearch();
+  }
+}
+
+const lazySearch = _.throttle(
+  function () {
+    //懒加载
+    if (!arcticelEnd) {
+      searchinputStore.searchMore();
+    }
+  },
+  200,
+  { trailing: false }
+);
 
 const getfocus = (item: searchInputItem) => {
   // console.log("1aaaaaaaaaa1");
   window.open(item.url, "_blank");
 };
+
+const handleScroll = _.throttle(
+  function () {
+    scrollEvent();
+  },
+  16.7,
+  { trailing: false }
+);
 </script>
 
 <style scoped>

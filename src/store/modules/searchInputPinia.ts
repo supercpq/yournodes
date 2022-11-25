@@ -59,10 +59,14 @@ export const searchInputStore = defineStore("searchInput", {
             console.log(res);
           },
           (err) => {
-            console.log(err);
+            console.log("!!!!", err);
             if (!this.show) {
               this.list.push(this.a);
             }
+            // for (var i = 0; i < 30; i++) {
+            //   this.a.id++;
+            //   this.list.push(this.a);
+            // }
             this.loading = false;
           }
         );
