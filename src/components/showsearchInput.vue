@@ -144,7 +144,7 @@ const handleScroll = _.throttle(
 );
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 ::v-deep transoptions {
   background-color: rgba(255, 255, 255, 0.5);
   color: #000000;
@@ -178,18 +178,7 @@ ul li {
 .list-item-ar {
   width: 670px;
 }
-.descri {
-  color: var(--jjext-color-secondary-app);
-  flex: 1 0 auto;
-  font-size: 13px;
-  line-height: 22px;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  word-break: break-word;
-}
+
 .outsideIt-ar {
   display: grid;
   /* grid-gap: 3px; */
@@ -237,8 +226,20 @@ ul li {
   height: 70px;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  line-height: 22px;
   padding: 5px;
+}
+.descri {
+  flex: 1 0 auto;
+  font-size: 13px;
+  line-height: 22px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  word-break: break-word;
+  width: 100%;
 }
 h4 {
   margin-block-start: 0.13em;

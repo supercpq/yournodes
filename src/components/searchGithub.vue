@@ -248,9 +248,6 @@ ul li {
   flex: 1 0 auto;
   font-size: 13px;
   line-height: 22px;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
   text-overflow: ellipsis;
   overflow: hidden;
   word-break: break-word;
