@@ -30,8 +30,7 @@ var nodata: likeArcticle = {
 const likeList = ref(<likeArcticle[]>[]);
 likeList.value = [
   {
-    articaName:
-      "superxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    articaName: "superxxx",
     articalLink: "student",
     articalImgLink:
       "https://p3-passport.byteimg.com/img/mosaic-legacy/3791/5070639578~180x180.png",
@@ -291,12 +290,20 @@ onMounted(() => {
   max-height: 400px;
   min-width: 660px;
   max-width: 800px;
-  background-color: rgba(255, 255, 255, 0.15);
+  background-color: rgba(255, 255, 255, 0.1);
 }
 li {
   list-style-type: none;
   margin-left: -33px;
-  padding: 5px;
+  text-align: left;
+  padding: 5px 20px;
+  div {
+    padding: 5px 20px;
+    background-color: rgba(255, 255, 255, 0.3);
+    span {
+      padding-left: 20px;
+    }
+  }
   :hover {
     background-color: rgba(255, 255, 255, 0.5);
     cursor: pointer;

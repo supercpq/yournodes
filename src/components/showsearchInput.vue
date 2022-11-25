@@ -44,9 +44,18 @@
             </div>
             <div class="outseideItem-ar">
               <div class="itemTitle">
-                <h4>
+                <h4 :title="item.title">
                   <a :href="item.url" target="_blank">
-                    <span>{{ item.title }}</span>
+                    <h4
+                      style="
+                        width: 400px;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                      "
+                    >
+                      {{ item.title }}
+                    </h4>
                   </a>
                 </h4>
               </div>

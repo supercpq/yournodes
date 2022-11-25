@@ -27,7 +27,8 @@ export const searchInputStore = defineStore("searchInput", {
       a: {
         // 没加载出来用的
         id: 0,
-        title: "nothing",
+        title:
+          "nothingnothingnothingnothingnothingnothingnothingnothingnothino datano datano datano datano datano datano datano datano datang",
         url: "#",
         description: "no data",
         likes: 0,
