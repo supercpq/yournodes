@@ -1,4 +1,8 @@
 <template>
+  <div class="list-title">
+    <h4>your likes</h4>
+  </div>
+
   <div class="outsideLike">
     <ul>
       <li v-for="item in likeList" :key="item.articalID" @click="readArc(item)">
@@ -297,10 +301,14 @@ li {
   margin-left: -33px;
   text-align: left;
   padding: 5px 20px;
+
   div {
     padding: 5px 20px;
     background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
     span {
+      text-shadow: rgba(43, 184, 219, 0.5) 3px 0 10px;
+      font-family: "微软雅黑";
       padding-left: 20px;
     }
   }
@@ -318,5 +326,10 @@ li {
   overflow: hidden;
   word-break: break-word;
   white-space: nowrap;
+}
+.list-title {
+  text-align: left;
+  //   background-color: rgba(255, 255, 255, 0.1);
+  margin-left: 20px;
 }
 </style>
