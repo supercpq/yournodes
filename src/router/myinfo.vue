@@ -18,11 +18,12 @@ import basicInfo from "../components/basicInfo.vue";
 .flex-info {
   height: 800px;
   display: grid;
-  grid-template-rows: 45% 50%;
+  grid-template-rows: 30% 50%;
   grid-gap: 20px;
 }
 .basic-info {
   grid-row-start: 1;
+  padding-top: 50px;
   margin: auto;
 }
 .like-list {

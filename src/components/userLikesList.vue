@@ -291,7 +291,7 @@ onMounted(() => {
   overflow: auto;
   font-size: 23px;
   line-height: 22px;
-  max-height: 400px;
+  max-height: 500px;
   min-width: 660px;
   max-width: 800px;
   background-color: rgba(255, 255, 255, 0.1);

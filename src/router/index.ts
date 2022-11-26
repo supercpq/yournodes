@@ -16,7 +16,9 @@ const routes: Array<RouteRecordRaw> = [
     path: "/myinfo",
     name: "myinfo",
     component: myinfo,
-    meta: {},
+    meta: {
+      keepAlive: false,
+    },
   },
 ];
 

@@ -24,6 +24,7 @@ export const searchInputStore = defineStore("searchInput", {
       list: <searchInputItem[]>[],
       inputSearch: "",
       loading: true,
+      lazy: true,
       a: {
         // 没加载出来用的
         id: 0,
@@ -33,7 +34,7 @@ export const searchInputStore = defineStore("searchInput", {
         likes: 0,
         reads: 0,
         pubTime: "--",
-        imglink: "https://vitejs.dev/logo.svg",
+        imglink: "src/assets/avatar.svg",
       },
     };
   },
@@ -54,29 +55,31 @@ export const searchInputStore = defineStore("searchInput", {
         this.loading = true;
         var seIn = { input };
         searchByTitle(seIn).then(
-          (res) => {
+          (res: any) => {
             // TODO:
-            console.log(res);
+            console.log("resByTitle", res.data);
+            this.list = res.data.list;
+
+            this.loading = false;
           },
           (err) => {
             console.log("!!!!", err);
             if (!this.show) {
               this.list.push(this.a);
             }
-            // for (var i = 0; i < 30; i++) {
-            //   this.a.id++;
-            //   this.list.push(this.a);
-            // }
             this.loading = false;
           }
         );
       }
     },
     searchMore() {
+      this.lazy = false;
       searchMoreByTitle({ input: this.inputSearch }).then(
-        (res) => {
-          console.log(res);
+        (res: any) => {
+          console.log("resMore", res.data.list);
+          this.list = [...this.list, ...res.data.list];
           this.loading = false;
+          this.lazy = true;
         },
         (err) => {
           console.log(err);
@@ -84,13 +87,15 @@ export const searchInputStore = defineStore("searchInput", {
             this.list.push(this.a);
           }
           this.loading = false;
+          this.lazy = true;
         }
       );
     },
     searchdefaultOnce() {
       getarticle({ input: this.inputSearch }).then(
-        (res) => {
-          console.log(res);
+        (res: any) => {
+          console.log("default", res.data);
+          this.list = res.data.list;
           this.loading = false;
         },
         (err) => {

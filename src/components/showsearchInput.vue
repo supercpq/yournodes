@@ -12,7 +12,7 @@
     <div v-show="searchinputStore.loading">
       <el-space direction="vertical" alignment="flex-start">
         <el-skeleton
-          style="width: 300px; text-align: left"
+          style="width: 500px; text-align: left"
           :loading="searchinputStore.loading"
           animated
           :rows="2"
@@ -123,7 +123,8 @@ function scrollEvent() {
   start.value = Math.floor(scrollTop / itemSize!);
   //此时的结束索引
   end.value = start.value + visibleCount.value;
-  if (end.value - searchinputStore.allList.length > 3) {
+  if (end.value - searchinputStore.allList.length > 0) {
+    // alert("qwr");
     lazySearch();
   }
 }
@@ -131,11 +132,12 @@ function scrollEvent() {
 const lazySearch = _.throttle(
   function () {
     //懒加载
-    if (!arcticelEnd) {
+    if (!arcticelEnd.value && searchinputStore.lazy) {
+      // alert("qwr");
       searchinputStore.searchMore();
     }
   },
-  200,
+  500,
   { trailing: false }
 );
 
@@ -211,6 +213,7 @@ ul li {
 }
 .imglinks {
   grid-column-start: 1;
+  padding: 3px;
   background-color: rgba(255, 255, 255, 0.564);
 }
 .imglinks:hover {

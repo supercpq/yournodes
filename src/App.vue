@@ -9,9 +9,6 @@ const router = useRouter();
 const route = useRoute();
 const routerPathStore = routerStore();
 const routerP = routerPathStore.$subscribe((mutations, state) => {
-  // console.log(mutations);
-  // console.log("wuhu~~~", state.routerPath);
-  // router.push({ path: "/" });
   localStorage.setItem("router", state.routerPath);
   router.push({ path: "/" + state.routerPath, replace: true });
 });
@@ -23,7 +20,13 @@ const routerP = routerPathStore.$subscribe((mutations, state) => {
       <mainView />
     </div>
     <div class="therouters">
-      <router-view></router-view>
+      <!-- <router-view></router-view>
+       -->
+      <router-view v-slot="{ Component }">
+        <transition name="fade" mode="out-in">
+          <component :is="Component" />
+        </transition>
+      </router-view>
     </div>
     <!-- <div class="zero"></div>
     <div class="two">
@@ -36,6 +39,15 @@ const routerP = routerPathStore.$subscribe((mutations, state) => {
 </template>
 
 <style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.167s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
 .wrapper {
   display: grid;
   grid-template-rows: 5% 90%;

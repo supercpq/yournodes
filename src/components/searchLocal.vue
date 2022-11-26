@@ -86,7 +86,8 @@ onMounted(() => {
   select.value =
     localStorage.getItem("searchSelect") || "https://www.google.com/search?q=";
   if (!inputStore.show) {
-    hellogit(value.value, "");
+    // hellogit(value.value, "");
+    inputStore.searchdefaultOnce();
   }
 });
 </script>

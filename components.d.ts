@@ -23,6 +23,7 @@ declare module '@vue/runtime-core' {
     ElSpace: typeof import('element-plus/es')['ElSpace']
     ElSubMenu: typeof import('element-plus/es')['ElSubMenu']
     ElSwitch: typeof import('element-plus/es')['ElSwitch']
+    Login: typeof import('./src/components/login.vue')['default']
     MainView: typeof import('./src/components/mainView.vue')['default']
     NormalTools: typeof import('./src/components/normalTools.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
