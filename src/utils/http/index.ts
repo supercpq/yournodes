@@ -25,7 +25,6 @@ const defaultConfig: AxiosRequestConfig = {
   // 数组格式参数序列化
   paramsSerializer: (params) => qs.stringify(params, { indices: false }),
 };
-
 class qHttp {
   constructor() {
     this.httpInterceptorsRequest();
@@ -44,6 +43,8 @@ class qHttp {
         const $config = config;
         // 开启进度条动画
         NProgress.start();
+        let whitelist = ["/api"];
+
         // 优先判断post/get等方法是否传入回调，否则执行初始化设置等回调
         if (typeof config.beforeRequestCallback === "function") {
           config.beforeRequestCallback($config);
@@ -54,10 +55,16 @@ class qHttp {
           return $config;
         }
         const token = getToken();
-        if (token) {
+        // if (whitelist.includes($config.url || "")) {
+        const str = $config.url || "";
+        if (str.startsWith(whitelist[0])) {
+          // console.log("api!!!!!!!!");
+          return $config;
+        } else if (token) {
           const data = JSON.parse(token);
           const now = new Date().getTime();
           const expired = parseInt(data.expires) - now <= 0;
+          // console.log("not api!!!!!!!!");
           if (expired) {
             // token过期刷新
             useUserStoreHook()

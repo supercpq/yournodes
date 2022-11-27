@@ -88,4 +88,21 @@ export default [
       };
     },
   },
+  {
+    url: "/api/article/getTools",
+    method: "get",
+    timeout: 500,
+    response: () => {
+      return {
+        data: {
+          items: [
+            {
+              url: "http://120.55.84.232/",
+              title: "朋友博客",
+            },
+          ],
+        },
+      };
+    },
+  },
 ] as MockMethod[];

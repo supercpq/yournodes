@@ -74,7 +74,7 @@ onMounted(() => {
         {
           url: "http://121.36.131.50:8000/",
           img: "src/assets/straw.svg",
-          title: "没有秘密基地",
+          title: "五楼没有秘密基地",
         },
       ];
       for (var i in res.data.items) {
@@ -117,7 +117,7 @@ onMounted(() => {
         {
           url: "http://121.36.131.50:8000/",
           img: "src/assets/straw.svg",
-          title: "没有秘密基地",
+          title: "五楼没有秘密基地",
         },
       ];
     }
@@ -131,6 +131,7 @@ onMounted(() => {
   height: 800px;
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
 }
 .tool {
   .tool-contant {
@@ -156,6 +157,7 @@ onMounted(() => {
     }
     .tool-title {
       grid-row-start: 2;
+      font-size: small;
       :hover {
         background-color: rgba(255, 255, 255, 0.1);
       }
