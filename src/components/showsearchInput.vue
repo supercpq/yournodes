@@ -98,7 +98,7 @@ interface searchInputItem {
   pubTime: string;
   imglink?: string;
 }
-const arcticelEnd = ref(false);
+const arcticelEnd = ref(false); // 是否全部加载
 const searchinputStore = searchInputStore();
 
 const screenHeight = ref(0);

@@ -1,9 +1,27 @@
 <template>
-  <div class="list-title">
+  <div v-show="loading">
+    <el-space direction="vertical" alignment="flex-start">
+      <!-- <div>
+      <el-switch v-model="gitstore.loading" />
+    </div> -->
+      <el-skeleton
+        style="width: 600px; text-align: left"
+        :loading="loading"
+        animated
+        :rows="6"
+      >
+      </el-skeleton>
+    </el-space>
+  </div>
+  <div class="list-title" v-show="!loading">
     <h4>your likes</h4>
   </div>
-
-  <div class="outsideLike">
+  <div
+    class="outsideLike"
+    @scroll="handleScroll"
+    ref="myList"
+    v-show="!loading"
+  >
     <ul>
       <li v-for="item in likeList" :key="item.articalID" @click="readArc(item)">
         <div :title="item.articaName" class="title">
@@ -17,8 +35,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import { ref, onMounted, computed } from "vue";
 import { mylike, moreLikes } from "../api/userinfo";
+import _ from "lodash"; //防抖节流
+
 interface likeArcticle {
   articaName: string;
   articalLink: string;
@@ -29,242 +49,18 @@ var nodata: likeArcticle = {
   articaName: "还没有点赞过文章哦~",
   articalLink: "#",
   articalImgLink: "",
-  articalID: 0,
+  articalID: -1,
 };
-const likeList = ref(<likeArcticle[]>[]);
-likeList.value = [
-  {
-    articaName: "superxxx",
-    articalLink: "student",
-    articalImgLink:
-      "https://p3-passport.byteimg.com/img/mosaic-legacy/3791/5070639578~180x180.png",
-    articalID: 123512,
-  },
-  {
-    articaName: "superxxx",
-    articalLink: "student",
-    articalImgLink:
-      "https://p3-passport.byteimg.com/img/mosaic-legacy/3791/5070639578~180x180.png",
-    articalID: 12352,
-  },
-  {
-    articaName: "superxxx",
-    articalLink: "student",
-    articalImgLink:
-      "https://p3-passport.byteimg.com/img/mosaic-legacy/3791/5070639578~180x180.png",
-    articalID: 12351,
-  },
-  {
-    articaName: "superxxx",
-    articalLink: "student",
-    articalImgLink:
-      "https://p3-passport.byteimg.com/img/mosaic-legacy/3791/5070639578~180x180.png",
-    articalID: 1235112,
-  },
-  {
-    articaName: "superxxx",
-    articalLink: "student",
-    articalImgLink:
-      "https://p3-passport.byteimg.com/img/mosaic-legacy/3791/5070639578~180x180.png",
-    articalID: 122352,
-  },
-  {
-    articaName: "superxxx",
-    articalLink: "student",
-    articalImgLink:
-      "https://p3-passport.byteimg.com/img/mosaic-legacy/3791/5070639578~180x180.png",
-    articalID: 123351,
-  },
-  {
-    articaName: "superxxx",
-    articalLink: "student",
-    articalImgLink:
-      "https://p3-passport.byteimg.com/img/mosaic-legacy/3791/5070639578~180x180.png",
-    articalID: 1235512,
-  },
-  {
-    articaName: "superxxx",
-    articalLink: "student",
-    articalImgLink:
-      "https://p3-passport.byteimg.com/img/mosaic-legacy/3791/5070639578~180x180.png",
-    articalID: 123652,
-  },
-  {
-    articaName: "superxxx",
-    articalLink: "student",
-    articalImgLink:
-      "https://p3-passport.byteimg.com/img/mosaic-legacy/3791/5070639578~180x180.png",
-    articalID: 123251,
-  },
-  {
-    articaName: "superxxx",
-    articalLink: "student",
-    articalImgLink:
-      "https://p3-passport.byteimg.com/img/mosaic-legacy/3791/5070639578~180x180.png",
-    articalID: 1623512,
-  },
-  {
-    articaName: "superxxx",
-    articalLink: "student",
-    articalImgLink:
-      "https://p3-passport.byteimg.com/img/mosaic-legacy/3791/5070639578~180x180.png",
-    articalID: 1235452,
-  },
-  {
-    articaName: "superxxx",
-    articalLink: "student",
-    articalImgLink:
-      "https://p3-passport.byteimg.com/img/mosaic-legacy/3791/5070639578~180x180.png",
-    articalID: 12345451,
-  },
-  {
-    articaName: "superxxx",
-    articalLink: "student",
-    articalImgLink:
-      "https://p3-passport.byteimg.com/img/mosaic-legacy/3791/5070639578~180x180.png",
-    articalID: 12351942,
-  },
-  {
-    articaName: "superxxx",
-    articalLink: "student",
-    articalImgLink:
-      "https://p3-passport.byteimg.com/img/mosaic-legacy/3791/5070639578~180x180.png",
-    articalID: 123252,
-  },
-  {
-    articaName: "superxxx",
-    articalLink: "student",
-    articalImgLink:
-      "https://p3-passport.byteimg.com/img/mosaic-legacy/3791/5070639578~180x180.png",
-    articalID: 1282351,
-  },
-  {
-    articaName: "superxxx",
-    articalLink: "student",
-    articalImgLink:
-      "https://p3-passport.byteimg.com/img/mosaic-legacy/3791/5070639578~180x180.png",
-    articalID: 12352612,
-  },
-  {
-    articaName: "superxxx",
-    articalLink: "student",
-    articalImgLink:
-      "https://p3-passport.byteimg.com/img/mosaic-legacy/3791/5070639578~180x180.png",
-    articalID: 1235572,
-  },
-  {
-    articaName: "superxxx",
-    articalLink: "student",
-    articalImgLink:
-      "https://p3-passport.byteimg.com/img/mosaic-legacy/3791/5070639578~180x180.png",
-    articalID: 1231751,
-  },
-  {
-    articaName: "superxxx",
-    articalLink: "student",
-    articalImgLink:
-      "https://p3-passport.byteimg.com/img/mosaic-legacy/3791/5070639578~180x180.png",
-    articalID: 123135512,
-  },
-  {
-    articaName: "superxxx",
-    articalLink: "student",
-    articalImgLink:
-      "https://p3-passport.byteimg.com/img/mosaic-legacy/3791/5070639578~180x180.png",
-    articalID: 123513542,
-  },
-  {
-    articaName: "superxxx",
-    articalLink: "student",
-    articalImgLink:
-      "https://p3-passport.byteimg.com/img/mosaic-legacy/3791/5070639578~180x180.png",
-    articalID: 12374551,
-  },
-  {
-    articaName: "superxxx",
-    articalLink: "student",
-    articalImgLink:
-      "https://p3-passport.byteimg.com/img/mosaic-legacy/3791/5070639578~180x180.png",
-    articalID: 123247512,
-  },
-  {
-    articaName: "superxxx",
-    articalLink: "student",
-    articalImgLink:
-      "https://p3-passport.byteimg.com/img/mosaic-legacy/3791/5070639578~180x180.png",
-    articalID: 12246352,
-  },
-  {
-    articaName: "superxxx",
-    articalLink: "student",
-    articalImgLink:
-      "https://p3-passport.byteimg.com/img/mosaic-legacy/3791/5070639578~180x180.png",
-    articalID: 12246351,
-  },
-  {
-    articaName: "superxxx",
-    articalLink: "student",
-    articalImgLink:
-      "https://p3-passport.byteimg.com/img/mosaic-legacy/3791/5070639578~180x180.png",
-    articalID: 12351262,
-  },
-  {
-    articaName: "superxxx",
-    articalLink: "student",
-    articalImgLink:
-      "https://p3-passport.byteimg.com/img/mosaic-legacy/3791/5070639578~180x180.png",
-    articalID: 1272352,
-  },
-  {
-    articaName: "superxxx",
-    articalLink: "student",
-    articalImgLink:
-      "https://p3-passport.byteimg.com/img/mosaic-legacy/3791/5070639578~180x180.png",
-    articalID: 1352351,
-  },
-  {
-    articaName: "superxxx",
-    articalLink: "student",
-    articalImgLink:
-      "https://p3-passport.byteimg.com/img/mosaic-legacy/3791/5070639578~180x180.png",
-    articalID: 123357512,
-  },
-  {
-    articaName: "superxxx",
-    articalLink: "student",
-    articalImgLink:
-      "https://p3-passport.byteimg.com/img/mosaic-legacy/3791/5070639578~180x180.png",
-    articalID: 1235272,
-  },
-  {
-    articaName: "superxxx",
-    articalLink: "student",
-    articalImgLink:
-      "https://p3-passport.byteimg.com/img/mosaic-legacy/3791/5070639578~180x180.png",
-    articalID: 1232751,
-  },
-  {
-    articaName: "superxxx",
-    articalLink: "student",
-    articalImgLink:
-      "https://p3-passport.byteimg.com/img/mosaic-legacy/3791/5070639578~180x180.png",
-    articalID: 123876512,
-  },
-  {
-    articaName: "superxxx",
-    articalLink: "student",
-    articalImgLink:
-      "https://p3-passport.byteimg.com/img/mosaic-legacy/3791/5070639578~180x180.png",
-    articalID: 1237852,
-  },
-  {
-    articaName: "superxxx",
-    articalLink: "student",
-    articalImgLink:
-      "https://p3-passport.byteimg.com/img/mosaic-legacy/3791/5070639578~180x180.png",
-    articalID: 1238851,
-  },
-];
+const likeList = ref(<any[]>[]);
+const myList = ref<any>(null);
+likeList.value = [];
+const screenHeight = ref(0);
+const start = ref(0);
+const end = ref(0);
+const itemSize = 43.3;
+const arcticelEnd = ref(false); //是否全部加载
+const lazy = ref(false); // 是否已触发懒加载
+const loading = ref(true);
 function readArc(item: likeArcticle) {
   window.open(item.articalLink, "_blank");
 }
@@ -277,6 +73,7 @@ onMounted(() => {
       } else {
         likeList.value.push(nodata);
       }
+      loading.value = false;
     },
     (err) => {
       nodata.articaName = "网络问题，没有更多数据";
@@ -284,6 +81,66 @@ onMounted(() => {
     }
   );
 });
+let visibleCount = computed(() => {
+  return Math.ceil(screenHeight.value / itemSize);
+});
+onMounted(() => {
+  screenHeight.value = document.body.clientHeight;
+  start.value = 0;
+  end.value = start.value + visibleCount.value;
+});
+function scrollEvent() {
+  let scrollTop = Math.floor(myList.value.scrollTop);
+  //此时的开始索引
+  start.value = Math.floor(scrollTop / itemSize!);
+  //此时的结束索引
+  end.value = start.value + visibleCount.value;
+  if (end.value - likeList.value.length > 0) {
+    // alert("qwr");
+    lazySearch();
+  }
+}
+
+const lazySearch = _.throttle(
+  function () {
+    //懒加载
+    if (!arcticelEnd.value && !lazy.value) {
+      // alert("qwr");
+      lazy.value = true;
+      moreLikes().then(
+        (res: any) => {
+          if (res.data.status == 0) {
+            likeList.value = likeList.value.concat(res.data.dataLikes);
+            // console.log(res.data);
+            lazy.value = false;
+          } else {
+            likeList.value.push(nodata);
+            lazy.value = false;
+          }
+          if (res.data.status == 3) {
+            // 数据全部获取
+            arcticelEnd.value = true;
+            lazy.value = false;
+          }
+        },
+        (err) => {
+          console.log(err.message);
+          lazy.value = false;
+        }
+      );
+    }
+  },
+  500,
+  { trailing: false }
+);
+
+const handleScroll = _.throttle(
+  function () {
+    scrollEvent();
+  },
+  16.7,
+  { trailing: false }
+);
 </script>
 
 <style scoped lang="scss">
