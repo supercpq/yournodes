@@ -57,6 +57,7 @@ export const useUserStore = defineStore({
             this.name = res.data.info.userName;
             this.profession = res.data.info.profession;
             this.avatarLink = res.data.info.avatarLink;
+            this.userMail = res.data.info.userMail;
           }
         },
         (err) => {

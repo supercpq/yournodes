@@ -76,6 +76,7 @@ export default [
             avatarLink: "https://avatars.githubusercontent.com/u/87625173?v=4",
             userName: "superCPQ",
             profession: "程序员",
+            userMail: "supercpq@outlook.com",
           },
         },
       };
