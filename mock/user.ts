@@ -62,4 +62,23 @@ export default [
       };
     },
   },
+  // /user/baseInfo
+  {
+    url: "/user/baseInfo",
+    method: "get",
+    timeout: 500,
+    response: () => {
+      return {
+        code: 0,
+        data: {
+          status: 0,
+          info: {
+            avatarLink: "https://avatars.githubusercontent.com/u/87625173?v=4",
+            userName: "superCPQ",
+            profession: "程序员",
+          },
+        },
+      };
+    },
+  },
 ] as MockMethod[];

@@ -30,14 +30,15 @@
 
 <script setup lang="ts">
 import { useUserStore } from "../store/modules/user";
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 const userStore = useUserStore();
 var rotateSpeed = ref("1s");
 var timer;
 var speed = 1;
+onMounted(() => {
+  userStore.getBaseInfo();
+});
 function rotateOver() {
-  // rotateSpeed.value = "0.1s";
-  // console.log("in");
   if (speed == 1) {
     timer = setInterval(() => {
       changeSpeed();
@@ -45,15 +46,12 @@ function rotateOver() {
   }
 }
 function changeSpeed() {
-  // rotateSpeed = "0.1s";
   if (speed > 0.1) {
     speed = speed - 0.004;
     rotateSpeed.value = String(speed) + "s";
-    // console.log(rotateSpeed.value);
   }
 }
 function rotateOut() {
-  // console.log("out");
   speed = 1;
   if (speed == 1) {
     clearInterval(timer);
@@ -67,8 +65,6 @@ function rotateOut() {
   min-width: 800px;
   height: 200px;
   background-color: rgba(255, 255, 255, 0.15);
-
-  /* min-height: 300px; */
 }
 .inside {
   padding: 20px 40px;

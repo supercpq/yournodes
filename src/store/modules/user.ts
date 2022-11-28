@@ -6,6 +6,7 @@ import { routerStore } from "./routerPinia";
 import { getToken, setToken, removeToken } from "../../utils/user";
 import { getLogin, refreshToken } from "../../api/user";
 import { storageSession } from "@pureadmin/utils";
+import { baseInfo } from "../../api/userinfo";
 // import { useMultiTagsStoreHook } from "/@/store/modules/multiTags";
 // const router = useRouter();
 const routerPath = routerStore();
@@ -47,6 +48,21 @@ export const useUserStore = defineStore({
     },
     SET_CURRENTPAGE(value) {
       this.currentPage = value;
+    },
+    getBaseInfo() {
+      baseInfo().then(
+        (res: any) => {
+          console.log(res.data);
+          if (res.data.status == 0) {
+            this.name = res.data.info.userName;
+            this.profession = res.data.info.profession;
+            this.avatarLink = res.data.info.avatarLink;
+          }
+        },
+        (err) => {
+          console.log(err.message);
+        }
+      );
     },
     // 登录
     async loginByUsername(data) {
