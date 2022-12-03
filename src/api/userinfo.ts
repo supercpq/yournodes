@@ -1,5 +1,8 @@
 import { http } from "../utils/http";
 
+export const infoTabs = (params?: object) => {
+  return http.request("get", "/user/infoTabs", { params });
+};
 // 基础信息
 export const baseInfo = (params?: object) => {
   return http.request("get", "/user/baseInfo", { params });

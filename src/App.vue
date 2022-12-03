@@ -28,13 +28,6 @@ const routerP = routerPathStore.$subscribe((mutations, state) => {
         </transition>
       </router-view>
     </div>
-    <!-- <div class="zero"></div>
-    <div class="two">
-      <searchGithub />
-    </div>
-    <div class="three"></div>
-    <div class="four"></div> -->
-    <!-- <searchLocal /> -->
   </div>
 </template>
 

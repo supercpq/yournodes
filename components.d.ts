@@ -14,6 +14,7 @@ declare module '@vue/runtime-core' {
     ElDrawer: typeof import('element-plus/es')['ElDrawer']
     ElIcon: typeof import('element-plus/es')['ElIcon']
     ElInput: typeof import('element-plus/es')['ElInput']
+    ElLink: typeof import('element-plus/es')['ElLink']
     ElMenu: typeof import('element-plus/es')['ElMenu']
     ElMenuItem: typeof import('element-plus/es')['ElMenuItem']
     ElOption: typeof import('element-plus/es')['ElOption']
@@ -32,6 +33,7 @@ declare module '@vue/runtime-core' {
     SearchInput: typeof import('./src/components/searchInput.vue')['default']
     SearchLocal: typeof import('./src/components/searchLocal.vue')['default']
     ShowsearchInput: typeof import('./src/components/showsearchInput.vue')['default']
+    UserInfoSetting: typeof import('./src/components/userInfoSetting.vue')['default']
     UserLikesList: typeof import('./src/components/userLikesList.vue')['default']
   }
   export interface ComponentCustomProperties {

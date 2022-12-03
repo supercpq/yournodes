@@ -82,4 +82,33 @@ export default [
       };
     },
   },
+  {
+    url: "/user/infoTabs",
+    method: "get",
+    timeout: 500,
+    response: () => {
+      return {
+        code: 0,
+        data: {
+          status: 0,
+          tabs: [
+            {
+              tabName: "个人资料",
+              tabIcon: "setUserInfo",
+              tabUrl: "/public/infoset.svg",
+            },
+            {
+              tabName: "账号设置",
+              tabIcon: "setAccountInfo",
+              tabUrl: "/public/accountset.svg",
+            },
+            {
+              tabName: "待开发",
+              tabUrl: "",
+            },
+          ],
+        },
+      };
+    },
+  },
 ] as MockMethod[];

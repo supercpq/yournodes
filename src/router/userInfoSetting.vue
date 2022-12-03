@@ -1,0 +1,142 @@
+<template>
+  <div class="setting">
+    <div class="navigation">
+      <button @click="backToMyInfo()">
+        <el-icon><ArrowLeftBold /></el-icon>返回个人中心
+      </button>
+    </div>
+    <div class="details">
+      <div class="tab">
+        <div class="insidetabs">
+          <div v-for="item in tabs" class="onetab">
+            <div v-if="'tabIcon' in item" class="tabIcon">
+              <img
+                :src="item.tabUrl"
+                alt=""
+                style="max-width: 60%; max-height: 60%; margin: 5px"
+              />
+            </div>
+            <!-- 
+        @mouseenter="rotateOver()"
+        @mouseleave="rotateOut()"
+             -->
+            <div class="tabTitle">
+              <p>{{ item.tabName }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="info">info</div>
+    </div>
+  </div>
+</template>
+<script setup lang="ts">
+import { ref, onMounted } from "vue";
+import { routerStore } from "../store/modules/routerPinia";
+import { infoTabs } from "../api/userinfo";
+
+const routerPath = routerStore();
+interface infoTab {
+  tabName: string;
+  tabUrl: string;
+  tabIcon?: string;
+}
+const tabs = ref(<infoTab[]>[]);
+
+function backToMyInfo() {
+  routerPath.routerPath = "myinfo";
+}
+
+onMounted(() => {
+  infoTabs().then(
+    (res: any) => {
+      if (res.data.status == 0) {
+        tabs.value = res.data.tabs;
+        console.log(tabs.value);
+      }
+    },
+    (err) => {
+      console.log(err.message);
+    }
+  );
+});
+</script>
+<style lang="scss" scoped>
+.setting {
+  display: grid;
+  padding: 30px;
+  max-width: 1200px;
+  width: 100%;
+  height: 800px;
+  margin: auto;
+  grid-template-rows: 5% 80%;
+  grid-gap: 20px;
+  button {
+    float: left;
+    background-color: rgba(255, 255, 255, 0.1);
+    :hover {
+      outline: none;
+    }
+  }
+}
+.navigation {
+  grid-row-start: 1;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.details {
+  max-width: 1180px;
+  grid-row-start: 2;
+  display: grid;
+  grid-template-columns: 25% 75%;
+  grid-gap: 20px;
+}
+
+.tab {
+  grid-column-start: 1;
+  background-color: rgba(255, 255, 255, 0.3);
+  display: flex;
+  flex-direction: column;
+  .insidetabs {
+    padding: 5px;
+    width: 95%;
+    :hover {
+      cursor: pointer;
+    }
+  }
+
+  .onetab {
+    display: grid;
+    width: 100%;
+    height: 40px;
+    margin-top: 6px;
+    grid-template-columns: 30% 60%;
+    background-color: rgba(255, 255, 255, 0.3);
+    :hover {
+      background-color: rgba(255, 255, 255, 0.4);
+      cursor: pointer;
+    }
+  }
+  .tabIcon {
+    grid-column-start: 1;
+    max-height: 40px;
+    max-width: 60px;
+  }
+  .tabTitle {
+    grid-column-start: 2;
+    max-width: 120px;
+    max-height: 40px;
+    vertical-align: middle;
+    display: table-cell;
+    p {
+      margin: 5px;
+      text-align: center;
+    }
+  }
+}
+
+.info {
+  grid-column-start: 2;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+</style>

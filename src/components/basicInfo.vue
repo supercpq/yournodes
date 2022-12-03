@@ -14,14 +14,16 @@
       <div class="basic-info">
         <!-- 名字，职业的flex -->
         <div class="user-title">
-          <h2>{{ userStore.name }}</h2>
+          <h2>
+            {{ userStore.name }}
+          </h2>
         </div>
         <div class="user-job">
           {{ userStore.profession }}
           <!-- 职业和编辑按钮的flex -->
         </div>
         <div class="user-setting">
-          <button>编辑信息</button>
+          <button @click="setInfo()">编辑信息</button>
         </div>
       </div>
     </div>
@@ -31,6 +33,8 @@
 <script setup lang="ts">
 import { useUserStore } from "../store/modules/user";
 import { ref, onMounted } from "vue";
+import { routerStore } from "../store/modules/routerPinia";
+const routerPath = routerStore();
 const userStore = useUserStore();
 var rotateSpeed = ref("1s");
 var timer;
@@ -56,6 +60,9 @@ function rotateOut() {
   if (speed == 1) {
     clearInterval(timer);
   }
+}
+function setInfo() {
+  routerPath.routerPath = "myinfo/setting";
 }
 </script>
 

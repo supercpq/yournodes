@@ -2,6 +2,7 @@ import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 
 const title = () => import("./title.vue");
 const myinfo = () => import("./myinfo.vue");
+const setting = () => import("./userInfoSetting.vue");
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -16,6 +17,14 @@ const routes: Array<RouteRecordRaw> = [
     path: "/myinfo",
     name: "myinfo",
     component: myinfo,
+    meta: {
+      keepAlive: false,
+    },
+  },
+  {
+    path: "/myinfo/setting",
+    name: "setting",
+    component: setting,
     meta: {
       keepAlive: false,
     },
