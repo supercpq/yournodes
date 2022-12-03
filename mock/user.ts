@@ -94,17 +94,17 @@ export default [
           tabs: [
             {
               tabName: "个人资料",
-              tabIcon: "setUserInfo",
-              tabUrl: "/public/infoset.svg",
+              tabUrl: "myinfo/setting/setUserInfo",
+              tabIcon: "/public/infoset.svg",
             },
             {
               tabName: "账号设置",
-              tabIcon: "setAccountInfo",
-              tabUrl: "/public/accountset.svg",
+              tabUrl: "myinfo/setting/setAccountInfo",
+              tabIcon: "/public/accountset.svg",
             },
             {
               tabName: "待开发",
-              tabUrl: "",
+              tabUrl: "myinfo/setting",
             },
           ],
         },

@@ -8,10 +8,14 @@
     <div class="details">
       <div class="tab">
         <div class="insidetabs">
-          <div v-for="item in tabs" class="onetab">
+          <div
+            v-for="item in tabs"
+            class="onetab"
+            @click="settingTabs(item.tabUrl)"
+          >
             <div v-if="'tabIcon' in item" class="tabIcon">
               <img
-                :src="item.tabUrl"
+                :src="item.tabIcon"
                 alt=""
                 style="max-width: 60%; max-height: 60%; margin: 5px"
               />
@@ -26,7 +30,7 @@
           </div>
         </div>
       </div>
-      <div class="info">info</div>
+      <div class="info"></div>
     </div>
   </div>
 </template>
@@ -42,6 +46,10 @@ interface infoTab {
   tabIcon?: string;
 }
 const tabs = ref(<infoTab[]>[]);
+
+function settingTabs(url: string) {
+  routerPath.routerPath = url;
+}
 
 function backToMyInfo() {
   routerPath.routerPath = "myinfo";
