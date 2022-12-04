@@ -11,7 +11,7 @@
           <div
             v-for="item in tabs"
             class="onetab"
-            @click="settingTabs(item.tabUrl)"
+            @click="componentNameId = item.componentName"
           >
             <div v-if="'tabIcon' in item" class="tabIcon">
               <img
@@ -30,18 +30,32 @@
           </div>
         </div>
       </div>
-      <div class="info"></div>
+      <div class="info">
+        <component
+          :is="componentTabs[componentNameId]"
+          style="height: 100%; width: 100%"
+        ></component>
+      </div>
     </div>
   </div>
 </template>
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import { ref, onMounted, markRaw } from "vue";
 import { routerStore } from "../store/modules/routerPinia";
 import { infoTabs } from "../api/userinfo";
+import basicSetting from "../components/basicSetting.vue";
+import accountSetting from "../components/accountSetting.vue";
 
+const componentNameId = ref("");
+
+const componentTabs = {
+  basicSetting,
+  accountSetting,
+};
 const routerPath = routerStore();
 interface infoTab {
   tabName: string;
+  componentName: string;
   tabUrl: string;
   tabIcon?: string;
 }
@@ -58,9 +72,9 @@ function backToMyInfo() {
 onMounted(() => {
   infoTabs().then(
     (res: any) => {
-      if (res.data.status == 0) {
-        tabs.value = res.data.tabs;
-        console.log(tabs.value);
+      if (res.status == 0) {
+        tabs.value = res.tabs;
+        componentNameId.value = tabs.value[0].componentName;
       }
     },
     (err) => {

@@ -7,8 +7,12 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    Accountsetting: typeof import('./src/components/accountsetting.vue')['default']
+    AccountSetting: typeof import('./src/components/accountSetting.vue')['default']
     BaicInfo: typeof import('./src/components/baicInfo.vue')['default']
     BasicInfo: typeof import('./src/components/basicInfo.vue')['default']
+    Basicsetting: typeof import('./src/components/basicsetting.vue')['default']
+    BasicSetting: typeof import('./src/components/basicSetting.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElCard: typeof import('element-plus/es')['ElCard']
     ElDrawer: typeof import('element-plus/es')['ElDrawer']

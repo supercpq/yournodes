@@ -89,25 +89,27 @@ export default [
     response: () => {
       return {
         code: 0,
-        data: {
-          status: 0,
-          tabs: [
-            {
-              tabName: "个人资料",
-              tabUrl: "myinfo/setting/setUserInfo",
-              tabIcon: "/public/infoset.svg",
-            },
-            {
-              tabName: "账号设置",
-              tabUrl: "myinfo/setting/setAccountInfo",
-              tabIcon: "/public/accountset.svg",
-            },
-            {
-              tabName: "待开发",
-              tabUrl: "myinfo/setting",
-            },
-          ],
-        },
+
+        status: 0,
+        tabs: [
+          {
+            tabName: "个人资料",
+            componentName: "basicSetting",
+            tabUrl: "myinfo/setting/setUserInfo",
+            tabIcon: "/public/infoset.svg",
+          },
+          {
+            tabName: "账号设置",
+            componentName: "accountSetting",
+            tabUrl: "myinfo/setting/setAccountInfo",
+            tabIcon: "/public/accountset.svg",
+          },
+          {
+            tabName: "待开发",
+            componentName: "",
+            tabUrl: "myinfo/setting",
+          },
+        ],
       };
     },
   },

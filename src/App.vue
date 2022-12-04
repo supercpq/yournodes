@@ -10,7 +10,7 @@ const route = useRoute();
 const routerPathStore = routerStore();
 const routerP = routerPathStore.$subscribe((mutations, state) => {
   localStorage.setItem("router", state.routerPath);
-  router.push({ path: "/" + state.routerPath, replace: true });
+  router.push({ path: "/" + state.routerPath, replace: false });
 });
 </script>
 
