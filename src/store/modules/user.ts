@@ -52,12 +52,11 @@ export const useUserStore = defineStore({
     getBaseInfo() {
       baseInfo().then(
         (res: any) => {
-          console.log(res.data);
-          if (res.data.status == 0) {
-            this.name = res.data.info.userName;
-            this.profession = res.data.info.profession;
-            this.avatarLink = res.data.info.avatarLink;
-            this.userMail = res.data.info.userMail;
+          if (res.status == 0) {
+            this.name = res.info.userName;
+            this.profession = res.info.profession;
+            this.avatarLink = res.info.avatarLink;
+            this.userMail = res.info.userMail;
           }
         },
         (err) => {

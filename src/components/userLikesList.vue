@@ -68,8 +68,8 @@ onMounted(() => {
   mylike().then(
     (res: any) => {
       likeList.value = [];
-      if (res.data.status == 0) {
-        likeList.value = res.data.dataLikes;
+      if (res.status == 0) {
+        likeList.value = res.dataLikes;
       } else {
         likeList.value.push(nodata);
       }
@@ -109,15 +109,15 @@ const lazySearch = _.throttle(
       lazy.value = true;
       moreLikes().then(
         (res: any) => {
-          if (res.data.status == 0) {
-            likeList.value = likeList.value.concat(res.data.dataLikes);
+          if (res.status == 0) {
+            likeList.value = likeList.value.concat(res.dataLikes);
             // console.log(res.data);
             lazy.value = false;
           } else {
             likeList.value.push(nodata);
             lazy.value = false;
           }
-          if (res.data.status == 3) {
+          if (res.status == 3) {
             // 数据全部获取
             arcticelEnd.value = true;
             lazy.value = false;

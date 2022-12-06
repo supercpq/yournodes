@@ -40,11 +40,8 @@ export default [
     timeout: 500,
     response: () => {
       return {
-        code: 0,
-        data: {
-          status: 0,
-          dataLikes: list,
-        },
+        status: 0,
+        dataLikes: list,
       };
     },
   },
@@ -54,11 +51,8 @@ export default [
     timeout: 500,
     response: () => {
       return {
-        code: 0,
-        data: {
-          status: 0,
-          dataLikes: list1,
-        },
+        status: 0,
+        dataLikes: list1,
       };
     },
   },
@@ -69,15 +63,12 @@ export default [
     timeout: 500,
     response: () => {
       return {
-        code: 0,
-        data: {
-          status: 0,
-          info: {
-            avatarLink: "https://avatars.githubusercontent.com/u/87625173?v=4",
-            userName: "superCPQ",
-            profession: "程序员",
-            userMail: "supercpq@outlook.com",
-          },
+        status: 0,
+        info: {
+          avatarLink: "https://avatars.githubusercontent.com/u/87625173?v=4",
+          userName: "superCPQ",
+          profession: "程序员",
+          userMail: "supercpq@outlook.com",
         },
       };
     },
@@ -96,13 +87,13 @@ export default [
             tabName: "个人资料",
             componentName: "basicSetting",
             tabUrl: "myinfo/setting/setUserInfo",
-            tabIcon: "/public/infoset.svg",
+            tabIcon: "/infoset.svg",
           },
           {
             tabName: "账号设置",
             componentName: "accountSetting",
             tabUrl: "myinfo/setting/setAccountInfo",
-            tabIcon: "/public/accountset.svg",
+            tabIcon: "/accountset.svg",
           },
           {
             tabName: "待开发",
@@ -110,6 +101,26 @@ export default [
             tabUrl: "myinfo/setting",
           },
         ],
+      };
+    },
+  },
+  {
+    url: "/myinfo/settingbase",
+    method: "post",
+    timeout: 500,
+    response: () => {
+      return {
+        status: 0,
+      };
+    },
+  },
+  {
+    url: "/myinfo/settingnewimg",
+    method: "post",
+    timeout: 500,
+    response: () => {
+      return {
+        status: 0,
       };
     },
   },

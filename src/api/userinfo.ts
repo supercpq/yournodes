@@ -37,3 +37,8 @@ export const changeName = (data: object) => {
 export const changeImg = (data: object) => {
   return http.request("post", "/user/account/changeImg", { data });
 };
+
+// 修改基本信息
+export const updatebaseinfo = (data: object) => {
+  return http.request("post", "/myinfo/settingbase", { data });
+};
