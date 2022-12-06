@@ -81,9 +81,9 @@ const avataralert = ref("");
 const userStore = useUserStore();
 
 const formLabelAlign = reactive({
-  name: "",
-  profession: "",
-  imageUrl: "",
+  name: userStore.name,
+  profession: userStore.profession,
+  imageUrl: userStore.avatarLink,
   type: "",
 });
 
@@ -92,6 +92,7 @@ const handleAvatarSuccess: UploadProps["onSuccess"] = (
   uploadFile
 ) => {
   formLabelAlign.imageUrl = URL.createObjectURL(uploadFile.raw!);
+  userStore.avatarLink = formLabelAlign.imageUrl;
 };
 
 const beforeAvatarUpload: UploadProps["beforeUpload"] = (rawFile) => {
