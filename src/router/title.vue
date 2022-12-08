@@ -10,9 +10,9 @@
       <div class="three">
         <showsearchInputVue />
       </div>
-      <div class="four">
+      <aside class="four">
         <nomalTool />
-      </div>
+      </aside>
     </div>
 
     <!-- <searchLocal /> -->

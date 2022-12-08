@@ -1,6 +1,6 @@
 <template>
   <div class="outside">
-    <!-- 整个按掘金设计，最外面的大框 -->
+    <!-- 最外面的大框 -->
     <div class="inside">
       <!-- 内层盒子 -->
       <div

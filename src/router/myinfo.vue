@@ -1,11 +1,11 @@
 <template>
   <div class="flex-info">
-    <div class="basic-info">
+    <header class="basic-info">
       <basicInfo />
-    </div>
-    <div class="like-list">
+    </header>
+    <section class="like-list">
       <userLikesListVue />
-    </div>
+    </section>
   </div>
 </template>
 

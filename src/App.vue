@@ -16,10 +16,12 @@ const routerP = routerPathStore.$subscribe((mutations, state) => {
 
 <template>
   <div class="wrapper">
-    <div class="one">
+    <!-- <div class="one"> -->
+    <nav class="one">
       <mainView />
-    </div>
-    <div class="therouters">
+    </nav>
+    <!-- </div> -->
+    <main class="therouters">
       <!-- <router-view></router-view>
        -->
       <router-view v-slot="{ Component }">
@@ -27,7 +29,7 @@ const routerP = routerPathStore.$subscribe((mutations, state) => {
           <component :is="Component" />
         </transition>
       </router-view>
-    </div>
+    </main>
   </div>
 </template>
 
