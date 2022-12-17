@@ -43,6 +43,7 @@ declare module '@vue/runtime-core' {
     ShowsearchInput: typeof import('./src/components/showsearchInput.vue')['default']
     UserInfoSetting: typeof import('./src/components/userInfoSetting.vue')['default']
     UserLikesList: typeof import('./src/components/userLikesList.vue')['default']
+    WriteArticle: typeof import('./src/components/writeArticle.vue')['default']
   }
   export interface ComponentCustomProperties {
     vInfiniteScroll: typeof import('element-plus/es')['ElInfiniteScroll']

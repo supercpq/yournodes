@@ -4,6 +4,8 @@ export const routerStore = defineStore("routerP", {
   state: () => {
     return {
       routerPath: "",
+      prop: false,
+      datas: {},
     };
   },
   getters: {

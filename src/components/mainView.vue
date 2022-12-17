@@ -35,8 +35,8 @@ const handleSelect = (key: string, keyPath: string[]) => {
   routerPath.routerPath = key;
 };
 onMounted(() => {
-  routerPath.routerPath = localStorage.getItem("router") || "";
-  activeIndex.value = routerPath.routerPath;
+  var routerPaths = localStorage.getItem("router") || "";
+  activeIndex.value = routerPaths;
 });
 </script>
 

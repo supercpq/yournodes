@@ -87,6 +87,10 @@
 import { ref, onMounted, computed } from "vue";
 import { searchInputStore } from "../store/modules/searchInputPinia";
 import _ from "lodash"; //防抖节流
+import { useUserStore } from "../store/modules/user";
+import { routerStore } from "../store/modules/routerPinia";
+const routerPath = routerStore();
+const userStore = useUserStore();
 
 interface searchInputItem {
   id: number;
@@ -143,7 +147,10 @@ const lazySearch = _.throttle(
 
 const getfocus = (item: searchInputItem) => {
   // console.log("1aaaaaaaaaa1");
-  window.open(item.url, "_blank");
+  // window.open(item.url, "_blank");
+  routerPath.routerPath = "reading";
+  routerPath.prop = true;
+  routerPath.datas = { Ar_id: item.id };
 };
 
 const handleScroll = _.throttle(
