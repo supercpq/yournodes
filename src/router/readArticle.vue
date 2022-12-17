@@ -21,7 +21,7 @@ import { useRoute } from "vue-router";
 const $route = useRoute();
 // props: [id];
 
-// console.log(JSON.stringify($route.query));
+console.log(JSON.stringify($route.query));
 console.log($route.params, $route.query);
 </script>
 

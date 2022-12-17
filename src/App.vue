@@ -11,17 +11,13 @@ const routerPathStore = routerStore();
 const routerP = routerPathStore.$subscribe((mutations, state) => {
   // localStorage.setItem("router", state.routerPath);
   if (state.prop) {
-    router.push({
-      name: state.routerPath,
-      // query: state.datas,
-      params: { id: "eduardo" },
-      query: {
-        id: "我是通过query传到组件B的参数",
-      },
-      replace: false,
-    });
+    // console.log(state.routerPath);
+    // router.push({
+    //   path: "/" + state.routerPath,
+    //   replace: false,
+    // });
+    // window.open(state.routerPath, "_blank");
     state.prop = false;
-    alert(JSON.stringify(state.datas));
   } else {
     router.push({ path: "/" + state.routerPath, replace: false });
   }

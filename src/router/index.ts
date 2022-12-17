@@ -35,7 +35,6 @@ const routes: Array<RouteRecordRaw> = [
     path: "/creator/write",
     name: "writear",
     component: writeAr,
-    props: true,
     meta: {
       keepAlive: false,
     },
