@@ -1,15 +1,12 @@
 <template>
   <div>
     <div class="pc">
-      <!-- pc端页面-->
       <h1>pc端页面</h1>
     </div>
     <div class="pad">
-      <!-- pad端页面-->
       <h1>pad端页面</h1>
     </div>
     <div class="mobile">
-      <!-- 移动端页面-->
       <h1>移动端页面</h1>
     </div>
   </div>
