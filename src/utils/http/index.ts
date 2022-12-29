@@ -11,6 +11,10 @@ import qs from "qs";
 import NProgress from "../progress";
 import { getToken } from "../user";
 import { useUserStoreHook } from "../../store/modules/user";
+import router from "src/router";
+import { routerStore } from "../../store/modules/routerPinia";
+
+const routerPath = routerStore();
 
 // axios封装的相关配置请参考：www.axios-js.com/zh-cn/docs/#axios-request-config-1
 
@@ -78,6 +82,9 @@ class qHttp {
             return $config;
           }
         } else {
+          // 请求不在白名单还没有token则跳转登录
+          routerPath.routerPath = "login";
+          console.log("请求不在白名单还没有token则跳转登录");
           return $config;
         }
         return $config;

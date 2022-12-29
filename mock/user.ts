@@ -124,4 +124,58 @@ export default [
       };
     },
   },
+  {
+    url: "/reading/like",
+    method: "post",
+    timeout: 500,
+    response: () => {
+      return {
+        status: 0,
+      };
+    },
+  },
+  {
+    url: "/api/reading/likeinfo",
+    method: "get",
+    timeout: 500,
+    response: () => {
+      return {
+        status: 0,
+        options: [
+          {
+            icon: "like.svg",
+            counts: 100,
+            active: false,
+            activeIcon: "likeit.svg",
+            disactiveIcon: "like.svg",
+          },
+        ],
+      };
+    },
+  },
+  {
+    url: "/api/reading/content",
+    method: "get",
+    timeout: 500,
+    response: () => {
+      return {
+        status: 0,
+        content: "# 123",
+        title: "hello, your news,这是supercpq的一篇博客的具体内容",
+      };
+    },
+  },
+  {
+    url: "/api/refreshToken",
+    method: "post",
+    timeout: 500,
+    response: () => {
+      return {
+        status: 0,
+        accessToken: "agauwrhgahjioatenhjtlmjimoa",
+        expires: 4827988371000,
+        name: "supercpq",
+      };
+    },
+  },
 ] as MockMethod[];

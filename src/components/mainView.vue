@@ -32,6 +32,9 @@ const routerPath = routerStore();
 const activeIndex = ref("");
 const handleSelect = (key: string, keyPath: string[]) => {
   // console.log(key, keyPath);
+  if (routerPath.routerPath === "") {
+    routerPath.routerPath = "/";
+  }
   routerPath.routerPath = key;
 };
 onMounted(() => {

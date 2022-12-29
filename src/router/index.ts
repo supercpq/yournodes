@@ -13,6 +13,7 @@ const routes: Array<RouteRecordRaw> = [
     component: title,
     meta: {
       keepAlive: true, // 需要被缓存
+      title: "your notes首页",
     },
   },
   {
@@ -21,6 +22,7 @@ const routes: Array<RouteRecordRaw> = [
     component: myinfo,
     meta: {
       keepAlive: false,
+      title: "个人主页",
     },
   },
   {
@@ -29,6 +31,7 @@ const routes: Array<RouteRecordRaw> = [
     component: setting,
     meta: {
       keepAlive: false,
+      title: "个人信息设置",
     },
   },
   {
@@ -37,6 +40,7 @@ const routes: Array<RouteRecordRaw> = [
     component: writeAr,
     meta: {
       keepAlive: false,
+      title: "创作作品",
     },
   },
   {
@@ -46,6 +50,7 @@ const routes: Array<RouteRecordRaw> = [
     props: true,
     meta: {
       keepAlive: false,
+      title: "具体文章",
     },
   },
 ];

@@ -60,4 +60,33 @@ import nomalTool from "../components/normalTools.vue";
   /* grid-row-start: 3; */
   grid-column-start: 3;
 }
+
+@media only screen and (max-width: 767px) {
+  .searchInput {
+    grid-row-start: 1;
+    width: 60%;
+    margin: auto;
+  }
+
+  .manyContents {
+    display: grid;
+    grid-gap: 10px;
+    grid-row-start: 2;
+    grid-template-columns: 1% 90% 1%;
+  }
+  .three {
+    /* grid-row-start: 3; */
+    /* display: none; */
+    grid-column-start: 1;
+    /* margin-left: 20px; */
+  }
+  .two {
+    display: none;
+    grid-column-start: 1;
+  }
+  .four {
+    display: none;
+    grid-column-start: 3;
+  }
+}
 </style>
