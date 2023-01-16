@@ -30,6 +30,12 @@ const onUploadImg = (files: any) => {
 const onSubmit = _.debounce((pub: boolean) => {
   // console.log("updata");
   isPublish.value = pub;
+  /* 
+  content: 文章内容
+  arid: 文章id，如果是新建草稿则为""，然后第一次提交草稿后，
+  由服务器返回id，如果有id，就取参数里的即可
+  isPublic: 是否已经发表
+  */
   updataArContent({
     content: text.value,
     arid: id.value,
