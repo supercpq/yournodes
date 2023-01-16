@@ -26,7 +26,7 @@ import _ from "lodash"; //防抖节流
 const userStore = useUserStore();
 const $route = useRoute();
 const Ar_content = ref("");
-const Ar_id = ref($route.query.Ar_id);
+const Ar_id = ref($route.query.ar_id);
 // props: [id];
 interface useroptions {
   icon: string;
@@ -66,7 +66,7 @@ const likeAr = _.throttle(
 
 onBeforeMount(async () => {
   // 获取用户文字内容，评论，点赞等
-  console.log($route.query.Ar_id, Ar_id.value);
+  console.log($route.query.ar_id, Ar_id.value);
   getArContent({
     id: Ar_id.value,
   }).then(

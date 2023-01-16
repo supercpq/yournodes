@@ -139,7 +139,7 @@ class qHttp {
       ...axiosConfig,
     } as qHttpRequestConfig;
 
-    // 单独处理自定义请求/响应回掉
+    // 单独处理自定义请求/响应回调
     return new Promise((resolve, reject) => {
       qHttp.axiosInstance
         .request(config)

@@ -50,7 +50,7 @@ const routes: Array<RouteRecordRaw> = [
     props: true,
     meta: {
       keepAlive: false,
-      title: "具体文章",
+      // title: "具体文章",
     },
   },
 ];

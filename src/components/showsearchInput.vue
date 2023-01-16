@@ -151,7 +151,8 @@ const getfocus = (item: searchInputItem) => {
   var routerPa = "reading?Ar_id=" + item.id;
   routerPath.prop = true;
   routerPath.datas = { Ar_id: item.id };
-  window.open(routerPa, "_blank");
+  window.open(routerPa, item.title);
+  // window.open(routerPa, "hello, your news,是supercpq的一篇博客的具体内容");
 };
 
 const handleScroll = _.throttle(
