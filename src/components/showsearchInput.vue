@@ -148,7 +148,7 @@ const lazySearch = _.throttle(
 const getfocus = (item: searchInputItem) => {
   // console.log("1aaaaaaaaaa1");
   // window.open(item.url, "_blank");
-  var routerPa = "reading?Ar_id=" + item.id;
+  var routerPa = "reading?ar_id=" + item.id;
   routerPath.prop = true;
   routerPath.datas = { Ar_id: item.id };
   window.open(routerPa, item.title);

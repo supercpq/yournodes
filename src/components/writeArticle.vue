@@ -3,10 +3,10 @@
     <md-editor
       class="mgb20"
       v-model="text"
-      @input="onSubmit()"
+      @input="onSubmit(isPublish)"
       @on-upload-img="onUploadImg"
     />
-    <el-button type="primary" class="submit" @click="onSubmit()"
+    <el-button type="primary" class="submit" @click="onSubmit(true)"
       >发表</el-button
     >
   </div>
@@ -27,8 +27,9 @@ const isPublish = ref(false);
 const onUploadImg = (files: any) => {
   console.log(files);
 };
-const onSubmit = _.debounce(() => {
+const onSubmit = _.debounce((pub: boolean) => {
   // console.log("updata");
+  isPublish.value = pub;
   updataArContent({
     content: text.value,
     arid: id.value,
@@ -52,6 +53,7 @@ onBeforeMount(() => {
     getDraft({ arid: $route.query.arid }).then(
       (res: any) => {
         text.value = res.text;
+        isPublish.value = res.isPublish;
         if (res.status === 1) {
           window.location.replace("write");
         } else if (typeof $route.query.arid === "string") {
