@@ -1,14 +1,14 @@
 <template>
   <div class="wrapperT">
     <div class="searchInput">
-      <searchLocal />
+      <searchLocal :isSelf="false" />
     </div>
     <div class="manyContents">
       <div class="two">
         <searchGithub />
       </div>
       <div class="three">
-        <showsearchInputVue />
+        <showsearchInputVue :isSelf="false" />
       </div>
       <aside class="four">
         <nomalTool />

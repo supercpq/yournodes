@@ -8,7 +8,12 @@
       @keyup.enter="hellogit(inputStore.inputSearch, select)"
     >
       <template #prepend>
-        <el-select v-model="select" placeholder="Select" style="width: 115px">
+        <el-select
+          v-model="select"
+          placeholder="Select"
+          style="width: 115px"
+          v-if="!props.isSelf"
+        >
           <el-option
             v-for="item in options"
             :key="item.value"
@@ -28,10 +33,13 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, watch, onMounted } from "vue";
+import { ref, watch, onMounted, onBeforeUnmount } from "vue";
 import { searchInputStore } from "../store/modules/searchInputPinia";
 import _ from "lodash";
 import { Search } from "@element-plus/icons-vue";
+const props = defineProps({
+  isSelf: { type: Boolean, required: true },
+});
 const inputSearch = ref("");
 const isclearable = true;
 const select = ref("https://www.google.com/search?q=");
@@ -71,7 +79,12 @@ const inputStore = searchInputStore();
 inputStore.inputSearch = inputSearch.value;
 const hellogit = _.debounce(
   (input: string, url: string) => {
-    inputStore.searchInputOnce(input, url);
+    if (props.isSelf) {
+      // TODO：获取自己写的文章的列表
+      inputStore.searchSelf();
+    } else {
+      inputStore.searchInputOnce(input, url);
+    }
   },
   200,
   {
@@ -87,8 +100,17 @@ onMounted(() => {
     localStorage.getItem("searchSelect") || "https://www.google.com/search?q=";
   if (!inputStore.show) {
     // hellogit(value.value, "");
-    inputStore.searchdefaultOnce();
+    if (props.isSelf) {
+      // TODO：获取自己写的文章的列表
+      inputStore.searchSelf();
+    } else {
+      inputStore.searchdefaultOnce();
+    }
   }
+});
+onBeforeUnmount(() => {
+  inputStore.list.length = 0;
+  inputStore.inputSearch = "";
 });
 </script>
 

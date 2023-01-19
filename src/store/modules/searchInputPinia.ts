@@ -5,8 +5,7 @@ import {
   getarticle,
   // getMorearticle,
 } from "../../api/mainface";
-import axios from "axios";
-axios.defaults.timeout = 10000;
+import { getMyList } from "../../api/ardata";
 interface searchInputItem {
   id: number;
   title: string;
@@ -34,7 +33,8 @@ export const searchInputStore = defineStore("searchInput", {
         likes: 0,
         reads: 0,
         pubTime: "--",
-        imglink: "src/assets/avatar.svg",
+        imglink:
+          "https://p3-passport.byteimg.com/img/mosaic-legacy/3791/5070639578~180x180.png",
       },
     };
   },
@@ -57,8 +57,8 @@ export const searchInputStore = defineStore("searchInput", {
         searchByTitle(seIn).then(
           (res: any) => {
             // TODO:
-            console.log("resByTitle", res.data);
-            this.list = res.data.list;
+            // console.log("resByTitle", res.data);
+            this.list = res.list;
 
             this.loading = false;
           },
@@ -74,10 +74,13 @@ export const searchInputStore = defineStore("searchInput", {
     },
     searchMore() {
       this.lazy = false;
-      searchMoreByTitle({ input: this.inputSearch }).then(
+      searchMoreByTitle({
+        input: this.inputSearch,
+        num: this.list.length,
+      }).then(
         (res: any) => {
-          console.log("resMore", res.data.list);
-          this.list = [...this.list, ...res.data.list];
+          // console.log("resMore", res.data.list);
+          this.list = [...this.list, ...res.list];
           this.loading = false;
           this.lazy = true;
         },
@@ -91,11 +94,30 @@ export const searchInputStore = defineStore("searchInput", {
         }
       );
     },
+    searchSelf() {
+      this.lazy = false;
+      getMyList({ input: this.inputSearch, num: this.list.length }).then(
+        (res: any) => {
+          // console.log("default", res.data);
+          this.list = [...this.list, ...res.list];
+          this.loading = false;
+          this.lazy = true;
+        },
+        (err) => {
+          console.log(err);
+          if (!this.show) {
+            this.list.push(this.a);
+          }
+          this.lazy = true;
+          this.loading = false;
+        }
+      );
+    },
     searchdefaultOnce() {
       getarticle({ input: this.inputSearch }).then(
         (res: any) => {
-          console.log("default", res.data);
-          this.list = res.data.list;
+          // console.log("default", res.data);
+          this.list = res.list;
           this.loading = false;
         },
         (err) => {

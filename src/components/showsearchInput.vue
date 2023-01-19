@@ -91,7 +91,9 @@ import { useUserStore } from "../store/modules/user";
 import { routerStore } from "../store/modules/routerPinia";
 const routerPath = routerStore();
 const userStore = useUserStore();
-
+const props = defineProps({
+  isSelf: { type: Boolean, required: true },
+});
 interface searchInputItem {
   id: number;
   title: string;
@@ -137,8 +139,12 @@ const lazySearch = _.throttle(
   function () {
     //懒加载
     if (!arcticelEnd.value && searchinputStore.lazy) {
-      // alert("qwr");
-      searchinputStore.searchMore();
+      if (props.isSelf) {
+        // 继续获取自己写的文章的列表
+        searchinputStore.searchSelf();
+      } else {
+        searchinputStore.searchMore(); // 正常懒加载获得
+      }
     }
   },
   500,
@@ -146,13 +152,14 @@ const lazySearch = _.throttle(
 );
 
 const getfocus = (item: searchInputItem) => {
-  // console.log("1aaaaaaaaaa1");
-  // window.open(item.url, "_blank");
-  var routerPa = "reading?ar_id=" + item.id;
-  routerPath.prop = true;
-  routerPath.datas = { Ar_id: item.id };
-  window.open(routerPa, item.title);
-  // window.open(routerPa, "hello, your news,是supercpq的一篇博客的具体内容");
+  if (props.isSelf) {
+    // TODO：获取文章数据
+  } else {
+    let routerPa = "reading?ar_id=" + item.id;
+    routerPath.prop = true;
+    routerPath.datas = { Ar_id: item.id };
+    window.open(routerPa, item.title);
+  }
 };
 
 const handleScroll = _.throttle(
@@ -165,7 +172,7 @@ const handleScroll = _.throttle(
 </script>
 
 <style scoped lang="scss">
-::v-deep transoptions {
+:deep(.transoptions) {
   background-color: rgba(255, 255, 255, 0.5);
   color: #000000;
 }

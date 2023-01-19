@@ -22,7 +22,10 @@
     "baseUrl": ".",
     "allowJs": false,
     "incremental": true,
-  },
+    "types": [
+          "vite-svg-loader"
+      ],
+    },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

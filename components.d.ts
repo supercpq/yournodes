@@ -32,6 +32,7 @@ declare module '@vue/runtime-core' {
     ElSubMenu: typeof import('element-plus/es')['ElSubMenu']
     ElSwitch: typeof import('element-plus/es')['ElSwitch']
     ElUpload: typeof import('element-plus/es')['ElUpload']
+    Error404: typeof import('./src/components/error404.vue')['default']
     Login: typeof import('./src/components/login.vue')['default']
     MainView: typeof import('./src/components/mainView.vue')['default']
     NormalTools: typeof import('./src/components/normalTools.vue')['default']

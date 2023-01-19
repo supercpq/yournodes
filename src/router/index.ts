@@ -5,7 +5,8 @@ const myinfo = () => import("./myinfo.vue");
 const setting = () => import("./userInfoSetting.vue");
 const reading = () => import("./readArticle.vue");
 const writeAr = () => import("./createArticle.vue");
-
+const arData = () => import("./articleData.vue");
+const error404 = () => import("./error404.vue");
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
@@ -13,7 +14,7 @@ const routes: Array<RouteRecordRaw> = [
     component: title,
     meta: {
       keepAlive: true, // 需要被缓存
-      title: "your notes首页",
+      title: "首页-yournotes",
     },
   },
   {
@@ -22,7 +23,7 @@ const routes: Array<RouteRecordRaw> = [
     component: myinfo,
     meta: {
       keepAlive: false,
-      title: "个人主页",
+      title: "个人主页-yournotes",
     },
   },
   {
@@ -31,7 +32,7 @@ const routes: Array<RouteRecordRaw> = [
     component: setting,
     meta: {
       keepAlive: false,
-      title: "个人信息设置",
+      title: "个人信息设置-yournotes",
     },
   },
   {
@@ -40,7 +41,7 @@ const routes: Array<RouteRecordRaw> = [
     component: writeAr,
     meta: {
       keepAlive: false,
-      title: "创作作品",
+      title: "创作作品-yournotes",
     },
   },
   {
@@ -52,6 +53,24 @@ const routes: Array<RouteRecordRaw> = [
       keepAlive: false,
       // title: "具体文章",
     },
+  },
+  {
+    path: "/creator/data",
+    name: "arData",
+    component: arData,
+    meta: {
+      keepAlive: false,
+      title: "文章数据-yournotes",
+    },
+  },
+  {
+    path: "/404",
+    name: "error404",
+    component: error404,
+  },
+  {
+    path: "/:catchAll(.*)",
+    redirect: "/404",
   },
 ];
 

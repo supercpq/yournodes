@@ -1,3 +1,4 @@
+import { ar } from "element-plus/es/locale";
 import { MockMethod } from "vite-plugin-mock";
 
 interface searchInputItem {
@@ -15,33 +16,48 @@ var a: searchInputItem = {
   // 没加载出来用的
   id: 0,
   title: "nothing",
-  url: "#",
+  url: "reading?ar_id=123",
   description: "no data",
   likes: 0,
   reads: 0,
   pubTime: "--",
-  imglink: "src/assets/avatar.svg",
+  imglink:
+    "https://p3-passport.byteimg.com/img/mosaic-legacy/3791/5070639578~180x180.png",
 };
 var b: searchInputItem = {
   // 没加载出来用的
   id: 0,
   title: "nothing",
-  url: "#",
+  url: "reading?ar_id=123",
   description: "no data",
   likes: 0,
   reads: 0,
   pubTime: "--",
-  imglink: "src/assets/avatar.svg",
+  imglink:
+    "https://p3-passport.byteimg.com/img/mosaic-legacy/3791/5070639578~180x180.png",
+};
+var c: searchInputItem = {
+  // 没加载出来用的
+  id: 0,
+  title: "nothing",
+  url: "../reading?ar_id=123",
+  description: "no data",
+  likes: 0,
+  reads: 0,
+  pubTime: "--",
+  imglink:
+    "https://p3-passport.byteimg.com/img/mosaic-legacy/3791/5070639578~180x180.png",
 };
 var list = <searchInputItem[]>[];
 var list2 = <searchInputItem[]>[];
+var selfList = <searchInputItem[]>[];
 
-for (var i = 0; i < 10; i++) {
+for (let i = 0; i < 10; i++) {
   a.title = "once data";
   a.id++;
   list.push(a);
 }
-for (var i = 0; i < 10; i++) {
+for (let i = 0; i < 10; i++) {
   b.title = "more data";
   b.id++;
   list2.push(b);
@@ -54,11 +70,8 @@ export default [
     timeout: 500,
     response: () => {
       return {
-        code: 0,
-        data: {
-          status: 0,
-          list,
-        },
+        status: 0,
+        list,
       };
     },
   },
@@ -68,10 +81,8 @@ export default [
     timeout: 500,
     response: () => {
       return {
-        data: {
-          status: 0,
-          list,
-        },
+        status: 0,
+        list,
       };
     },
   },
@@ -81,10 +92,8 @@ export default [
     timeout: 500,
     response: () => {
       return {
-        data: {
-          status: 0,
-          list: list2,
-        },
+        status: 0,
+        list: list2,
       };
     },
   },
@@ -94,14 +103,29 @@ export default [
     timeout: 500,
     response: () => {
       return {
-        data: {
-          items: [
-            {
-              url: "http://120.55.84.232/",
-              title: "朋友博客",
-            },
-          ],
-        },
+        items: [
+          {
+            url: "http://120.55.84.232/",
+            title: "朋友博客",
+          },
+        ],
+      };
+    },
+  },
+  {
+    url: "/myarlist",
+    method: "get",
+    timeout: 500,
+    response: (data) => {
+      selfList.length = 0;
+      for (let i = 0; i < 10; i++) {
+        c.title = "self data title" + data.query.num;
+        c.id++;
+        selfList.push(c);
+      }
+      return {
+        status: 0,
+        list: selfList,
       };
     },
   },

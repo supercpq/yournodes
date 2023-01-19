@@ -77,11 +77,11 @@ onMounted(() => {
           title: "五楼没有秘密基地",
         },
       ];
-      for (var i in res.data.items) {
+      for (var i in res.items) {
         var a: tool = {
-          url: res.data.items[i].url,
-          img: "src/assets/bock.svg",
-          title: res.data.items[i].title,
+          url: res.items[i].url,
+          img: "./bock.svg",
+          title: res.items[i].title,
         };
         toolList.value.push(a);
       }
