@@ -2,7 +2,7 @@
   <div class="outside">
     <noExist />
     <div>
-      <p>404</p>
+      <!-- <p>404</p> -->
       <p>抱歉，你访问的页面不存在</p>
       <el-button type="primary" @click="gotitle()"> 返回首页 </el-button>
     </div>

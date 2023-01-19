@@ -56,10 +56,8 @@ export const searchInputStore = defineStore("searchInput", {
         var seIn = { input };
         searchByTitle(seIn).then(
           (res: any) => {
-            // TODO:
             // console.log("resByTitle", res.data);
             this.list = res.list;
-
             this.loading = false;
           },
           (err) => {
@@ -96,9 +94,12 @@ export const searchInputStore = defineStore("searchInput", {
     },
     searchSelf() {
       this.lazy = false;
+      if (this.list.length === 0) {
+        this.loading = true;
+      }
+      console.log("searchSelf");
       getMyList({ input: this.inputSearch, num: this.list.length }).then(
         (res: any) => {
-          // console.log("default", res.data);
           this.list = [...this.list, ...res.list];
           this.loading = false;
           this.lazy = true;

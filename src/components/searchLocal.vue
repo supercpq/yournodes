@@ -81,6 +81,7 @@ const hellogit = _.debounce(
   (input: string, url: string) => {
     if (props.isSelf) {
       // TODO：获取自己写的文章的列表
+      inputStore.list.length = 0;
       inputStore.searchSelf();
     } else {
       inputStore.searchInputOnce(input, url);
