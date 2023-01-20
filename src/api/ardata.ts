@@ -18,3 +18,7 @@ export const allArDatas = (params?: object) => {
 export const arData = (params: object) => {
   return http.request("get", "/ardata", { params });
 };
+// 获取chartlable
+export const arDataLable = (params?: object) => {
+  return http.request("get", "/ardatalable", { params });
+};

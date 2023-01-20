@@ -67,6 +67,10 @@ const routes: Array<RouteRecordRaw> = [
     path: "/404",
     name: "error404",
     component: error404,
+    meta: {
+      keepAlive: false,
+      title: "未知界面-yournotes",
+    },
   },
   {
     path: "/:catchAll(.*)",

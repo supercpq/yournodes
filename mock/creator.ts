@@ -1,4 +1,5 @@
 import { MockMethod } from "vite-plugin-mock";
+import { shuffle } from "lodash";
 
 export default [
   {
@@ -30,9 +31,55 @@ export default [
     response: (data) => {
       // console.log(data.body);
       return {
-        status: 1,
+        status: 0,
         arid: "1234",
         isPublish: data.body.isPublish,
+      };
+    },
+  },
+  {
+    url: "/allardatas",
+    method: "get",
+    timeout: 500,
+    response: (data) => {
+      // console.log(data.body);
+      return {
+        status: 0,
+        barData: [10, 20, 10, 30, 30, 60, 30],
+        barLable: ["6天前", "5天前", "4天前", "3天前", "2天前", "昨天", "今天"],
+      };
+    },
+  },
+  {
+    url: "/ardata",
+    method: "get",
+    timeout: 500,
+    response: (data) => {
+      // console.log(data.body);
+      return {
+        status: 0,
+        lineData: shuffle([1, 2, 1, 3, 3, 6, 3]),
+        lineLable: [
+          "6天前",
+          "5天前",
+          "4天前",
+          "3天前",
+          "2天前",
+          "昨天",
+          "今天",
+        ],
+      };
+    },
+  },
+  {
+    url: "/ardatalable",
+    method: "get",
+    timeout: 500,
+    response: (data) => {
+      // console.log(data.body);
+      return {
+        status: 0,
+        chartlable: "文章总数据",
       };
     },
   },

@@ -97,7 +97,6 @@ export const searchInputStore = defineStore("searchInput", {
       if (this.list.length === 0) {
         this.loading = true;
       }
-      console.log("searchSelf");
       getMyList({ input: this.inputSearch, num: this.list.length }).then(
         (res: any) => {
           this.list = [...this.list, ...res.list];

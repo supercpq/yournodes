@@ -36,12 +36,12 @@ export const githubHotStore = defineStore("githubHotS", {
           .then(
             (res) => {
               if (typeof res.data.errors != undefined) {
-                console.log(this.show);
+                // console.log(this.show);
                 // console.log(res.data.code)
                 // console.log(res.data)
                 // this.gridCon = '\'logoItems \'\'searchInput \'\'musiclist\'\'musiclist\'\'musiclist\'\'musiclist\'\'musiclist\'\'musiclist\'\'musiclist\'\'musiclist\'\'musiclist'
                 this.list = [];
-                console.log(this.list.length);
+                // console.log(this.list.length);
                 for (let i in res.data.items) {
                   var a: githubHotItem = {
                     id: res.data.items[i].id,
@@ -56,7 +56,7 @@ export const githubHotStore = defineStore("githubHotS", {
                 }
                 this.loading = false;
                 // console.log(this.list);
-                console.log(this.list.length);
+                // console.log(this.list.length);
               } else {
                 if (!this.show) {
                   var a: githubHotItem = {

@@ -9,6 +9,7 @@ declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     Accountsetting: typeof import('./src/components/accountsetting.vue')['default']
     AccountSetting: typeof import('./src/components/accountSetting.vue')['default']
+    ArdataChats: typeof import('./src/components/ardataChats.vue')['default']
     BaicInfo: typeof import('./src/components/baicInfo.vue')['default']
     BasicInfo: typeof import('./src/components/basicInfo.vue')['default']
     Basicsetting: typeof import('./src/components/basicsetting.vue')['default']
@@ -16,6 +17,7 @@ declare module '@vue/runtime-core' {
     ElAlert: typeof import('element-plus/es')['ElAlert']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElCard: typeof import('element-plus/es')['ElCard']
+    ElDivider: typeof import('element-plus/es')['ElDivider']
     ElDrawer: typeof import('element-plus/es')['ElDrawer']
     ElForm: typeof import('element-plus/es')['ElForm']
     ElFormItem: typeof import('element-plus/es')['ElFormItem']

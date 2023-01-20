@@ -87,10 +87,12 @@
 import { ref, onMounted, computed } from "vue";
 import { searchInputStore } from "../store/modules/searchInputPinia";
 import _ from "lodash"; //防抖节流
-import { useUserStore } from "../store/modules/user";
+// import { useUserStore } from "../store/modules/user";
 import { routerStore } from "../store/modules/routerPinia";
+import { ardataStore } from "../store/modules/ardata";
 const routerPath = routerStore();
-const userStore = useUserStore();
+// const userStore = useUserStore();
+const ardata = ardataStore();
 const props = defineProps({
   isSelf: { type: Boolean, required: true },
 });
@@ -106,7 +108,6 @@ interface searchInputItem {
 }
 const arcticelEnd = ref(false); // 是否全部加载
 const searchinputStore = searchInputStore();
-
 const screenHeight = ref(0);
 const start = ref(0);
 const end = ref(0);
@@ -154,6 +155,7 @@ const lazySearch = _.throttle(
 const getfocus = (item: searchInputItem) => {
   if (props.isSelf) {
     // TODO：获取文章数据
+    ardata.getline(item.id, item.title);
   } else {
     let routerPa = "reading?ar_id=" + item.id;
     routerPath.prop = true;

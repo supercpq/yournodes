@@ -83,7 +83,10 @@ class qHttp {
           }
         } else {
           // 请求不在白名单还没有token则跳转登录
-          routerPath.routerPath = "login";
+          // routerPath.routerPath = "login";
+          location.replace(
+            window.location.protocol + "//" + window.location.host + "/login"
+          );
           console.log("请求不在白名单还没有token则跳转登录");
           return $config;
         }

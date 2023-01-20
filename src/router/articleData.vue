@@ -4,13 +4,16 @@
       <searchLocal :isSelf="true" style="padding: 0 60px" />
       <showsearchInputVue :isSelf="true" />
     </section>
-    <aside class="ar-data"></aside>
+    <aside class="ar-data">
+      <dataChats />
+    </aside>
   </div>
 </template>
 
 <script setup lang="ts">
 import searchLocal from "../components/searchLocal.vue";
 import showsearchInputVue from "../components/showsearchInput.vue";
+import dataChats from "../components/ardataChats.vue";
 </script>
 
 <style scoped>
