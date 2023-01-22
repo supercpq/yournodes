@@ -16,7 +16,7 @@ export const ardataStore = defineStore("ardata", {
       this.chartlable[0] = title + "的阅读数据";
       arData({ id }).then(
         (res: any) => {
-          console.log("res", res);
+          // console.log("res", res);
           this.lineData = res.lineData;
           this.lineLable = res.lineLable;
         },

@@ -43,6 +43,9 @@ body {
   /* 循环动画 - 原理4 */
   animation: gradientBG 30s ease infinite;
 }
+.mgb20 {
+  margin-bottom: 20px;
+}
 
 h1 {
   font-size: 3.2em;

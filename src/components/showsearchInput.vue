@@ -157,7 +157,12 @@ const getfocus = (item: searchInputItem) => {
     // TODO：获取文章数据
     ardata.getline(item.id, item.title);
   } else {
-    let routerPa = "reading?ar_id=" + item.id;
+    let routerPa =
+      window.location.protocol +
+      "//" +
+      window.location.host +
+      "/reading?ar_id=" +
+      item.id;
     routerPath.prop = true;
     routerPath.datas = { Ar_id: item.id };
     window.open(routerPa, item.title);

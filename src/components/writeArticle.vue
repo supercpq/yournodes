@@ -3,6 +3,7 @@
     <md-editor
       class="mgb20"
       v-model="text"
+      previewTheme="cyanosis"
       @input="onSubmit(isPublish)"
       @on-upload-img="onUploadImg"
     />
@@ -67,12 +68,12 @@ onBeforeMount(() => {
         }
       },
       (err) => {
-        text.value = "Hello markDown!";
+        text.value = "## Hello markDown!";
         console.log(err.message);
       }
     );
   } else {
-    text.value = "Hello markDown!";
+    text.value = "## Hello markDown!";
   }
 });
 </script>
@@ -85,7 +86,7 @@ onBeforeMount(() => {
   border: 1px solid #ddd;
   border-radius: 5px;
   text-align: left;
-  height: 760px;
+  height: 800px;
 }
 .md-editor {
   height: 700px;
