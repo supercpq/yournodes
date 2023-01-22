@@ -21,12 +21,22 @@
         ref="editorRef"
         :previewOnly="true"
         :sanitize="(html: string) => {
-          
           return getTitle(html);
           }"
       />
     </main>
-    <aside class="directory"></aside>
+    <aside class="directory">
+      <div class="catatitle"><b>目录</b></div>
+      <div class="catalog">
+        <div
+          class="cata"
+          v-for="(item, index) in arCatalog"
+          @click="gotoTitle(index)"
+        >
+          {{ item }}
+        </div>
+      </div>
+    </aside>
   </div>
 </template>
 
@@ -39,8 +49,8 @@ import "md-editor-v3/lib/style.css";
 import MdEditor from "md-editor-v3";
 import _ from "lodash"; //防抖节流
 // import type { ExposeParam } from "md-editor-v3";
-// const editorRef = ref<ExposeParam>();
-
+// const editorRef = ref<ExposeParam>(); color: cornflowerblue;
+const arCatalog = ref<Array<string>>([]);
 const userStore = useUserStore();
 const $route = useRoute();
 const Ar_content = ref("");
@@ -81,6 +91,10 @@ const likeAr = _.throttle(
   50,
   { trailing: false }
 );
+function gotoTitle(title: number) {
+  // document.querySelector(`#title-${title}`)?.scrollIntoView(true);
+  window.location.hash = `#title-${title}`;
+}
 function getTitle(html: string) {
   /*
     替换html里的<a href="#部分，修改成title-0  -1这样的锚点，
@@ -96,7 +110,7 @@ function getTitle(html: string) {
       ? html
       : html.slice(html.search(geth), html.length); // 用于存还没改的html
   let title = 0;
-  let hello = new Array<string>();
+  // let hello = new Array<string>();
 
   while (changeHtml.search(geta) !== -1) {
     // 先处理h再处理a
@@ -111,7 +125,7 @@ function getTitle(html: string) {
     let h = changeHtml.match(geth)?.[0][2];
     let titleindex = test?.slice(8, test?.length - 2); // 各个小标题名
     if (typeof titleindex === "string") {
-      hello.push(titleindex);
+      arCatalog.value.push(titleindex);
     }
     // console.log("title", title, changeHtml);
     changeHtml = changeHtml.replace(geth, `<h${h} id="title-${title}">`);
@@ -192,6 +206,39 @@ onBeforeMount(async () => {
     width: 3px;
   }
 }
+.catalog {
+  display: flex;
+  max-height: 300px;
+  width: 100%;
+  padding: 20px;
+  flex-direction: column;
+  overflow-y: auto;
+  background-color: rgba(255, 255, 255, 0.15);
+  :hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+  }
+}
+::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
+}
+.cata {
+  width: 100%;
+  min-height: 30px;
+  line-height: 30px;
+  padding: 10px 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.catatitle {
+  width: 100%;
+  padding: 10px 20px;
+  width: 100%;
+  font-size: larger;
+  background-color: rgba(255, 255, 255, 0.15);
+}
 .img-icon {
   width: 30px;
   height: 30px;
@@ -204,8 +251,9 @@ onBeforeMount(async () => {
   height: 100%;
   width: 100%;
   display: grid;
-  grid-template-columns: 10% 65% 25%;
+  grid-template-columns: 10% 65% 20%;
   // grid-template-columns: 10% 89%;
+  gap: 10px;
   margin: 10px auto;
 }
 ::-webkit-scrollbar {
@@ -257,7 +305,7 @@ onBeforeMount(async () => {
 @media only screen and (min-width: 1150px) {
   .grid-content {
     // grid-template-columns: 10% 89%;
-    grid-template-columns: 10% 65% 25%;
+    grid-template-columns: 10% 65% 20%;
   }
 }
 //pad端
