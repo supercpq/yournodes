@@ -6,6 +6,7 @@
       previewTheme="cyanosis"
       @input="onSubmit(isPublish)"
       @on-upload-img="onUploadImg"
+      @onSave="onSubmit(isPublish)"
     />
     <el-button type="primary" class="submit" @click="onSubmit(true)"
       >发表</el-button
