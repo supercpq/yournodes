@@ -17,10 +17,10 @@ export const reguser = (data: object) => {
 
 // 邮箱找回密码
 export const emailCode = (data: object) => {
-  return http.request("post", "/api/code/user", { data });
+  return http.request("post", "/api/code", { data });
 };
 
 // 找回密码验证
 export const updatepwd = (data: object) => {
-  return http.request("post", "/api/code/updatepwd", { data });
+  return http.request("post", "/api/updatepwd", { data });
 };

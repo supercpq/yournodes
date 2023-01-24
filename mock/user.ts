@@ -208,4 +208,25 @@ export default [
       };
     },
   },
+  {
+    url: "/api/code",
+    method: "post",
+    timeout: 500,
+    response: () => {
+      return {
+        status: 0,
+        code: 123,
+      };
+    },
+  },
+  {
+    url: "/api/updatepwd",
+    method: "post",
+    timeout: 500,
+    response: () => {
+      return {
+        status: 0,
+      };
+    },
+  },
 ] as MockMethod[];

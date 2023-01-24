@@ -1,66 +1,68 @@
 <template>
-  <div class="tabinfo">
-    <h4>个人资料</h4>
-  </div>
-  <div class="info-detail">
-    <div class="info-form">
-      <el-form
-        :label-position="labelPosition"
-        label-width="100px"
-        :model="formLabelAlign"
-        style="max-width: 460px"
-      >
-        <el-form-item label="用户名">
-          <el-input v-model="formLabelAlign.name" maxlength="20" />
-        </el-form-item>
-        <el-form-item label="职位">
-          <el-input v-model="formLabelAlign.profession" maxlength="20" />
-        </el-form-item>
-        <el-form-item label="公司">
-          <el-input v-model="formLabelAlign.type" maxlength="20" />
-        </el-form-item>
-      </el-form>
-      <button @click="updataInfo()" style="float: left">保存修改</button>
-      <el-alert
-        v-if="isSuccess == 1"
-        title="success"
-        type="success"
-        center
-        show-icon
-        :closable="false"
-      />
-      <el-alert
-        v-else-if="isSuccess == 2"
-        title="error"
-        type="error"
-        center
-        show-icon
-        :closable="false"
-      />
+  <div>
+    <div class="tabinfo">
+      <h4>个人资料</h4>
     </div>
-    <div class="info-avatar">
-      <div class="info-mask">
-        <el-upload
-          class="avatar-uploader"
-          :action="imgUpdataUrl"
-          :show-file-list="false"
-          :on-success="handleAvatarSuccess"
-          :before-upload="beforeAvatarUpload"
+    <div class="info-detail">
+      <div class="info-form">
+        <el-form
+          :label-position="labelPosition"
+          label-width="100px"
+          :model="formLabelAlign"
+          style="max-width: 460px"
         >
-          <img
-            v-if="formLabelAlign.imageUrl"
-            :src="formLabelAlign.imageUrl"
-            class="avatar"
-          />
-          <el-icon v-else class="avatar-uploader-icon"><Plus /></el-icon>
-          <div class="masks">
-            <h5>点击更换头像</h5>
-            <el-icon :size="40"><CirclePlus /></el-icon>
-          </div>
-        </el-upload>
+          <el-form-item label="用户名">
+            <el-input v-model="formLabelAlign.name" maxlength="20" />
+          </el-form-item>
+          <el-form-item label="职位">
+            <el-input v-model="formLabelAlign.profession" maxlength="20" />
+          </el-form-item>
+          <el-form-item label="公司">
+            <el-input v-model="formLabelAlign.type" maxlength="20" />
+          </el-form-item>
+        </el-form>
+        <button @click="updataInfo()" style="float: left">保存修改</button>
+        <el-alert
+          v-if="isSuccess == 1"
+          title="success"
+          type="success"
+          center
+          show-icon
+          :closable="false"
+        />
+        <el-alert
+          v-else-if="isSuccess == 2"
+          title="error"
+          type="error"
+          center
+          show-icon
+          :closable="false"
+        />
       </div>
-      <p>支持上传 jpg、png、jpeg 格式大小 5M 以内的图片</p>
-      <p v-if="avatarcheck" style="color: red">{{ avataralert }}</p>
+      <div class="info-avatar">
+        <div class="info-mask">
+          <el-upload
+            class="avatar-uploader"
+            :action="imgUpdataUrl"
+            :show-file-list="false"
+            :on-success="handleAvatarSuccess"
+            :before-upload="beforeAvatarUpload"
+          >
+            <img
+              v-if="formLabelAlign.imageUrl"
+              :src="formLabelAlign.imageUrl"
+              class="avatar"
+            />
+            <el-icon v-else class="avatar-uploader-icon"><Plus /></el-icon>
+            <div class="masks">
+              <h5>点击更换头像</h5>
+              <el-icon :size="40"><CirclePlus /></el-icon>
+            </div>
+          </el-upload>
+        </div>
+        <p>支持上传 jpg、png、jpeg 格式大小 5M 以内的图片</p>
+        <p v-if="avatarcheck" style="color: red">{{ avataralert }}</p>
+      </div>
     </div>
   </div>
 </template>
