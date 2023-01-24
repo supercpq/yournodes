@@ -71,11 +71,6 @@ onMounted(() => {
           img: "src/assets/icon_cpq.svg",
           title: "hellocpq",
         },
-        {
-          url: "http://121.36.131.50:8000/",
-          img: "src/assets/straw.svg",
-          title: "五楼没有秘密基地",
-        },
       ];
       for (var i in res.items) {
         var a: tool = {
@@ -113,11 +108,6 @@ onMounted(() => {
           url: "https://juejin.cn/user/3171425354782893",
           img: "src/assets/icon_cpq.svg",
           title: "hellocpq",
-        },
-        {
-          url: "http://121.36.131.50:8000/",
-          img: "src/assets/straw.svg",
-          title: "五楼没有秘密基地",
         },
       ];
     }

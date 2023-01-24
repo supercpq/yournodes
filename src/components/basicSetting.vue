@@ -69,7 +69,6 @@
 
 <script lang="ts" setup>
 import { reactive, ref, onMounted } from "vue";
-import { ElMessage, ElNotification } from "element-plus";
 import { Plus } from "@element-plus/icons-vue";
 import { useUserStore } from "../store/modules/user";
 import type { UploadProps } from "element-plus";

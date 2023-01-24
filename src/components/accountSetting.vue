@@ -97,7 +97,7 @@ const validatePass = async (rule: any, value: any, callback: any) => {
   }
 };
 const rules = reactive({
-  newpassword: [{ validator: validatePass, trigger: "blur" }],
+  newpassword: [{ required: true, validator: validatePass, trigger: "blur" }],
   check: [{ required: true, message: "please input code", rigger: "blur" }],
 });
 
