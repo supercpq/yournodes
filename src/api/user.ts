@@ -1,5 +1,10 @@
 import { http } from "../utils/http";
 
+//获取登录rsa公钥
+export const getPublicKey = (params?: object) => {
+  return http.request("get", "/api/pubkey", { params });
+};
+
 //登录
 export const getLogin = (data: object) => {
   return http.request("post", "/api/login", { data });
@@ -10,7 +15,7 @@ export const refreshToken = (data: object) => {
   return http.request("post", "/api/refreshToken", { data });
 };
 
-// 注册
+// 注册(相比找回密码验证，多了一些返回的用户信息)
 export const reguser = (data: object) => {
   return http.request("post", "/api/reguser", { data });
 };

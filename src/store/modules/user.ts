@@ -4,9 +4,10 @@ import { store } from "../index";
 // import { useRouter, useRoute } from "vue-router";
 import { routerStore } from "./routerPinia";
 import { getToken, setToken, removeToken } from "../../utils/user";
-import { getLogin, refreshToken } from "../../api/user";
+import { getLogin, refreshToken, reguser, getPublicKey } from "../../api/user";
 import { storageSession } from "@pureadmin/utils";
 import { baseInfo } from "../../api/userinfo";
+import { JSEncrypt } from "jsencrypt";
 // import { useMultiTagsStoreHook } from "/@/store/modules/multiTags";
 // const router = useRouter();
 const routerPath = routerStore();
@@ -66,19 +67,50 @@ export const useUserStore = defineStore({
       );
     },
     // 登录
-    async loginByUsername(data) {
-      return new Promise<void>((reslove, reject) => {
-        getLogin(data)
-          .then((data) => {
-            if (data) {
-              setToken(data);
-              reslove();
+    loginByUsername(data) {
+      getPublicKey()
+        .then(
+          (res: any) => res.pubkey,
+          (err) => {
+            console.log(err.message);
+          }
+        )
+        .then(
+          (PUBLIC_KEY) => {
+            let encryptor = new JSEncrypt();
+            encryptor.setPublicKey(PUBLIC_KEY);
+            let result = encryptor.encrypt(data.pass);
+            // console.log("key:", PUBLIC_KEY, data, "加密后：", result);
+            if (result) {
+              getLogin({ email: data.email, pass: result }).then(
+                (res: any) => {
+                  if (res.status === 0) {
+                    setToken(res);
+                    location.href = "myinfo";
+                  }
+                },
+                (err) => {
+                  console.log(err.message);
+                }
+              );
             }
-          })
-          .catch((error) => {
-            reject(error);
-          });
-      });
+          },
+          (err) => {
+            console.log(err.message);
+          }
+        );
+      // return new Promise<void>((reslove, reject) => {
+      //   getLogin(data)
+      //     .then((data) => {
+      //       if (data) {
+      //         setToken(data);
+      //         reslove();
+      //       }
+      //     })
+      //     .catch((error) => {
+      //       reject(error);
+      //     });
+      // });
     },
     // 登出
     logOut() {
@@ -100,7 +132,41 @@ export const useUserStore = defineStore({
         }
       });
     },
-    //
+    // 注册
+    reguser(data) {
+      getPublicKey()
+        .then(
+          (res: any) => res.pubkey,
+          (err) => {
+            console.log(err.message);
+          }
+        )
+        .then(
+          (PUBLIC_KEY) => {
+            let encryptor = new JSEncrypt();
+            encryptor.setPublicKey(PUBLIC_KEY);
+            let result = encryptor.encrypt(data.newpassword);
+            let { check, email, code } = data;
+            console.log(reguser);
+            if (result) {
+              reguser({ email, check, code, pass: result }).then(
+                (res: any) => {
+                  if (res.status === 0) {
+                    setToken(res);
+                    location.href = "myinfo";
+                  }
+                },
+                (err) => {
+                  console.log(err.message);
+                }
+              );
+            }
+          },
+          (err) => {
+            console.log(err.message);
+          }
+        );
+    },
   },
 });
 

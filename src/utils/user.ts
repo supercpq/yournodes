@@ -39,3 +39,9 @@ export function removeToken() {
   Cookies.remove(TokenKey);
   sessionStorage.removeItem(TokenKey);
 }
+// 一些表单校验的规则
+export const pwdRegex = new RegExp(/[\u4e00-\u9fff]/g); // 中文
+export const pwdcheck = new RegExp("(?=.*[0-9])(?=.*[a-zA-Z]).{8,30}"); // 字母 + 数字
+export const emailcheck = new RegExp(
+  /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+\.[a-zA-Z0-9_-]+$/
+); // 邮箱

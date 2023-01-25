@@ -7,6 +7,8 @@ const reading = () => import("./readArticle.vue");
 const writeAr = () => import("./createArticle.vue");
 const arData = () => import("./articleData.vue");
 const error404 = () => import("./error404.vue");
+const login = () => import("./login.vue");
+const reguser = () => import("./reguser.vue");
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
@@ -61,6 +63,24 @@ const routes: Array<RouteRecordRaw> = [
     meta: {
       keepAlive: false,
       title: "文章数据-yournotes",
+    },
+  },
+  {
+    path: "/login",
+    name: "login",
+    component: login,
+    meta: {
+      keepAlive: true, // 需要被缓存
+      title: "登录-yournotes",
+    },
+  },
+  {
+    path: "/reguser",
+    name: "reguser",
+    component: reguser,
+    meta: {
+      keepAlive: true, // 需要被缓存
+      title: "注册/找回密码-yournotes",
     },
   },
   {

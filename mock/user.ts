@@ -35,6 +35,61 @@ for (var i = 0; i < 20; i++) {
 }
 export default [
   {
+    url: "/api/pubkey",
+    method: "get",
+    timeout: 500,
+    response: () => {
+      return {
+        status: 0,
+        pubkey: `MIIBCgKCAQEA5mSIryzUoK4K5DLZErIbHnRol27/A0ZVrhL1adaiUSM8Dv2Xk5I1
+        rUZ75ZshmeJbDphc3vH79fs2/inWVYKsr/MDdL17gVh6mK8xvJ1fFPK/asiB9JnG
+        aEXNqtIMunKWJejADFeWHuUoRfdJ12Nxucw+PPyZu7U9i24MGpsgH8ddu+PsMS8P
+        nUxdf7O63obDOmfkiD82No/MQzT5dq1EHLsTdjOhfJMCPScdKugVsAAl7KzlEugo
+        k4dRo1nKotzVYxwhCKFRWf7PSKxAN+DnDQMKCZsD2Qi+iarF82bck37Cvw9gDB2D
+        CP+/0He1JwxRODpnYFb7dpdmHdQaX+O9bQIDAQAB`,
+      };
+    },
+  },
+  {
+    url: "/api/reguser",
+    method: "post",
+    timeout: 500,
+    response: () => {
+      return {
+        status: 0,
+        name: "superCPQ",
+        accessToken: "thisistokenstring.superCPQ",
+        expires: "32285982150", // 2024-02-02T12:04:14.000Z
+      };
+    },
+  },
+  {
+    url: "/api/refreshToken",
+    method: "post",
+    timeout: 500,
+    response: () => {
+      return {
+        status: 0,
+        name: "superCPQ",
+        accessToken: "thisistokenstring.superCPQ",
+        expires: "32285982150", // 2024-02-02T12:04:14.000Z
+      };
+    },
+  },
+  {
+    url: "/api/login",
+    method: "post",
+    timeout: 500,
+    response: () => {
+      return {
+        status: 0,
+        name: "superCPQ",
+        accessToken: "thisistokenstring.superCPQ",
+        expires: "32285982150", // 2024-02-02T12:04:14.000Z
+      };
+    },
+  },
+  {
     url: "/user/myLikes",
     method: "get",
     timeout: 500,

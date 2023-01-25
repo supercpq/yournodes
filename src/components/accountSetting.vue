@@ -37,6 +37,19 @@
         <button @click="changeEmail(ruleFormRef)" style="float: left">
           确认修改
         </button>
+        <el-popconfirm
+          confirm-button-text="Yes"
+          cancel-button-text="No"
+          :icon="InfoFilled"
+          icon-color="#626AEF"
+          title="Really? Are you sure to logout?"
+          @confirm="confirmEvent"
+          @cancel="cancelEvent"
+        >
+          <template #reference>
+            <el-button type="danger">登出</el-button>
+          </template>
+        </el-popconfirm>
         <el-alert
           v-if="isSuccess == 1"
           title="success"
@@ -63,6 +76,10 @@ import { useUserStore } from "../store/modules/user";
 import { emailCode, updatepwd } from "../api/user";
 import type { FormInstance } from "element-plus";
 import { baseInfo } from "../api/userinfo";
+import { pwdRegex, pwdcheck } from "../utils/user";
+import { InfoFilled } from "@element-plus/icons-vue";
+import { getPublicKey } from "../api/user";
+import { JSEncrypt } from "jsencrypt";
 
 const ruleFormRef = ref<FormInstance>();
 const isSuccess = ref(0);
@@ -75,11 +92,16 @@ const formLabelAlign = reactive({
   newpassword: "",
   check: "",
 });
+const confirmEvent = () => {
+  console.log("confirm!");
+  userStore.logOut();
+};
+const cancelEvent = () => {
+  console.log("cancel!");
+};
 const code = ref<number>();
 
 const validatePass = async (rule: any, value: any, callback: any) => {
-  let pwdRegex = new RegExp(/[\u4e00-\u9fff]/g); // 中文
-  let pwdcheck = new RegExp("(?=.*[0-9])(?=.*[a-zA-Z]).{8,30}"); // 字母数字
   if (value === "") {
     callback(new Error("Please input the password"));
   } else {
@@ -127,23 +149,47 @@ function getEmailChangeCheck() {
 
 function changeEmail(formEl: FormInstance | undefined) {
   // 更改email
-  console.log(formEl);
   if (!formEl) return;
   formEl.validate((valid) => {
     if (valid) {
       if (code.value != undefined) {
-        updatepwd({ ...formLabelAlign, code: code.value }).then(
-          (res: any) => {
-            if (res.status == 0) {
-              isSuccess.value = 1;
-            } else {
-              isSuccess.value = 2;
+        getPublicKey()
+          .then(
+            (res: any) => res.pubkey,
+            (err) => {
+              console.log(err.message);
             }
-          },
-          (err) => {
-            isSuccess.value = 2;
-          }
-        );
+          )
+          .then(
+            (PUBLIC_KEY) => {
+              let encryptor = new JSEncrypt();
+              encryptor.setPublicKey(PUBLIC_KEY);
+              let result = encryptor.encrypt(formLabelAlign.newpassword);
+              if (result) {
+                let { email, check } = formLabelAlign;
+                updatepwd({
+                  email,
+                  check,
+                  pass: result,
+                  code: code.value,
+                }).then(
+                  (res: any) => {
+                    if (res.status == 0) {
+                      isSuccess.value = 1;
+                    } else {
+                      isSuccess.value = 2;
+                    }
+                  },
+                  (err) => {
+                    isSuccess.value = 2;
+                  }
+                );
+              }
+            },
+            (err) => {
+              console.log(err.message);
+            }
+          );
       }
     } else {
       return false;
