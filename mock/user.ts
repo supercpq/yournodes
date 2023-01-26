@@ -60,6 +60,7 @@ export default [
         name: "superCPQ",
         accessToken: "thisistokenstring.superCPQ",
         expires: "32285982150", // 2024-02-02T12:04:14.000Z
+        id: "123456",
       };
     },
   },
@@ -73,6 +74,7 @@ export default [
         name: "superCPQ",
         accessToken: "thisistokenstring.superCPQ",
         expires: "32285982150", // 2024-02-02T12:04:14.000Z
+        id: "123456",
       };
     },
   },
@@ -86,6 +88,7 @@ export default [
         name: "superCPQ",
         accessToken: "thisistokenstring.superCPQ",
         expires: "32285982150", // 2024-02-02T12:04:14.000Z
+        id: "123456",
       };
     },
   },
@@ -124,6 +127,7 @@ export default [
           userName: "superCPQ",
           profession: "程序员",
           userMail: "supercpq@outlook.com",
+          id: "123456",
         },
       };
     },

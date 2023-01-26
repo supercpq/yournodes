@@ -50,6 +50,8 @@ import { useUserStore } from "../store/modules/user";
 import "md-editor-v3/lib/style.css";
 import MdEditor from "md-editor-v3";
 import _ from "lodash"; //防抖节流
+import { getuseid } from "../utils/user";
+
 // import type { ExposeParam } from "md-editor-v3";
 // const editorRef = ref<ExposeParam>(); color: cornflowerblue;
 const arCatalog = ref<Array<string>>([]);
@@ -180,7 +182,7 @@ onBeforeMount(async () => {
       console.log(err.message);
     }
   );
-  let user = userStore.id;
+  let user = getuseid();
   getArLikes({
     id: Ar_id.value,
     user, //user 为空代表不需要获取文章是否被此用户点赞过，activie都为false

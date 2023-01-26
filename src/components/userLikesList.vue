@@ -107,7 +107,7 @@ const lazySearch = _.throttle(
     if (!arcticelEnd.value && !lazy.value) {
       // alert("qwr");
       lazy.value = true;
-      moreLikes().then(
+      moreLikes({ num: likeList.value.length }).then(
         (res: any) => {
           if (res.status == 0) {
             likeList.value = likeList.value.concat(res.dataLikes);

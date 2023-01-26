@@ -15,9 +15,13 @@ export function getToken() {
   //{%22accessToken%22:%22eyJhbGciOiJIUzUxMiJ9.admin%22%2C%22expires%22:1698595200000}  注意：(%22是"  %2C是,)
 }
 
+export function getuseid() {
+  return Cookies.get("authorized-id");
+}
+
 // 设置token以及过期时间
 export function setToken(data) {
-  const { accessToken, expires, name } = data;
+  const { accessToken, expires, name, id } = data;
   const paramsMap: paramsMapType = {
     name,
     expires: Date.now() + parseInt(expires), //过期时间
@@ -31,12 +35,20 @@ export function setToken(data) {
         expires: expires / 86400000,
       })
     : Cookies.set(TokenKey, dataString);
+  expires > 0
+    ? Cookies.set("authorized-id", id, {
+        expires: expires / 86400000,
+      })
+    : Cookies.set("authorized-id", id);
+  sessionStorage.setItem("authorized-id", id);
   sessionStorage.setItem(TokenKey, dataString);
 }
 
 // 删除token
 export function removeToken() {
   Cookies.remove(TokenKey);
+  Cookies.remove("authorized-id");
+  sessionStorage.removeItem("authorized-id");
   sessionStorage.removeItem(TokenKey);
 }
 // 一些表单校验的规则
