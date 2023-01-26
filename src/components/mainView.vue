@@ -38,7 +38,9 @@ const handleSelect = (key: string, keyPath: string[]) => {
   // console.log(key, keyPath);
   if (key === "ZH") {
     i18n.setLocale("zh");
+    localStorage.setItem("lang-zh-en", "zh");
   } else if (key === "EN") {
+    localStorage.setItem("lang-zh-en", "en");
     i18n.setLocale("en");
   } else {
     if (routerPath.routerPath === "") {
@@ -48,8 +50,15 @@ const handleSelect = (key: string, keyPath: string[]) => {
   }
 };
 onMounted(() => {
-  var routerPaths = localStorage.getItem("router") || "";
+  let routerPaths = localStorage.getItem("router") || "";
   activeIndex.value = routerPaths;
+  let langSet = ["zh", "en"];
+  let lang = localStorage.getItem("lang-zh-en") || "zh";
+  if (langSet.indexOf(lang) === -1) {
+    i18n.setLocale("zh");
+  } else {
+    i18n.setLocale(lang);
+  }
 });
 </script>
 

@@ -11,13 +11,17 @@
         ref="ruleFormRef"
       >
         <el-form-item label="邮箱" prop="email">
-          <el-input v-model="formLabelAlign.email" maxlength="20" />
+          <el-input
+            v-model="formLabelAlign.email"
+            placeholder="email"
+            maxlength="20"
+          />
           <button
             @click="getEmailChangeCheck()"
             style="float: left"
             :disabled="butttonDisable"
           >
-            {{ checkable }}
+            {{ checkable }}{{ $t("getcode") }}
           </button>
         </el-form-item>
         <el-form-item label="新密码" prop="newpassword">
@@ -25,10 +29,15 @@
             v-model="formLabelAlign.newpassword"
             maxlength="20"
             autocomplete="off"
+            placeholder="new password"
           />
         </el-form-item>
         <el-form-item label="验证码" prop="check">
-          <el-input v-model="formLabelAlign.check" maxlength="10" />
+          <el-input
+            v-model="formLabelAlign.check"
+            placeholder="verification code"
+            maxlength="10"
+          />
         </el-form-item>
       </el-form>
       <div class="submit">
