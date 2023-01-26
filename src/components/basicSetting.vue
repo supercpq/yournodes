@@ -12,13 +12,25 @@
           style="max-width: 460px"
         >
           <el-form-item label="用户名">
-            <el-input v-model="formLabelAlign.name" maxlength="20" />
+            <el-input
+              v-model="formLabelAlign.name"
+              placeholder="user name"
+              maxlength="20"
+            />
           </el-form-item>
           <el-form-item label="职位">
-            <el-input v-model="formLabelAlign.profession" maxlength="20" />
+            <el-input
+              v-model="formLabelAlign.profession"
+              placeholder="profession"
+              maxlength="20"
+            />
           </el-form-item>
           <el-form-item label="公司">
-            <el-input v-model="formLabelAlign.type" maxlength="20" />
+            <el-input
+              v-model="formLabelAlign.type"
+              placeholder="company"
+              maxlength="20"
+            />
           </el-form-item>
         </el-form>
         <button @click="updataInfo()" style="float: left">

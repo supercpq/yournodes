@@ -27,11 +27,16 @@
             <el-input
               v-model="formLabelAlign.newpassword"
               maxlength="20"
+              placeholder="new password"
               autocomplete="off"
             />
           </el-form-item>
           <el-form-item label="验证码" prop="check">
-            <el-input v-model="formLabelAlign.check" maxlength="10" />
+            <el-input
+              v-model="formLabelAlign.check"
+              placeholder="verification code"
+              maxlength="10"
+            />
           </el-form-item>
         </el-form>
         <button @click="changeEmail(ruleFormRef)" style="float: left">
