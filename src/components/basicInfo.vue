@@ -23,7 +23,7 @@
           <!-- 职业和编辑按钮的flex -->
         </div>
         <div class="user-setting">
-          <button @click="setInfo()">编辑信息</button>
+          <button @click="setInfo()">{{ $t("editInfo") }}</button>
         </div>
       </div>
     </div>

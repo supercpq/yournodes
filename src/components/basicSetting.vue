@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="tabinfo">
-      <h4>个人资料</h4>
+      <h4>{{ $t("userinfo") }}</h4>
     </div>
     <div class="info-detail">
       <div class="info-form">
@@ -21,7 +21,9 @@
             <el-input v-model="formLabelAlign.type" maxlength="20" />
           </el-form-item>
         </el-form>
-        <button @click="updataInfo()" style="float: left">保存修改</button>
+        <button @click="updataInfo()" style="float: left">
+          {{ $t("sureToChange") }}
+        </button>
         <el-alert
           v-if="isSuccess == 1"
           title="success"
@@ -60,7 +62,7 @@
             </div>
           </el-upload>
         </div>
-        <p>支持上传 jpg、png、jpeg 格式大小 5M 以内的图片</p>
+        <p>{{ $t("uploadimg") }}</p>
         <p v-if="avatarcheck" style="color: red">{{ avataralert }}</p>
       </div>
     </div>

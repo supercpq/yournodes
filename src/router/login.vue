@@ -1,6 +1,6 @@
 <template>
   <div class="login">
-    <h3>your nodes 登录</h3>
+    <h3>your nodes {{ $t("login") }}</h3>
     <el-form
       class="login-form"
       ref="ruleFormRef"
@@ -11,19 +11,24 @@
       label-position="top"
     >
       <el-form-item label="邮箱" prop="email">
-        <el-input v-model="ruleForm.email" />
+        <el-input v-model="ruleForm.email" placeholder="email" />
       </el-form-item>
       <el-form-item label="密码" prop="pass">
-        <el-input v-model="ruleForm.pass" type="password" autocomplete="off" />
+        <el-input
+          v-model="ruleForm.pass"
+          placeholder="password"
+          type="password"
+          autocomplete="off"
+        />
       </el-form-item>
       <el-form-item>
         <div class="submit">
-          <el-button type="primary" @click="submitForm(ruleFormRef)"
-            >登录</el-button
-          >
-          <el-link type="success" href="/reguser"
-            >没有账号或者密码忘了？</el-link
-          >
+          <el-button type="primary" @click="submitForm(ruleFormRef)">{{
+            $t("login")
+          }}</el-button>
+          <el-link type="success" href="/reguser">{{
+            $t("loginmessage")
+          }}</el-link>
         </div>
       </el-form-item>
     </el-form>

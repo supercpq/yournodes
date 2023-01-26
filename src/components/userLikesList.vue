@@ -14,7 +14,7 @@
     </el-space>
   </div>
   <div class="list-title" v-show="!loading">
-    <h4>your likes</h4>
+    <h4>{{ $t("likes") }}</h4>
   </div>
   <div
     class="outsideLike"

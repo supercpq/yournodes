@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="tabinfo">
-      <h4>账户设置</h4>
+      <h4>{{ $t("accountinfo") }}</h4>
     </div>
     <div class="info-detail">
       <div class="info-form">
@@ -20,7 +20,7 @@
               style="float: left"
               :disabled="butttonDisable"
             >
-              {{ checkable }}
+              {{ checkable }}{{ $t("getcode") }}
             </button>
           </el-form-item>
           <el-form-item label="新密码" prop="newpassword">
@@ -35,7 +35,7 @@
           </el-form-item>
         </el-form>
         <button @click="changeEmail(ruleFormRef)" style="float: left">
-          确认修改
+          {{ $t("sureToChange") }}
         </button>
         <el-popconfirm
           confirm-button-text="Yes"
@@ -47,7 +47,7 @@
           @cancel="cancelEvent"
         >
           <template #reference>
-            <el-button type="danger">登出</el-button>
+            <el-button type="danger">{{ $t("logout") }}</el-button>
           </template>
         </el-popconfirm>
         <el-alert
@@ -85,7 +85,7 @@ const ruleFormRef = ref<FormInstance>();
 const isSuccess = ref(0);
 const labelPosition = ref("left");
 const userStore = useUserStore();
-const checkable = ref("获取验证码");
+const checkable = ref("");
 const butttonDisable = ref(false);
 const formLabelAlign = reactive({
   email: userStore.userMail,
@@ -128,11 +128,11 @@ function getEmailChangeCheck() {
   let times = 60;
   let timer = setInterval(() => {
     times--;
-    checkable.value = `${times}s后可重发`;
+    checkable.value = `${times}s `;
   }, 1000);
   setTimeout(() => {
     butttonDisable.value = false;
-    checkable.value = "获取验证码";
+    checkable.value = "";
     clearInterval(timer);
   }, times * 1000);
   // 通知后端发送邮箱验证码

@@ -1,6 +1,6 @@
 <template>
   <div class="login">
-    <h3>your nodes 注册 or 找回</h3>
+    <h3>your nodes {{ $t("reguser") }}</h3>
     <div class="login-form">
       <el-form
         :label-position="labelPosition"
@@ -33,9 +33,11 @@
       </el-form>
       <div class="submit">
         <button @click="changeEmail(ruleFormRef)" style="float: left">
-          注册/更改密码
+          {{ $t("reguser") }}
         </button>
-        <el-link type="success" href="/login">我有账号，去登录</el-link>
+        <el-link type="success" href="/login">
+          {{ $t("regusermessage") }}
+        </el-link>
       </div>
     </div>
   </div>
@@ -53,7 +55,7 @@ import { reguser, getPublicKey } from "../api/user";
 const ruleFormRef = ref<FormInstance>();
 const labelPosition = ref("left");
 const userStore = useUserStore();
-const checkable = ref("获取验证码");
+const checkable = ref("");
 const butttonDisable = ref(false);
 const formLabelAlign = reactive({
   email: "",
@@ -101,11 +103,11 @@ function getEmailChangeCheck() {
   let times = 60;
   let timer = setInterval(() => {
     times--;
-    checkable.value = `${times}s后可重发`;
+    checkable.value = `${times}s `;
   }, 1000);
   setTimeout(() => {
     butttonDisable.value = false;
-    checkable.value = "获取验证码";
+    checkable.value = "";
     clearInterval(timer);
   }, times * 1000);
   // 通知后端发送邮箱验证码

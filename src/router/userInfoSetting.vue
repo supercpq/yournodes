@@ -2,7 +2,7 @@
   <div class="setting">
     <div class="navigation">
       <button @click="backToMyInfo()">
-        <el-icon><ArrowLeftBold /></el-icon>返回个人中心
+        <el-icon><ArrowLeftBold /></el-icon>{{ $t("backtoperson") }}
       </button>
     </div>
     <div class="details">

@@ -26,7 +26,9 @@
       />
     </main>
     <aside class="directory">
-      <div class="catatitle"><b>目录</b></div>
+      <div class="catatitle">
+        <b>{{ $t("catalog") }}</b>
+      </div>
       <div class="catalog">
         <div
           class="cata"

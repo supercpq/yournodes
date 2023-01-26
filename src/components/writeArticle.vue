@@ -8,9 +8,9 @@
       @on-upload-img="onUploadImg"
       @onSave="onSubmit(isPublish)"
     />
-    <el-button type="primary" class="submit" @click="onSubmit(true)"
-      >发表</el-button
-    >
+    <el-button type="primary" class="submit" @click="onSubmit(true)">{{
+      $t("submit")
+    }}</el-button>
   </div>
 </template>
 

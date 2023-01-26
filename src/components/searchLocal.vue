@@ -72,7 +72,7 @@ const options = [
   },
   {
     value: " ",
-    label: "站内文章",
+    label: "this site(站内文章)",
   },
 ];
 const inputStore = searchInputStore();
