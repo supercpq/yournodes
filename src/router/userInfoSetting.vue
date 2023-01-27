@@ -59,7 +59,7 @@ interface infoTab {
   tabUrl: string;
   tabIcon?: string;
 }
-const tabs = ref(<infoTab[]>[]);
+const tabs = ref<infoTab[]>([]);
 
 function settingTabs(url: string) {
   routerPath.routerPath = url;

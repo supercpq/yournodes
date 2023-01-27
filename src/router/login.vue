@@ -10,10 +10,10 @@
       label-width="120px"
       label-position="top"
     >
-      <el-form-item label="邮箱" prop="email">
+      <el-form-item :label="$t('email')" prop="email">
         <el-input v-model="ruleForm.email" placeholder="email" />
       </el-form-item>
-      <el-form-item label="密码" prop="pass">
+      <el-form-item :label="$t('newpassword')" prop="pass">
         <el-input
           v-model="ruleForm.pass"
           placeholder="password"

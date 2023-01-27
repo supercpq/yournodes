@@ -67,7 +67,7 @@ interface useroptions {
   activeIcon: string;
   disactiveIcon: string;
 }
-const options = ref(<useroptions[]>[]);
+const options = ref<useroptions[]>([]);
 
 const likeAr = _.throttle(
   function (index: number) {

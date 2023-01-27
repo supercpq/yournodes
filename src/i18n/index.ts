@@ -1,6 +1,6 @@
-import { createI18n, Messages } from "vue3-i18n";
+import { type I18n, createI18n } from "vue-i18n";
 
-const messages: Messages = {
+const messages = {
   en: {
     menu: [
       "Home",
@@ -28,6 +28,12 @@ const messages: Messages = {
     backToHome: "Back to Home",
     reguser: "register or reset",
     regusermessage: "I have an account, log in",
+    email: "email",
+    profession: "profession",
+    company: "company",
+    newpassword: "password",
+    verification: "verification",
+    username: "user name",
   },
   zh: {
     menu: ["首页", "个人中心", "创作中心", "写文章", "文章数据", "语言"],
@@ -49,14 +55,23 @@ const messages: Messages = {
     backToHome: "返回首页",
     reguser: "注册/更改密码",
     regusermessage: "我有账号，去登录",
+    email: "邮箱",
+    profession: "职位",
+    company: "公司",
+    newpassword: "新密码",
+    verification: "验证码",
+    username: "用户名",
   },
 };
 
 // console.log(JSON.stringify(messages));
 
 const i18n = createI18n({
-  locale: "zh",
-  messages: messages,
+  legacy: false,
+  locale: "zh", // set locale
+  messages, // set locale messages
+  // If you need to specify other options, you can set other options
+  // ...
 });
 
 export default i18n;

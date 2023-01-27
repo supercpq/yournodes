@@ -11,21 +11,21 @@
           :model="formLabelAlign"
           style="max-width: 460px"
         >
-          <el-form-item label="用户名">
+          <el-form-item :label="$t('username')">
             <el-input
               v-model="formLabelAlign.name"
               placeholder="user name"
               maxlength="20"
             />
           </el-form-item>
-          <el-form-item label="职位">
+          <el-form-item :label="$t('profession')">
             <el-input
               v-model="formLabelAlign.profession"
               placeholder="profession"
               maxlength="20"
             />
           </el-form-item>
-          <el-form-item label="公司">
+          <el-form-item :label="$t('company')">
             <el-input
               v-model="formLabelAlign.type"
               placeholder="company"

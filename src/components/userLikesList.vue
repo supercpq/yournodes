@@ -51,7 +51,7 @@ var nodata: likeArcticle = {
   articalImgLink: "",
   articalID: -1,
 };
-const likeList = ref(<any[]>[]);
+const likeList = ref<any[]>([]);
 const myList = ref<any>(null);
 likeList.value = [];
 const screenHeight = ref(0);

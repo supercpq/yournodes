@@ -30,18 +30,18 @@
 <script lang="ts" setup>
 import { ref, onMounted } from "vue";
 import { routerStore } from "../store/modules/routerPinia";
-import { useI18n } from "vue3-i18n";
-const i18n = useI18n();
+import { useI18n } from "vue-i18n";
+const { locale } = useI18n();
 const routerPath = routerStore();
 const activeIndex = ref("");
 const handleSelect = (key: string, keyPath: string[]) => {
   // console.log(key, keyPath);
   if (key === "ZH") {
-    i18n.setLocale("zh");
+    locale.value = "zh";
     localStorage.setItem("lang-zh-en", "zh");
   } else if (key === "EN") {
     localStorage.setItem("lang-zh-en", "en");
-    i18n.setLocale("en");
+    locale.value = "en";
   } else {
     if (routerPath.routerPath === "") {
       routerPath.routerPath = "/";
@@ -55,9 +55,9 @@ onMounted(() => {
   let langSet = ["zh", "en"];
   let lang = localStorage.getItem("lang-zh-en") || "zh";
   if (langSet.indexOf(lang) === -1) {
-    i18n.setLocale("zh");
+    locale.value = "zh";
   } else {
-    i18n.setLocale(lang);
+    locale.value = "en";
   }
 });
 </script>

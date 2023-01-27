@@ -31,7 +31,7 @@ interface tool {
   img: string;
   title: string;
 }
-var toolList = ref(<tool[]>[]);
+var toolList = ref<tool[]>([]);
 const drawer = ref(false);
 const Weburl = ref("");
 const title = ref("");
