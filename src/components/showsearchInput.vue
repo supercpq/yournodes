@@ -130,7 +130,7 @@ function scrollEvent() {
   start.value = Math.floor(scrollTop / itemSize!);
   //此时的结束索引
   end.value = start.value + visibleCount.value;
-  if (end.value - searchinputStore.allList.length > 0) {
+  if (end.value - searchinputStore.list.length > 0) {
     // alert("qwr");
     lazySearch();
   }

@@ -18,23 +18,30 @@ export default defineConfig({
     }),
     viteMockServe({
       mockPath: "mock",
+      // localEnabled: true,
+      // // 以下是新增，上面两行为build后mock不加入生产环境
+      // prodEnabled: true, // 生产打包开关 // 这样可以控制关闭mock的时候不让mock打包到最终代码内
+      // injectCode: ` import { setupProdMockServer } from './mockProdServer'; setupProdMockServer(); `,
+      // logger: false, //是否在控制台显示请求日志
+      // supportTs: false, //打开后，可以读取 ts 文件模块。 请注意，打开后将无法监视.js 文件
       localEnabled: true,
+      prodEnabled: true,
+      injectCode: `
+          import { setupProdMockServer } from './mockProdServer';
+          setupProdMockServer();
+        `,
+      logger: false,
     }),
     svgLoader(),
   ],
 });
-/*// 2.配置vite.config.js
-import svgLoader from 'vite-svg-loader'
-
-export default defineConfig({
-  plugins: [vue(), svgLoader()]
-})
-
-// 3.项目是ts的，要非常注意，需要单独声明模块！！！
-// tsconfig.json
-    "compilerOptions": {
-        "types": [
-        // 一定要声明
-            "vite-svg-loader"
-        ],
-} */
+/*
+viteMockServe({// 更多配置见最下方
+     	mockPath: "./mock/", //mock文件地址 
+     	localEnabled: false, // 开发打包开关 
+     	prodEnabled: true, // 生产打包开关 // 这样可以控制关闭mock的时候不让mock打包到最终代码内 
+     	injectCode: ` import { setupProdMockServer } from './mockProdServer'; setupProdMockServer(); `, 
+     	logger: false, //是否在控制台显示请求日志 
+     	supportTs: false //打开后，可以读取 ts 文件模块。 请注意，打开后将无法监视.js 文件 
+     })
+*/

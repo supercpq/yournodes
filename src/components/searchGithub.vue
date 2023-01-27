@@ -20,9 +20,7 @@
       <div class="langOptions">
         <div class="langOptionsItem">
           <a href="https://github.com/" target="_blank">
-            <span
-              ><img src="../../public/githublogo.svg" alt="github logo"
-            /></span>
+            <span><img :src="githublogo" alt="github logo" /></span>
             <span> Github</span>
           </a>
         </div>
@@ -84,6 +82,7 @@ import { githubHotStore } from "../store/modules/searchGithubPinia";
 import _ from "lodash";
 import { ref, watch, onMounted } from "vue";
 const value = ref("Vue");
+const githublogo = "githublogo.svg";
 const options = [
   {
     value: "Vue",

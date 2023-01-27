@@ -48,27 +48,27 @@ onMounted(() => {
       toolList.value = [
         {
           url: "https://ip.cn/",
-          img: "src/assets/IP.svg",
+          img: "/IP.svg",
           title: "ip查询",
         },
         {
           url: "https://tool.lu/timestamp/",
-          img: "src/assets/time.svg",
+          img: "/time.svg",
           title: "时间戳",
         },
         {
           url: "https://www.liantu.com/",
-          img: "src/assets/qr.svg",
+          img: "/qr.svg",
           title: "二维码",
         },
         {
           url: "http://www.iciba.com/",
-          img: "src/assets/trans.svg",
+          img: "/trans.svg",
           title: "翻译",
         },
         {
           url: "https://juejin.cn/user/3171425354782893",
-          img: "src/assets/icon_cpq.svg",
+          img: "/icon_cpq.svg",
           title: "hellocpq",
         },
       ];
@@ -86,27 +86,27 @@ onMounted(() => {
       toolList.value = [
         {
           url: "https://ip.cn/",
-          img: "src/assets/IP.svg",
+          img: "/IP.svg",
           title: "ip查询",
         },
         {
           url: "https://tool.lu/timestamp/",
-          img: "src/assets/time.svg",
+          img: "/time.svg",
           title: "时间戳",
         },
         {
           url: "https://www.liantu.com/",
-          img: "src/assets/qr.svg",
+          img: "/qr.svg",
           title: "二维码",
         },
         {
           url: "http://www.iciba.com/",
-          img: "src/assets/trans.svg",
+          img: "/trans.svg",
           title: "翻译",
         },
         {
           url: "https://juejin.cn/user/3171425354782893",
-          img: "src/assets/icon_cpq.svg",
+          img: "/icon_cpq.svg",
           title: "hellocpq",
         },
       ];

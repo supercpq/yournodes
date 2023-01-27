@@ -16,12 +16,12 @@ let token = "";
 let name = "your name";
 let profession = "your job";
 let userMail = "";
-let avatarLink = "src/assets/avatar.svg";
+let avatarLink = "/avatar.svg";
 if (data) {
   const dataJson = JSON.parse(data);
   if (dataJson) {
     token = dataJson?.accessToken;
-    name = dataJson?.name ?? "admin";
+    name = dataJson?.name ?? "your name";
     profession = dataJson?.job ?? "your job";
   }
 }
