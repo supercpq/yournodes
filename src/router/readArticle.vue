@@ -58,6 +58,7 @@ const arCatalog = ref<Array<string>>([]);
 const userStore = useUserStore();
 const $route = useRoute();
 const Ar_content = ref("");
+const isedit = ref(false);
 const Ar_id = ref($route.query.ar_id);
 // props: [id];
 interface useroptions {
@@ -159,6 +160,12 @@ function getTitle(html: string) {
   }
   // console.log(arHtml, "\n\n", html, "\n\n", hello);
   // console.log(hello);
+  if (isedit) {
+    let editPath = window.location.protocol + "//" + window.location.host;
+    arHtml =
+      `<a href='${editPath}/creator/write?arid=${Ar_id.value}'>edit<a>` +
+      arHtml;
+  }
   return arHtml;
 }
 // onMounted(() => {
@@ -174,6 +181,7 @@ onBeforeMount(async () => {
     (res: any) => {
       //更新Ar_content
       Ar_content.value = res.content;
+      isedit.value = res.isEdit;
       if (typeof res.title === "string") {
         document.title = res.title;
       }

@@ -34,6 +34,7 @@ const messages = {
     newpassword: "password",
     verification: "verification",
     username: "user name",
+    editAr: "edit article",
   },
   zh: {
     menu: ["首页", "个人中心", "创作中心", "写文章", "文章数据", "语言"],
@@ -61,6 +62,7 @@ const messages = {
     newpassword: "新密码",
     verification: "验证码",
     username: "用户名",
+    editAr: "编辑文章",
   },
 };
 
