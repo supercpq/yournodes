@@ -57,7 +57,7 @@ onMounted(() => {
   if (langSet.indexOf(lang) === -1) {
     locale.value = "zh";
   } else {
-    locale.value = "en";
+    locale.value = lang;
   }
 });
 </script>
