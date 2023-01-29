@@ -1,16 +1,25 @@
-# Vue 3 + TypeScript + Vite
+# your notes ———— 一个浏览器主页兼博客网站的前端
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+[点我查看项目预览](https://www.wxhzny.top/)
+## 项目简介
 
-## Recommended IDE Setup
+`yournodes` 是一个浏览器主页+博客网站的前端，使用`Vue3`、`Vite`、`Element-Plus`、`TypeScript`、`Pinia`、`scss`等主流技术开发。
+## 尝试这个项目
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
+- install: `git clone https://github.com/supercpq/yournodes.git`
+- run:
+```
+cd yournodes
+npm i
+npm run dev
+```
+- build: `npm run build` 和 `npm run preview`
+(**build时注意**：若需要从项目中已经写好的mock中获取数据，则直接运行 `npm run build` 和 `npm run preview`即可，否则需要将vite.config.ts进行更改：`prodEnabled: false`)
+- 服务器部署：本次路由采用HTML5　history模式，直接进行静态资源托管将导致除首页外的刷新返回｀Cannot　GET｀，可选择更改使用hash模式或参考[vue-router文档](https://router.vuejs.org/zh/guide/essentials/history-mode.html)来进行对服务器端的微调。
 
-## Type Support For `.vue` Imports in TS
+## 浏览器的兼容性支持
+推荐使用Google/Edge开发，支持现代浏览器, 不支持 IE
 
-Since TypeScript cannot handle type information for `.vue` imports, they are shimmed to be a generic Vue component type by default. In most cases this is fine if you don't really care about component prop types outside of templates. However, if you wish to get actual prop types in `.vue` imports (for example to get props validation when using manual `h(...)` calls), you can enable Volar's Take Over mode by following these steps:
-
-1. Run `Extensions: Show Built-in Extensions` from VS Code's command palette, look for `TypeScript and JavaScript Language Features`, then right click and select `Disable (Workspace)`. By default, Take Over mode will enable itself if the default TypeScript extension is disabled.
-2. Reload the VS Code window by running `Developer: Reload Window` from the command palette.
-
-You can learn more about Take Over mode [here](https://github.com/johnsoncodehk/volar/discussions/471).
+| [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt=" Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>IE | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt=" Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Safari |
+| :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+|                                                                                             not support                                                                                              |                                                                                            last 2 versions                                                                                             |                                                                                                  last 2 versions                                                                                                  |                                                                                                last 2 versions                                                                                                |                                                                                                last 2 versions                                                                                                |
