@@ -15,7 +15,7 @@ npm run dev
 ```
 - build: `npm run build` 和 `npm run preview`
 (**build时注意**：若需要从项目中已经写好的mock中获取数据，则直接运行 `npm run build` 和 `npm run preview`即可，否则需要将vite.config.ts进行更改：`prodEnabled: false`)
-- 服务器部署：本次路由采用HTML5　history模式，直接进行静态资源托管将导致除首页外的刷新返回｀Cannot　GET｀，可选择更改使用hash模式或参考[vue-router文档](https://router.vuejs.org/zh/guide/essentials/history-mode.html)来进行对服务器端的微调。
+- 服务器部署：本次路由采用HTML5　history模式，直接进行静态资源托管将导致除首页外的刷新返回`Cannot　GET`，可选择更改使用hash模式或参考[vue-router文档](https://router.vuejs.org/zh/guide/essentials/history-mode.html)来进行对服务器端的微调。
 
 ## 浏览器的兼容性支持
 推荐使用Google/Edge开发，支持现代浏览器, 不支持 IE
