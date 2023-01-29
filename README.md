@@ -1,4 +1,4 @@
-# your notes ———— 一个浏览器主页兼博客网站的前端
+# your notes —— 一个浏览器主页兼博客网站的前端
 
 [点我查看项目预览](https://www.wxhzny.top/)
 ## 项目简介
