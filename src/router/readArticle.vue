@@ -116,7 +116,7 @@ function getTitle(html: string) {
       : html.slice(html.search(geth), html.length); // 用于存还没改的html
   let title = 0;
   // let hello = new Array<string>();
-
+  arCatalog.value.length = 0; //防止因markdown内容改变重复渲染目录
   while (changeHtml.search(geta) !== -1) {
     // 先处理h再处理a
     // 处理h和把标题名加入数组
