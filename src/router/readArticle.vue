@@ -187,6 +187,9 @@ onBeforeMount(async () => {
       }
     },
     (err) => {
+      location.replace(
+        window.location.protocol + "//" + window.location.host + "/404"
+      );
       console.log(err.message);
     }
   );
