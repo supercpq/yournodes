@@ -288,4 +288,14 @@ export default [
       };
     },
   },
+  {
+    url: "/api/img/upload",
+    method: "post",
+    timeout: 500,
+    response: () => {
+      return {
+        url: "https://avatars.githubusercontent.com/u/87625173?v=4",
+      };
+    },
+  },
 ] as MockMethod[];
