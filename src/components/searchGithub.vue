@@ -74,6 +74,10 @@
       </ul>
     </div>
   </div>
+  <a href="https://beian.miit.gov.cn/" target="_blank" class="icp"
+    >辽ICP备2022003671号-2</a
+  >
+
   <!-- <p>No more</p> -->
 </template>
 

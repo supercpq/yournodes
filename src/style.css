@@ -14,7 +14,12 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 }
-
+.icp {
+  text-align: center;
+  font-size: 10px;
+  position: absolute;
+  left: 50%;
+}
 a {
   font-weight: 500;
   color: #646cff;
