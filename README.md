@@ -1,6 +1,6 @@
 # your notes —— 一个浏览器主页兼博客网站的前端
 
-[点我查看项目预览](https://www.wxhzny.top/)
+[点我查看项目预览](https://www.supercpq.top/)
 ## 项目简介
 
 `yournodes` 是一个浏览器主页+博客网站的前端，使用`Vue3`、`Vite`、`Element-Plus`、`TypeScript`、`Pinia`、`scss`等主流技术开发。
