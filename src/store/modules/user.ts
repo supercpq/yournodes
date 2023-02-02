@@ -15,8 +15,8 @@ const data = getToken();
 let token = "";
 let name = "your name";
 let profession = "your job";
-let userMail = "";
-let avatarLink = "/avatar.svg";
+const userMail = "";
+const avatarLink = "/avatar.svg";
 if (data) {
   const dataJson = JSON.parse(data);
   if (dataJson) {
@@ -78,9 +78,9 @@ export const useUserStore = defineStore({
         )
         .then(
           (PUBLIC_KEY) => {
-            let encryptor = new JSEncrypt();
+            const encryptor = new JSEncrypt();
             encryptor.setPublicKey(PUBLIC_KEY);
-            let result = encryptor.encrypt(data.pass);
+            const result = encryptor.encrypt(data.pass);
             // console.log("key:", PUBLIC_KEY, data, "加密后：", result);
             if (result) {
               getLogin({ email: data.email, pass: result }).then(
@@ -144,10 +144,10 @@ export const useUserStore = defineStore({
         )
         .then(
           (PUBLIC_KEY) => {
-            let encryptor = new JSEncrypt();
+            const encryptor = new JSEncrypt();
             encryptor.setPublicKey(PUBLIC_KEY);
-            let result = encryptor.encrypt(data.newpassword);
-            let { check, email, code } = data;
+            const result = encryptor.encrypt(data.newpassword);
+            const { check, email, code } = data;
             console.log(reguser);
             if (result) {
               reguser({ email, check, code, pass: result }).then(

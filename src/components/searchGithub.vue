@@ -65,7 +65,7 @@
                   ><el-icon><StarFilled /></el-icon>{{ item.stars }}
                 </span>
                 <span>
-                  &nbsp<el-icon><Share /></el-icon> {{ item.forks }}
+                  &nbsp;<el-icon><Share /></el-icon> {{ item.forks }}
                 </span>
               </div>
             </div>
@@ -167,7 +167,7 @@ const load1 = () => {
 };
 
 const hellogit = _.debounce(
-  (lang: string = "vue") => {
+  (lang = "vue") => {
     gitstore.loading = true;
     localStorage.setItem("lang", lang);
     gitstore.searchrepositories(lang);

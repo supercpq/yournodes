@@ -26,7 +26,7 @@ export const githubHotStore = defineStore("githubHotS", {
     },
   },
   actions: {
-    searchrepositories(lang: string = "vue") {
+    searchrepositories(lang = "vue") {
       lang = lang.trim().slice(0, 20);
       if (lang) {
         axios
@@ -42,8 +42,8 @@ export const githubHotStore = defineStore("githubHotS", {
                 // this.gridCon = '\'logoItems \'\'searchInput \'\'musiclist\'\'musiclist\'\'musiclist\'\'musiclist\'\'musiclist\'\'musiclist\'\'musiclist\'\'musiclist\'\'musiclist'
                 this.list = [];
                 // console.log(this.list.length);
-                for (let i in res.data.items) {
-                  var a: githubHotItem = {
+                for (const i in res.data.items) {
+                  const listItem: githubHotItem = {
                     id: res.data.items[i].id,
                     name: res.data.items[i].full_name,
                     picUrl: res.data.items[i].html_url,
@@ -51,7 +51,7 @@ export const githubHotStore = defineStore("githubHotS", {
                     stars: res.data.items[i].stargazers_count,
                     forks: res.data.items[i].forks_count,
                   };
-                  this.list.push(a);
+                  this.list.push(listItem);
                   // console.log(res.data.result.songs[i].id, res.data.result.songs[i].name, res.data.result.songs[i].al.picUrl)
                 }
                 this.loading = false;
@@ -59,7 +59,7 @@ export const githubHotStore = defineStore("githubHotS", {
                 // console.log(this.list.length);
               } else {
                 if (!this.show) {
-                  var a: githubHotItem = {
+                  const listItem: githubHotItem = {
                     id: 0,
                     name: "nothing",
                     picUrl: "#",
@@ -67,7 +67,7 @@ export const githubHotStore = defineStore("githubHotS", {
                     stars: 0,
                     forks: 0,
                   };
-                  this.list.push(a);
+                  this.list.push(listItem);
                 }
                 this.loading = false;
               }
@@ -75,7 +75,7 @@ export const githubHotStore = defineStore("githubHotS", {
             (err) => {
               // console.log('searchMusicListByName3')
               if (!this.show) {
-                var a: githubHotItem = {
+                const listItem: githubHotItem = {
                   id: 0,
                   name: "nothing",
                   picUrl: "#",
@@ -83,7 +83,7 @@ export const githubHotStore = defineStore("githubHotS", {
                   stars: 0,
                   forks: 0,
                 };
-                this.list.push(a);
+                this.list.push(listItem);
               }
               console.log(err.message);
               this.loading = false;

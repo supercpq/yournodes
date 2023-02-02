@@ -1,6 +1,6 @@
 <template>
   <div class="nomal-tool">
-    <div class="tool" v-for="item in toolList">
+    <div class="tool" v-for="(item, index) in toolList" :key="index">
       <button class="tool-contant" @click="openOutside(item.url, item.title)">
         <div class="tool-icon">
           <img

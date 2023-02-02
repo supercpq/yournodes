@@ -6,8 +6,8 @@ interface searchLike {
   articalImgLink: string;
   articalID: number;
 }
-var list = <searchLike[]>[];
-var a: searchLike = {
+const list = <searchLike[]>[];
+const a: searchLike = {
   articaName: "superxxx123456789",
   articalLink: "/reading?ar_id=10",
   articalImgLink:
@@ -19,9 +19,9 @@ for (var i = 0; i < 20; i++) {
   a.articalID++;
   list.push(a);
 }
-var list1 = <searchLike[]>[];
+const list1 = <searchLike[]>[];
 
-var b: searchLike = {
+const b: searchLike = {
   articaName: "superxxx123456789",
   articalLink: "/reading?ar_id=10",
   articalImgLink:

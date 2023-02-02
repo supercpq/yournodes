@@ -53,7 +53,7 @@ export const searchInputStore = defineStore("searchInput", {
         window.open(url.trim() + input, "_blank");
       } else {
         this.loading = true;
-        var seIn = { input };
+        const seIn = { input };
         searchByTitle(seIn).then(
           (res: any) => {
             // console.log("resByTitle", res.data);

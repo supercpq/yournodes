@@ -52,14 +52,11 @@
   </div>
 </template>
 <script setup lang="ts">
-import { reactive, ref, onMounted } from "vue";
+import { reactive, ref } from "vue";
 import { useUserStore } from "../store/modules/user";
-import { emailCode, updatepwd } from "../api/user";
+import { emailCode } from "../api/user";
 import type { FormInstance } from "element-plus";
-import { baseInfo } from "../api/userinfo";
 import { pwdRegex, pwdcheck, emailcheck } from "../utils/user";
-import { JSEncrypt } from "jsencrypt";
-import { reguser, getPublicKey } from "../api/user";
 
 const ruleFormRef = ref<FormInstance>();
 const labelPosition = ref("left");

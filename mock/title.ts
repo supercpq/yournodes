@@ -12,7 +12,7 @@ interface searchInputItem {
   imglink?: string;
 }
 
-var a: searchInputItem = {
+const a: searchInputItem = {
   // 没加载出来用的
   id: 0,
   title: "nothing",
@@ -27,7 +27,7 @@ var a: searchInputItem = {
   imglink:
     "https://p3-passport.byteimg.com/img/mosaic-legacy/3791/5070639578~180x180.png",
 };
-var b: searchInputItem = {
+const b: searchInputItem = {
   // 没加载出来用的
   id: 0,
   title: "nothing",
@@ -39,7 +39,7 @@ var b: searchInputItem = {
   imglink:
     "https://p3-passport.byteimg.com/img/mosaic-legacy/3791/5070639578~180x180.png",
 };
-var c: searchInputItem = {
+const c: searchInputItem = {
   // 没加载出来用的
   id: 0,
   title: "nothing",
@@ -51,9 +51,9 @@ var c: searchInputItem = {
   imglink:
     "https://p3-passport.byteimg.com/img/mosaic-legacy/3791/5070639578~180x180.png",
 };
-var list = <searchInputItem[]>[];
-var list2 = <searchInputItem[]>[];
-var selfList = <searchInputItem[]>[];
+const list = <searchInputItem[]>[];
+const list2 = <searchInputItem[]>[];
+const selfList = <searchInputItem[]>[];
 
 for (let i = 0; i < 10; i++) {
   a.title = "once data";

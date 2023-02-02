@@ -6,6 +6,7 @@
         v-for="(item, index) in options"
         :badge="item.counts"
         @click="likeAr(index)"
+        :key="index"
       >
         <!-- <small class="counts">{{ item.counts }}</small> -->
         <img :src="item.icon" v-if="!item.active" alt="" class="img-icon" />
@@ -34,6 +35,7 @@
           class="cata"
           v-for="(item, index) in arCatalog"
           @click="gotoTitle(index)"
+          :key="index"
         >
           {{ item }}
         </div>
@@ -85,7 +87,9 @@ const likeAr = _.throttle(
       id: Ar_id.value,
       active: options.value[index].active, // true为点赞，false为取消（对后端而言）
     }).then(
-      (res) => {},
+      (res) => {
+        console.log("");
+      },
       (err) => {
         console.log(err.message);
         options.value[index].active = !options.value[index].active;
@@ -160,7 +164,7 @@ function getTitle(html: string) {
   }
   // console.log(arHtml, "\n\n", html, "\n\n", hello);
   // console.log(hello);
-  if (isedit) {
+  if (isedit.value) {
     let editPath = window.location.protocol + "//" + window.location.host;
     arHtml =
       `<a href='${editPath}/creator/write?arid=${Ar_id.value}'>edit<a>` +

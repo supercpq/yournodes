@@ -47,7 +47,7 @@ class qHttp {
         const $config = config;
         // 开启进度条动画
         NProgress.start();
-        let whitelist = ["/api"];
+        const whitelist = ["/api"];
 
         // 优先判断post/get等方法是否传入回调，否则执行初始化设置等回调
         if (typeof config.beforeRequestCallback === "function") {

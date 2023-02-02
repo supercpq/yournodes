@@ -9,9 +9,10 @@
       <div class="tab">
         <div class="insidetabs">
           <div
-            v-for="item in tabs"
+            v-for="(item, index) in tabs"
             class="onetab"
             @click="componentNameId = item.componentName"
+            :key="index"
           >
             <div v-if="'tabIcon' in item" class="tabIcon">
               <img
@@ -40,7 +41,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, onMounted, markRaw } from "vue";
+import { ref, onMounted } from "vue";
 import { routerStore } from "../store/modules/routerPinia";
 import { infoTabs } from "../api/userinfo";
 import basicSetting from "../components/basicSetting.vue";
@@ -60,10 +61,6 @@ interface infoTab {
   tabIcon?: string;
 }
 const tabs = ref<infoTab[]>([]);
-
-function settingTabs(url: string) {
-  routerPath.routerPath = url;
-}
 
 function backToMyInfo() {
   routerPath.routerPath = "myinfo";

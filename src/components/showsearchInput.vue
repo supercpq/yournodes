@@ -69,10 +69,10 @@
                   ><el-icon><Pointer /></el-icon>{{ item.likes }}
                 </span>
                 <span>
-                  &nbsp<el-icon><View /></el-icon> {{ item.reads }}
+                  &nbsp;<el-icon><View /></el-icon> {{ item.reads }}
                 </span>
                 <span>
-                  &nbsp<el-icon><Clock /></el-icon> {{ item.pubTime }}
+                  &nbsp;<el-icon><Clock /></el-icon> {{ item.pubTime }}
                 </span>
               </div>
             </div>
