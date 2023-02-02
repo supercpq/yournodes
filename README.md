@@ -25,4 +25,5 @@ npm run dev
 |     not support    |    last 2 versions    |     last 2 versions    |    last 2 versions     |     last 2 versions    |
 
 - 由于项目内容（比如文章数据和markdown编辑页的功能和展示需要，仅有文章阅读界面有响应式布局）
+- eslint检查：0 error，存在少量warning
 - 本项目的后端在开发中
