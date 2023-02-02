@@ -108,12 +108,8 @@ export default [
       return {
         items: [
           {
-            url: "http://121.36.131.50:8000/",
-            title: "五楼没有秘密基地",
-          },
-          {
-            url: "http://120.55.84.232/",
-            title: "朋友博客",
+            url: "https://space.bilibili.com/511481687?plat_id=1&share_from=space&share_medium=android&share_plat=android&share_session_id=2e9848a8-25e6-4352-9dfa-b68fcebe1ea0&share_source=WEIXIN&share_tag=s_i&timestamp=1675262554&unique_k=4oHcOgX",
+            title: "朋友B站",
           },
         ],
       };
