@@ -1,4 +1,4 @@
-import { ar } from "element-plus/es/locale";
+// import { ar } from "element-plus/es/locale";
 import { MockMethod } from "vite-plugin-mock";
 
 interface searchInputItem {

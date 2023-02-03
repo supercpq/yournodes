@@ -14,7 +14,7 @@ const a: searchLike = {
     "https://p3-passport.byteimg.com/img/mosaic-legacy/3791/5070639578~180x180.png",
   articalID: 1231241,
 };
-for (var i = 0; i < 20; i++) {
+for (let i = 0; i < 20; i++) {
   a.articaName = "once data superxxx123456789";
   a.articalID++;
   list.push(a);
@@ -28,7 +28,7 @@ const b: searchLike = {
     "https://p3-passport.byteimg.com/img/mosaic-legacy/3791/5070639578~180x180.png",
   articalID: 12312411,
 };
-for (var i = 0; i < 20; i++) {
+for (let i = 0; i < 20; i++) {
   b.articaName = "more data superxxx123456789";
   b.articalID++;
   list1.push(b);
