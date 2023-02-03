@@ -227,7 +227,7 @@ onBeforeMount(async () => {
 }
 .catalog {
   display: flex;
-  max-height: 600px;
+  max-height: 400px;
   width: 100%;
   padding: 20px;
   flex-direction: column;
