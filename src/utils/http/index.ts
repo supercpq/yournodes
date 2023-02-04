@@ -106,6 +106,13 @@ class qHttp {
         const $config = response.config;
         // 关闭进度条动画
         NProgress.done();
+        // 最优先判断服务器返回的状态，规定status===114为服务器端因重启等原因导致token提前过期的处理
+        if (response.data.status === 114) {
+          location.replace(
+            window.location.protocol + "//" + window.location.host + "/login"
+          );
+          return;
+        }
         // 优先判断post/get等方法是否传入回掉，否则执行初始化设置等回掉
         if (typeof $config.beforeResponseCallback === "function") {
           $config.beforeResponseCallback(response);
