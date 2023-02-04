@@ -41,12 +41,7 @@ export default [
     response: () => {
       return {
         status: 0,
-        pubkey: `MIIBCgKCAQEA5mSIryzUoK4K5DLZErIbHnRol27/A0ZVrhL1adaiUSM8Dv2Xk5I1
-        rUZ75ZshmeJbDphc3vH79fs2/inWVYKsr/MDdL17gVh6mK8xvJ1fFPK/asiB9JnG
-        aEXNqtIMunKWJejADFeWHuUoRfdJ12Nxucw+PPyZu7U9i24MGpsgH8ddu+PsMS8P
-        nUxdf7O63obDOmfkiD82No/MQzT5dq1EHLsTdjOhfJMCPScdKugVsAAl7KzlEugo
-        k4dRo1nKotzVYxwhCKFRWf7PSKxAN+DnDQMKCZsD2Qi+iarF82bck37Cvw9gDB2D
-        CP+/0He1JwxRODpnYFb7dpdmHdQaX+O9bQIDAQAB`,
+        pubkey: `-----BEGIN PUBLIC KEY-----\nMFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAIuf1MX43houxs6VCAgex1CPUtBHok8Q\nDV28Bt3yOZ+hPMxZ3eIGNxfjiRRwNCPmLCmEeWRNwSY/yHoBXCLqC80CAwEAAQ==\n-----END PUBLIC KEY-----`,
       };
     },
   },
