@@ -11,10 +11,10 @@ import qs from "qs";
 import NProgress from "../progress";
 import { getToken, removeToken } from "../user";
 import { useUserStoreHook } from "../../store/modules/user";
-import router from "src/router";
-import { routerStore } from "../../store/modules/routerPinia";
+// import router from "src/router";
+// import { routerStore } from "../../store/modules/routerPinia";
 
-const routerPath = routerStore();
+// const routerPath = routerStore();
 
 // axios封装的相关配置请参考：www.axios-js.com/zh-cn/docs/#axios-request-config-1
 
