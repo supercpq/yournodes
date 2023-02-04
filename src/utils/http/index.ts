@@ -9,7 +9,7 @@ import {
 } from "./types";
 import qs from "qs";
 import NProgress from "../progress";
-import { getToken } from "../user";
+import { getToken, removeToken } from "../user";
 import { useUserStoreHook } from "../../store/modules/user";
 import router from "src/router";
 import { routerStore } from "../../store/modules/routerPinia";
@@ -111,6 +111,7 @@ class qHttp {
           location.replace(
             window.location.protocol + "//" + window.location.host + "/login"
           );
+          removeToken();
           return;
         }
         // 优先判断post/get等方法是否传入回掉，否则执行初始化设置等回掉
