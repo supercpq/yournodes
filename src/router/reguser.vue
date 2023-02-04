@@ -118,7 +118,7 @@ function getEmailChangeCheck() {
   }, times * 1000);
   // 通知后端发送邮箱验证码
   // 并获取后端返回的修改ID
-  emailCode({ email: userStore.userMail }).then(
+  emailCode({ email: formLabelAlign.email }).then(
     (res: any) => {
       code.value = res.code;
     },
