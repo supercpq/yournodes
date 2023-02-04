@@ -34,6 +34,15 @@ export default defineConfig({
     }),
     svgLoader(),
   ],
+  // 后端开发时候连本地node用，生产环境有nginx解决跨域
+  server: {
+    proxy: {
+      "/api": {
+        target: "http://127.0.0.1:3000", //目标url
+        changeOrigin: true, //支持跨域
+      },
+    },
+  },
 });
 /*
 viteMockServe({// 更多配置见最下方
