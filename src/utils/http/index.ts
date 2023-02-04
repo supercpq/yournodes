@@ -114,6 +114,13 @@ class qHttp {
           removeToken();
           return;
         }
+        // 404情况是get或者post请求的内容服务器找不到，手动跳转用
+        if (response.data.status === 404) {
+          location.replace(
+            window.location.protocol + "//" + window.location.host + "/404"
+          );
+          return;
+        }
         // 优先判断post/get等方法是否传入回掉，否则执行初始化设置等回掉
         if (typeof $config.beforeResponseCallback === "function") {
           $config.beforeResponseCallback(response);

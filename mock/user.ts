@@ -41,7 +41,7 @@ export default [
     response: () => {
       return {
         status: 0,
-        pubkey: `-----BEGIN PUBLIC KEY-----\nMFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAIuf1MX43houxs6VCAgex1CPUtBHok8Q\nDV28Bt3yOZ+hPMxZ3eIGNxfjiRRwNCPmLCmEeWRNwSY/yHoBXCLqC80CAwEAAQ==\n-----END PUBLIC KEY-----`,
+        pubkey: `-----BEGIN PUBLIC KEY-----\nMFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBANDl0XBfBU8SM3Ppj6kwrHc2WSKNdGgC\nNPWDeB1t50jcSV9YZ02Z7Ne0hbXt1vh7q6PkWwfTiozNjofRNofwhWkCAwEAAQ==\n-----END PUBLIC KEY-----`,
       };
     },
   },
