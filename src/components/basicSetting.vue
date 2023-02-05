@@ -146,6 +146,7 @@ onMounted(() => {
         formLabelAlign.name = res.info.userName;
         formLabelAlign.profession = res.info.profession;
         formLabelAlign.imageUrl = res.info.avatarLink;
+        formLabelAlign.type = res.info.company;
       }
     },
     (err) => {

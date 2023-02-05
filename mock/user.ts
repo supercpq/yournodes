@@ -123,6 +123,7 @@ export default [
           profession: "程序员",
           userMail: "supercpq@outlook.com",
           id: "123456",
+          company: "大连理工大学",
         },
       };
     },
