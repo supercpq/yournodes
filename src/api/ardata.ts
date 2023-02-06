@@ -8,17 +8,17 @@ import { http } from "../utils/http";
     )
  */
 export const getMyList = (params: object) => {
-  return http.request("get", "/myarlist", { params });
+  return http.request("get", "/my/myarlist", { params });
 };
 // 获取所有文章总体数据
 export const allArDatas = (params?: object) => {
-  return http.request("get", "/allardatas", { params });
+  return http.request("get", "/my/allardatas", { params });
 };
 // 获取某一文章的数据 参数必选：文章id
 export const arData = (params: object) => {
-  return http.request("get", "/ardata", { params });
+  return http.request("get", "/my/ardata", { params });
 };
 // 获取chartlable
 export const arDataLable = (params?: object) => {
-  return http.request("get", "/ardatalable", { params });
+  return http.request("get", "/my/ardatalable", { params });
 };

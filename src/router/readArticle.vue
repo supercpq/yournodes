@@ -179,8 +179,10 @@ function getTitle(html: string) {
 onBeforeMount(async () => {
   // 获取用户文字内容，评论，点赞等
   // console.log($route.query.ar_id, Ar_id.value);
+  let user = getuseid();
   getArContent({
     id: Ar_id.value,
+    user,
   }).then(
     (res: any) => {
       //更新Ar_content
@@ -197,7 +199,6 @@ onBeforeMount(async () => {
       console.log(err.message);
     }
   );
-  let user = getuseid();
   getArLikes({
     id: Ar_id.value,
     user, //user 为空代表不需要获取文章是否被此用户点赞过，activie都为false

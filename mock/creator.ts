@@ -3,7 +3,7 @@ import { shuffle } from "lodash";
 
 export default [
   {
-    url: "/draft",
+    url: "/my/draft",
     method: "post",
     timeout: 500,
     response: (data) => {
@@ -25,7 +25,7 @@ export default [
     },
   },
   {
-    url: "/updata.content",
+    url: "/my/updata.content",
     method: "post",
     timeout: 500,
     response: (data) => {
@@ -38,7 +38,7 @@ export default [
     },
   },
   {
-    url: "/allardatas",
+    url: "/my/allardatas",
     method: "get",
     timeout: 500,
     response: (data) => {
@@ -51,7 +51,7 @@ export default [
     },
   },
   {
-    url: "/ardata",
+    url: "/my/ardata",
     method: "get",
     timeout: 500,
     response: (data) => {
@@ -72,7 +72,7 @@ export default [
     },
   },
   {
-    url: "/ardatalable",
+    url: "/my/ardatalable",
     method: "get",
     timeout: 500,
     response: (data) => {

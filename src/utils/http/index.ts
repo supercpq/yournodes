@@ -68,6 +68,7 @@ class qHttp {
           const data = JSON.parse(token);
           const now = new Date().getTime();
           const expired = parseInt(data.expires) - now <= 0;
+          console.log(data);
           // console.log("not api!!!!!!!!");
           if (expired) {
             // token过期刷新
@@ -106,8 +107,8 @@ class qHttp {
         const $config = response.config;
         // 关闭进度条动画
         NProgress.done();
-        // 最优先判断服务器返回的状态，规定status===114为服务器端因重启等原因导致token提前过期的处理
-        if (response.data.status === 114) {
+        // 最优先判断服务器返回的状态，规定status===401(没有权限xxx)为服务器端因重启等原因导致token提前过期的处理
+        if (response.data.status === 401) {
           location.replace(
             window.location.protocol + "//" + window.location.host + "/login"
           );

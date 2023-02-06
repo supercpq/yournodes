@@ -116,7 +116,7 @@ export default [
     },
   },
   {
-    url: "/myarlist",
+    url: "/my/myarlist",
     method: "get",
     timeout: 500,
     response: (data) => {
