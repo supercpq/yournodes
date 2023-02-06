@@ -35,6 +35,7 @@ const messages = {
     verification: "verification",
     username: "user name",
     editAr: "edit article",
+    changeava: "click to change",
   },
   zh: {
     menu: ["首页", "个人中心", "创作中心", "写文章", "文章数据", "语言"],
@@ -63,6 +64,7 @@ const messages = {
     verification: "验证码",
     username: "用户名",
     editAr: "编辑文章",
+    changeava: "点击更换头像",
   },
 };
 

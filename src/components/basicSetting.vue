@@ -58,6 +58,7 @@
           <el-upload
             class="avatar-uploader"
             :action="imgUpdataUrl"
+            :headers="jwtoken"
             :show-file-list="false"
             :on-success="handleAvatarSuccess"
             :before-upload="beforeAvatarUpload"
@@ -69,7 +70,7 @@
             />
             <el-icon v-else class="avatar-uploader-icon"><Plus /></el-icon>
             <div class="masks">
-              <h5>点击更换头像</h5>
+              <h5>{{ $t("changeava") }}</h5>
               <el-icon :size="40"><CirclePlus /></el-icon>
             </div>
           </el-upload>
@@ -87,6 +88,7 @@ import { Plus } from "@element-plus/icons-vue";
 import { useUserStore } from "../store/modules/user";
 import type { UploadProps } from "element-plus";
 import { baseInfo, updatebaseinfo } from "../api/userinfo";
+import { getToken } from "../utils/user";
 
 const imgUpdataUrl = ref("/myinfo/settingnewimg");
 const isSuccess = ref(0);
@@ -94,7 +96,7 @@ const avatarcheck = ref(false);
 const labelPosition = ref("left");
 const avataralert = ref("");
 const userStore = useUserStore();
-
+const jwtoken = reactive({ Authorization: "" });
 const formLabelAlign = reactive({
   name: userStore.name,
   profession: userStore.profession,
@@ -119,6 +121,20 @@ const beforeAvatarUpload: UploadProps["beforeUpload"] = (rawFile) => {
     avataralert.value = "不能大于5MB";
     avatarcheck.value = true;
     return false;
+  }
+  const token = getToken();
+  if (token) {
+    const data = JSON.parse(token);
+    const now = new Date().getTime();
+    const expired = parseInt(data.expires) - now <= 0;
+    if (expired) {
+      location.replace(
+        window.location.protocol + "//" + window.location.host + "/login"
+      );
+      return;
+    } else {
+      jwtoken.Authorization = "Bearer " + data.accessToken;
+    }
   }
   avatarcheck.value = false;
   return true;
