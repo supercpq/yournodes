@@ -68,7 +68,7 @@ class qHttp {
           const data = JSON.parse(token);
           const now = new Date().getTime();
           const expired = parseInt(data.expires) - now <= 0;
-          console.log(data);
+          // console.log(data);
           // console.log("not api!!!!!!!!");
           if (expired) {
             // token过期刷新

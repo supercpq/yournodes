@@ -47,6 +47,7 @@ const onUploadImg = async (files, callback) => {
   callback(res.map((item) => item.data.url));
 };
 const onSubmit = _.debounce((pub: boolean) => {
+  if (id.value === "-1") return;
   // console.log("updata");
   isPublish.value = pub;
   /* 
@@ -61,8 +62,9 @@ const onSubmit = _.debounce((pub: boolean) => {
     isPublish: isPublish.value,
   }).then(
     (res: any) => {
-      if (typeof res.arid === "string") {
-        id.value = res.arid;
+      let ar = res.arid.toString();
+      if (typeof ar === "string") {
+        id.value = ar;
       }
       isPublish.value = res.isPublish;
     },
@@ -70,7 +72,7 @@ const onSubmit = _.debounce((pub: boolean) => {
       console.log(err.message);
     }
   );
-}, 200);
+}, 1000);
 
 onBeforeMount(() => {
   // 获取文章id发过去，然后axios拦截器添加token，后端根据用户来判断是否返回草稿内容

@@ -25,7 +25,7 @@ export default defineConfig({
       // logger: false, //是否在控制台显示请求日志
       // supportTs: false, //打开后，可以读取 ts 文件模块。 请注意，打开后将无法监视.js 文件
       localEnabled: true,
-      prodEnabled: true,
+      prodEnabled: false,
       injectCode: `
           import { setupProdMockServer } from './mockProdServer';
           setupProdMockServer();
@@ -35,14 +35,22 @@ export default defineConfig({
     svgLoader(),
   ],
   // 后端开发时候连本地node用，生产环境有nginx解决跨域
-  server: {
-    proxy: {
-      "/api": {
-        target: "http://127.0.0.1:3000", //目标url
-        changeOrigin: true, //支持跨域
-      },
-    },
-  },
+  // server: {
+  //   proxy: {
+  //     "/api": {
+  //       target: "http://127.0.0.1:3000", //目标url
+  //       changeOrigin: true, //支持跨域
+  //     },
+  //     "/user": {
+  //       target: "http://127.0.0.1:3000", //目标url
+  //       changeOrigin: true, //支持跨域
+  //     },
+  //     "/myinfo": {
+  //       target: "http://127.0.0.1:3000", //目标url
+  //       changeOrigin: true, //支持跨域
+  //     },
+  //   },
+  // },
 });
 /*
 viteMockServe({// 更多配置见最下方

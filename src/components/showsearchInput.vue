@@ -39,7 +39,14 @@
               <img
                 :src="item.imglink"
                 alt="img"
-                style="width: 90%; height: 90%; margin: auto; padding: auto"
+                style="
+                  width: 90%;
+                  height: 90%;
+                  margin: auto;
+                  padding: auto;
+                  max-width: 110px;
+                  max-height: 110px;
+                "
               />
             </div>
             <div class="outseideItem-ar">
