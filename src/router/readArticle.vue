@@ -40,28 +40,35 @@
           {{ item }}
         </div>
       </div>
+      <div style="max-width: 100px; max-height: 100px" v-html="qr_svg"></div>
+      <p style="text-align: left; font-size: smaller">{{ $t("qrinfo") }}</p>
     </aside>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useRoute } from "vue-router";
-import { arLikes, getArContent, getArLikes } from "../api/readAr";
-import { ref, reactive, onBeforeMount, onMounted } from "vue";
-import { useUserStore } from "../store/modules/user";
+import { arLikes, getArContent, getArLikes, getQr } from "../api/readAr";
+import { ref, onBeforeMount } from "vue";
+// import { useUserStore } from "../store/modules/user";
 import "md-editor-v3/lib/style.css";
 import MdEditor from "md-editor-v3";
 import _ from "lodash"; //防抖节流
 import { getuseid } from "../utils/user";
-
+// import { useI18n } from "vue-i18n";
+// const { t } = useI18n({
+//   useScope: "global",
+// });
 // import type { ExposeParam } from "md-editor-v3";
 // const editorRef = ref<ExposeParam>(); color: cornflowerblue;
 const arCatalog = ref<Array<string>>([]);
-const userStore = useUserStore();
+// const userStore = useUserStore();
 const $route = useRoute();
 const Ar_content = ref("");
 const isedit = ref(false);
 const Ar_id = ref($route.query.ar_id);
+const qr_svg = ref("");
+// const qrinfo = ref(t("qrinfo"));
 // props: [id];
 interface useroptions {
   icon: string;
@@ -179,6 +186,7 @@ function getTitle(html: string) {
 onBeforeMount(async () => {
   // 获取用户文字内容，评论，点赞等
   // console.log($route.query.ar_id, Ar_id.value);
+  // let qrinfo = t("qrinfo");
   let user = getuseid();
   getArContent({
     id: Ar_id.value,
@@ -206,6 +214,15 @@ onBeforeMount(async () => {
     (res: any) => {
       //更新options
       options.value = res.options;
+    },
+    (err) => {
+      console.log(err.message);
+    }
+  );
+  getQr({ url: window.location.href }).then(
+    (res: any) => {
+      //更新options
+      qr_svg.value = res.svg_string;
     },
     (err) => {
       console.log(err.message);

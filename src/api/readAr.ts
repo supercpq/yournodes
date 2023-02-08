@@ -20,3 +20,8 @@ export const getArContent = (params?: object) => {
 export const getArLikes = (params?: object) => {
   return http.request("get", "/api/reading/likeinfo", { params });
 };
+
+// 获取文章分享二维码
+export const getQr = (data: object) => {
+  return http.request("post", "/api/qr-code", { data });
+};

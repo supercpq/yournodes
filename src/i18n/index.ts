@@ -36,6 +36,7 @@ const messages = {
     username: "user name",
     editAr: "edit article",
     changeava: "click to change",
+    qrinfo: "phone-reading",
   },
   zh: {
     menu: ["首页", "个人中心", "创作中心", "写文章", "文章数据", "语言"],
@@ -65,6 +66,7 @@ const messages = {
     username: "用户名",
     editAr: "编辑文章",
     changeava: "点击更换头像",
+    qrinfo: "手机阅读",
   },
 };
 
