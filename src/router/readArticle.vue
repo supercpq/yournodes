@@ -235,7 +235,7 @@ onBeforeMount(async () => {
 .md-editor {
   height: 850px;
   text-align: left;
-  opacity: 0.7;
+  opacity: 0.8;
   padding: 0 20px;
 }
 :v-deep(.md-editor) {
