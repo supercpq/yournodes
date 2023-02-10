@@ -64,7 +64,7 @@ import nomalTool from "../components/normalTools.vue";
 @media only screen and (max-width: 767px) {
   .searchInput {
     grid-row-start: 1;
-    width: 60%;
+    width: 90%;
     margin: auto;
   }
 
@@ -77,7 +77,7 @@ import nomalTool from "../components/normalTools.vue";
   .three {
     /* grid-row-start: 3; */
     /* display: none; */
-    grid-column-start: 1;
+    grid-column-start: 2;
     /* margin-left: 20px; */
   }
   .two {

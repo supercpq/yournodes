@@ -196,7 +196,9 @@ ul li {
 }
 .searchSelect-ar {
   height: 800px;
-  width: 710px;
+  // width: 710px;
+  width: 100%;
+  min-width: 360px;
   padding: 20px;
 }
 ::-webkit-scrollbar {
@@ -206,7 +208,10 @@ ul li {
 
 .searchLi-ar {
   height: 800px;
-  width: 730px;
+  // width: 730px;
+  width: 100%;
+  min-width: 360px;
+  container-type: inline-size;
   overflow: auto;
   background-color: rgba(255, 255, 255, 0.15);
 }
@@ -230,7 +235,7 @@ ul li {
 }
 
 .outseideItem-ar {
-  grid-column-start: 0;
+  grid-column-start: 2;
   text-align: left;
   flex-grow: 1;
   /* width: 350px; */
@@ -288,5 +293,39 @@ h4 {
   margin-block-end: 0.33em;
   margin-inline-start: 0px;
   margin-inline-end: 0px;
+}
+
+@container (max-width: 400px) {
+  .searchSelect-ar {
+    max-width: 400px;
+    width: 100%;
+  }
+  .outsideIt-ar {
+    grid-template-columns: 100%;
+    max-width: 400px;
+    width: 100%;
+  }
+  .imglinks {
+    display: none;
+  }
+  .outseideItem-ar {
+    grid-column-start: 1;
+  }
+  .ul-list-item-ar {
+    max-width: 400px;
+    width: 100%;
+  }
+  .itemTitle {
+    max-width: 400px;
+    width: 100%;
+  }
+  .itemDecri {
+    max-width: 400px;
+    width: 100%;
+  }
+  .list-item-ar {
+    max-width: 400px;
+    width: 100%;
+  }
 }
 </style>
