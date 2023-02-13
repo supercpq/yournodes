@@ -43,10 +43,7 @@
       </div>
       <div class="aside-setting">
         <div>
-          <div
-            style="max-width: 100px; max-height: 100px"
-            v-html="qr_svg"
-          ></div>
+          <div style="width: 100px; height: 100px" v-html="qr_svg"></div>
           <p style="text-align: left; font-size: smaller">{{ $t("qrinfo") }}</p>
         </div>
         <editor-theme />
