@@ -11,6 +11,7 @@ declare module '@vue/runtime-core' {
     ArdataChats: typeof import('./src/components/ardataChats.vue')['default']
     BasicInfo: typeof import('./src/components/basicInfo.vue')['default']
     BasicSetting: typeof import('./src/components/basicSetting.vue')['default']
+    EditorTheme: typeof import('./src/components/editorTheme.vue')['default']
     ElAlert: typeof import('element-plus/es')['ElAlert']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElDivider: typeof import('element-plus/es')['ElDivider']

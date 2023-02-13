@@ -3,7 +3,8 @@
     <md-editor
       class="mgb20"
       v-model="text"
-      previewTheme="cyanosis"
+      :previewTheme="mdEditorStore.getPreviewTheme"
+      :theme="mdEditorStore.getTheme"
       @input="onSubmit(isPublish)"
       @on-upload-img="onUploadImg"
       @onSave="onSubmit(isPublish)"
@@ -13,9 +14,12 @@
         <time-now />
       </template>
     </md-editor>
-    <el-button type="primary" class="submit" @click="onSubmit(true)">{{
-      $t("submit")
-    }}</el-button>
+    <div class="setting">
+      <el-button type="primary" class="submit" @click="onSubmit(true)">{{
+        $t("submit")
+      }}</el-button>
+      <editor-theme />
+    </div>
   </div>
 </template>
 
@@ -28,7 +32,9 @@ import { getDraft, updataArContent } from "../api/creator";
 import _ from "lodash";
 import axios from "axios";
 import TimeNow from "./timeNow.vue";
-
+import { mdStore } from "../store/modules/mdEditorPinia";
+import editorTheme from "./editorTheme.vue";
+const mdEditorStore = mdStore();
 const $route = useRoute();
 const text = ref("");
 const id = ref("");
@@ -116,6 +122,12 @@ onBeforeMount(() => {
 }
 .md-editor {
   height: 700px;
+}
+
+.setting {
+  display: flex;
+  justify-items: auto;
+  margin: 10px;
 }
 .submit {
   position: relative;

@@ -17,7 +17,8 @@
       <md-editor
         class="mgb20"
         v-model="Ar_content"
-        previewTheme="cyanosis"
+        :previewTheme="mdEditorStore.getPreviewTheme"
+        :theme="mdEditorStore.getTheme"
         :readOnly="true"
         ref="editorRef"
         :previewOnly="true"
@@ -40,8 +41,16 @@
           {{ item }}
         </div>
       </div>
-      <div style="max-width: 100px; max-height: 100px" v-html="qr_svg"></div>
-      <p style="text-align: left; font-size: smaller">{{ $t("qrinfo") }}</p>
+      <div class="aside-setting">
+        <div>
+          <div
+            style="max-width: 100px; max-height: 100px"
+            v-html="qr_svg"
+          ></div>
+          <p style="text-align: left; font-size: smaller">{{ $t("qrinfo") }}</p>
+        </div>
+        <editor-theme />
+      </div>
     </aside>
   </div>
 </template>
@@ -55,6 +64,10 @@ import "md-editor-v3/lib/style.css";
 import MdEditor from "md-editor-v3";
 import _ from "lodash"; //防抖节流
 import { getuseid } from "../utils/user";
+import { mdStore } from "../store/modules/mdEditorPinia";
+import editorTheme from "../components/editorTheme.vue";
+
+const mdEditorStore = mdStore();
 // import { useI18n } from "vue-i18n";
 // const { t } = useI18n({
 //   useScope: "global",
@@ -375,5 +388,11 @@ onBeforeMount(async () => {
   .directory {
     display: none !important;
   }
+}
+
+.aside-setting {
+  display: flex;
+  justify-items: auto;
+  margin: 3px;
 }
 </style>
