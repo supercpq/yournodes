@@ -36,6 +36,7 @@ declare module '@vue/runtime-core' {
     SearchGithub: typeof import('./src/components/searchGithub.vue')['default']
     SearchLocal: typeof import('./src/components/searchLocal.vue')['default']
     ShowsearchInput: typeof import('./src/components/showsearchInput.vue')['default']
+    TimeNow: typeof import('./src/components/timeNow.vue')['default']
     UserLikesList: typeof import('./src/components/userLikesList.vue')['default']
     WriteArticle: typeof import('./src/components/writeArticle.vue')['default']
   }

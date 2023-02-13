@@ -7,7 +7,12 @@
       @input="onSubmit(isPublish)"
       @on-upload-img="onUploadImg"
       @onSave="onSubmit(isPublish)"
-    />
+      :footers="['markdownTotal', '=', 0, 'scrollSwitch']"
+    >
+      <template #defFooters>
+        <time-now />
+      </template>
+    </md-editor>
     <el-button type="primary" class="submit" @click="onSubmit(true)">{{
       $t("submit")
     }}</el-button>
@@ -22,6 +27,7 @@ import MdEditor from "md-editor-v3";
 import { getDraft, updataArContent } from "../api/creator";
 import _ from "lodash";
 import axios from "axios";
+import TimeNow from "./timeNow.vue";
 
 const $route = useRoute();
 const text = ref("");
