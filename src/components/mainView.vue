@@ -31,6 +31,8 @@
 import { ref, onMounted } from "vue";
 import { routerStore } from "../store/modules/routerPinia";
 import { useI18n } from "vue-i18n";
+import { mdStore } from "../store/modules/mdEditorPinia";
+const mdEditorStore = mdStore();
 const { locale } = useI18n();
 const routerPath = routerStore();
 const activeIndex = ref("");
@@ -39,9 +41,11 @@ const handleSelect = (key: string, keyPath: string[]) => {
   if (key === "ZH") {
     locale.value = "zh";
     localStorage.setItem("lang-zh-en", "zh");
+    mdEditorStore.setLang("zh-CN");
   } else if (key === "EN") {
     localStorage.setItem("lang-zh-en", "en");
     locale.value = "en";
+    mdEditorStore.setLang("en-US");
   } else {
     if (routerPath.routerPath === "") {
       routerPath.routerPath = "/";

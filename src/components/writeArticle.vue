@@ -5,6 +5,7 @@
       v-model="text"
       :previewTheme="mdEditorStore.getPreviewTheme"
       :theme="mdEditorStore.getTheme"
+      :language="mdEditorStore.getLang"
       @input="onSubmit(isPublish)"
       @on-upload-img="onUploadImg"
       @onSave="onSubmit(isPublish)"

@@ -6,6 +6,7 @@ export const mdStore = defineStore("mdStore", {
     return {
       theme: "light" as Theme,
       previewTheme: "cyanosis",
+      Lang: "zh-CN",
     };
   },
   getters: {
@@ -16,6 +17,9 @@ export const mdStore = defineStore("mdStore", {
     getPreviewTheme: (state) => {
       // 'default' | 'github' | 'vuepress' | 'mk-cute' | 'smart-blue' | 'cyanosis'
       return state.previewTheme || "cyanosis";
+    },
+    getLang: (state) => {
+      return state.Lang;
     },
   },
   actions: {
@@ -35,6 +39,9 @@ export const mdStore = defineStore("mdStore", {
       this.previewTheme = previewThemeList.includes(previewTheme)
         ? previewTheme
         : "cyanosis";
+    },
+    setLang(lang: string) {
+      this.Lang = lang;
     },
   },
 });
