@@ -19,7 +19,11 @@
     <div v-show="!gitstore.loading" class="searchLi">
       <div class="langOptions">
         <div class="langOptionsItem">
-          <a href="https://github.com/supercpq/yournodes" target="_blank">
+          <a
+            href="https://github.com/supercpq/yournodes"
+            target="_blank"
+            title="your notes"
+          >
             <span><img :src="githublogo" alt="github logo" /></span>
             <span> Github</span>
           </a>
