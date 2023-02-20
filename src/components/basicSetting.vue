@@ -13,21 +13,21 @@
         >
           <el-form-item :label="$t('username')">
             <el-input
-              v-model="formLabelAlign.name"
+              v-model.trim="formLabelAlign.name"
               placeholder="user name"
               maxlength="20"
             />
           </el-form-item>
           <el-form-item :label="$t('profession')">
             <el-input
-              v-model="formLabelAlign.profession"
+              v-model.trim="formLabelAlign.profession"
               placeholder="profession"
               maxlength="20"
             />
           </el-form-item>
           <el-form-item :label="$t('company')">
             <el-input
-              v-model="formLabelAlign.type"
+              v-model.trim="formLabelAlign.type"
               placeholder="company"
               maxlength="20"
             />

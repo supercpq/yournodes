@@ -1,7 +1,7 @@
 <template>
   <div class="mt-4">
     <el-input
-      v-model="inputStore.inputSearch"
+      v-model.trim="inputStore.inputSearch"
       placeholder="Enter your search term"
       :clearable="isclearable"
       class="input-with-select"
@@ -69,6 +69,10 @@ const options = [
   {
     value: "https://stackoverflow.com/search?q=",
     label: "stackoverflow",
+  },
+  {
+    value: "https://search.bilibili.com/all?keyword=",
+    label: "bilibili",
   },
   {
     value: " ",

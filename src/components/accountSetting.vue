@@ -14,7 +14,11 @@
           ref="ruleFormRef"
         >
           <el-form-item :label="$t('email')">
-            <el-input v-model="formLabelAlign.email" maxlength="20" disabled />
+            <el-input
+              v-model.trim="formLabelAlign.email"
+              maxlength="60"
+              disabled
+            />
             <button
               @click="getEmailChangeCheck()"
               style="float: left"
@@ -25,7 +29,7 @@
           </el-form-item>
           <el-form-item :label="$t('newpassword')" prop="newpassword">
             <el-input
-              v-model="formLabelAlign.newpassword"
+              v-model.trim="formLabelAlign.newpassword"
               maxlength="20"
               placeholder="new password"
               autocomplete="off"
@@ -33,7 +37,7 @@
           </el-form-item>
           <el-form-item :label="$t('verification')" prop="check">
             <el-input
-              v-model="formLabelAlign.check"
+              v-model.trim="formLabelAlign.check"
               placeholder="verification code"
               maxlength="10"
             />
