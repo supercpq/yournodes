@@ -1,10 +1,11 @@
 <template>
   <div class="mt-4">
     <el-input
-      v-model.trim="inputStore.inputSearch"
+      v-model="inputStore.inputSearch"
       placeholder="Enter your search term"
       :clearable="isclearable"
       class="input-with-select"
+      maxlength="200"
       @keyup.enter="hellogit(inputStore.inputSearch, select)"
       @focus="setFocus(true)"
       @blur="setFocus(false)"
