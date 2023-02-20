@@ -1,7 +1,7 @@
 <template>
   <div class="wrapperT">
     <div class="searchInput">
-      <searchLocal :isSelf="false" />
+      <searchLocal :isSelf="false" :autoComp="true" />
     </div>
     <div class="manyContents">
       <div class="two">
