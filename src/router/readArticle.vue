@@ -14,7 +14,9 @@
       </div>
     </aside>
     <main class="content">
-      <editor-theme flexDisplay="row" class="editor-theme" />
+      <div class="editor-theme">
+        <editor-theme flexDisplay="row" />
+      </div>
       <md-editor
         class="mgb20"
         v-model="Ar_content"
@@ -358,12 +360,18 @@ onBeforeMount(async () => {
     // grid-template-columns: 10% 89%;
     grid-template-columns: 10% 65% 20%;
   }
+  .editor-theme {
+    display: none;
+  }
 }
 //pad端
 @media only screen and (min-width: 768px) and (max-width: 1150px) {
   .grid-content {
     grid-template-columns: 70% 30%;
     // grid-template-columns: 100%;
+  }
+  .editor-theme {
+    display: none;
   }
   .likes {
     display: none !important;
