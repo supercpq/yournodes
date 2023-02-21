@@ -19,7 +19,7 @@
       <el-button type="primary" class="submit" @click="onSubmit(true)">{{
         $t("submit")
       }}</el-button>
-      <editor-theme />
+      <editor-theme flexDisplay="column" />
     </div>
   </div>
 </template>
