@@ -48,6 +48,9 @@ type Theme = "light" | "dark";
 const mdEditorStore = mdStore();
 const thvalue = ref<Theme>("light");
 const prvalue = ref("cyanosis");
+const props = defineProps({
+  flexDisplay: { type: String, required: true },
+});
 const options = [
   {
     value: "light" as Theme,
@@ -99,6 +102,10 @@ onMounted(() => {
 ::v-deep transoptions {
   background-color: rgba(255, 255, 255, 0.5);
   color: #000000;
+}
+.theme-contain {
+  display: flex;
+  flex-flow: v-bind("props.flexDisplay");
 }
 .langOptionsItem {
   width: 100px;

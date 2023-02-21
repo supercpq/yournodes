@@ -14,6 +14,7 @@
       </div>
     </aside>
     <main class="content">
+      <editor-theme flexDisplay="row" class="editor-theme" />
       <md-editor
         class="mgb20"
         v-model="Ar_content"
@@ -46,7 +47,7 @@
           <div style="width: 100px; height: 100px" v-html="qr_svg"></div>
           <p style="text-align: left; font-size: smaller">{{ $t("qrinfo") }}</p>
         </div>
-        <editor-theme />
+        <editor-theme flexDisplay="column" />
       </div>
     </aside>
   </div>
@@ -348,6 +349,9 @@ onBeforeMount(async () => {
   background-color: gray;
   opacity: 0.6;
 }
+.editor-theme {
+  display: none;
+}
 //pc端
 @media only screen and (min-width: 1150px) {
   .grid-content {
@@ -381,6 +385,9 @@ onBeforeMount(async () => {
   }
   .content {
     grid-template-columns: 1;
+  }
+  .editor-theme {
+    display: flex;
   }
   .directory {
     display: none !important;
