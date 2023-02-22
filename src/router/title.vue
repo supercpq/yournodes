@@ -78,6 +78,7 @@ import nomalTool from "../components/normalTools.vue";
     /* grid-row-start: 3; */
     /* display: none; */
     grid-column-start: 2;
+    margin-left: -30px;
     /* margin-left: 20px; */
   }
   .two {

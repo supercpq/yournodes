@@ -295,7 +295,7 @@ h4 {
   margin-inline-end: 0px;
 }
 
-@container (max-width: 400px) {
+@container (max-width: 440px) {
   .searchSelect-ar {
     max-width: 400px;
     width: 100%;
@@ -310,6 +310,7 @@ h4 {
   }
   .outseideItem-ar {
     grid-column-start: 1;
+    margin-left: -40px;
   }
   .ul-list-item-ar {
     max-width: 400px;
