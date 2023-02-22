@@ -16,6 +16,22 @@
     <main class="content">
       <div class="editor-theme">
         <editor-theme flexDisplay="row" />
+        <div class="transoptions">
+          <el-select
+            class="m-2"
+            placeholder="Select"
+            size="small"
+            v-model="titleI"
+          >
+            <el-option
+              v-for="(item, index) in arCatalog"
+              :key="index"
+              :label="item"
+              :value="item"
+              @click="gotoTitle(index)"
+            />
+          </el-select>
+        </div>
       </div>
       <md-editor
         class="mgb20"
@@ -75,7 +91,7 @@ const mdEditorStore = mdStore();
 // import type { ExposeParam } from "md-editor-v3";
 // const editorRef = ref<ExposeParam>(); color: cornflowerblue;
 const arCatalog = ref<Array<string>>([]);
-// const userStore = useUserStore();
+const titleI = ref("目录  catalog");
 const $route = useRoute();
 const Ar_content = ref("");
 const isedit = ref(false);
@@ -122,6 +138,7 @@ const likeAr = _.throttle(
 );
 function gotoTitle(title: number) {
   // document.querySelector(`#title-${title}`)?.scrollIntoView(true);
+  titleI.value = arCatalog.value[title];
   window.location.hash = `#title-${title}`;
 }
 function getTitle(html: string) {
@@ -353,6 +370,10 @@ onBeforeMount(async () => {
 }
 .editor-theme {
   display: none;
+}
+.transoptions {
+  position: relative;
+  top: 10px;
 }
 //pc端
 @media only screen and (min-width: 1150px) {
