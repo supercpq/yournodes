@@ -62,7 +62,8 @@ onMounted(() => {
           title: "二维码",
         },
         {
-          url: "https://www.bing.com/translator?ref=TThis&text=&from=zh-Hans&to=en",
+          // url: "https://www.bing.com/translator?ref=TThis&text=&from=zh-Hans&to=en",
+          url: "https://www.iciba.com/",
           img: "/trans.svg",
           title: "翻译",
         },
