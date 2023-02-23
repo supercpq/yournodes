@@ -44,6 +44,11 @@
         :sanitize="(html: string) => {
           return getTitle(html);
           }"
+        :onGetCatalog="
+          (list) => {
+            Catalog(list);
+          }
+        "
       />
     </main>
     <aside class="directory">
@@ -107,7 +112,33 @@ interface useroptions {
   disactiveIcon: string;
 }
 const options = ref<useroptions[]>([]);
-
+const intersectionObserver = new IntersectionObserver((entries) => {
+  // 如果 intersectionRatio 为 0，则目标在视野外，
+  // 我们不需要做任何事情。
+  if (entries[0].intersectionRatio <= 0) return;
+  entries.forEach((item) => {
+    console.log(item.target);
+    alert(item);
+  });
+  // console.log('Loaded new items');
+});
+// 开始监听
+// intersectionObserver.observe(document.querySelector("#title-1") as HTMLElement);
+// intersectionObserver.observe(document.querySelector('#实例方法'));
+// intersectionObserver.observe(document.querySelector('#实例属性'));
+async function Catalog(list) {
+  console.log(arCatalog.value);
+  console.log(list);
+  for (
+    let index = 0;
+    index < list.length && index < arCatalog.value.length;
+    index++
+  ) {
+    const blankString = "\u3000";
+    arCatalog.value[index] =
+      blankString.repeat(list[index].level - 1) + arCatalog.value[index];
+  }
+}
 const likeAr = _.throttle(
   function (index: number) {
     // 切换活跃状态
@@ -298,6 +329,7 @@ onBeforeMount(async () => {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  text-align: left;
 }
 .catatitle {
   width: 100%;
