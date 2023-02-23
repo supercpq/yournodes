@@ -61,6 +61,7 @@
           v-for="(item, index) in arCatalog"
           :id="`arCatalog-${index}`"
           @click="gotoTitle(index)"
+          :title="item"
           :key="index"
         >
           {{ item }}
@@ -122,6 +123,8 @@ const intersectionObserver = new IntersectionObserver((entries) => {
       // console.log(item.target.id);
       const index = item.target.id.slice(6, 9);
       const el = document.querySelector(`#arCatalog-${index}`) as HTMLElement;
+      // console.log(el.title);
+      titleI.value = el.title;
       for (let elIndex = 0; elIndex < arCatalog.value.length; elIndex++) {
         const cataElement = document.querySelector(
           `#arCatalog-${elIndex}`
