@@ -59,6 +59,7 @@
         <div
           class="cata"
           v-for="(item, index) in arCatalog"
+          :id="`arCatalog-${index}`"
           @click="gotoTitle(index)"
           :key="index"
         >
@@ -117,18 +118,32 @@ const intersectionObserver = new IntersectionObserver((entries) => {
   // 我们不需要做任何事情。
   if (entries[0].intersectionRatio <= 0) return;
   entries.forEach((item) => {
-    console.log(item.target);
-    alert(item);
+    if (item.intersectionRatio > 0) {
+      // console.log(item.target.id);
+      const index = item.target.id.slice(6, 9);
+      const el = document.querySelector(`#arCatalog-${index}`) as HTMLElement;
+      for (let elIndex = 0; elIndex < arCatalog.value.length; elIndex++) {
+        const cataElement = document.querySelector(
+          `#arCatalog-${elIndex}`
+        ) as HTMLElement;
+        cataElement.className = "cata";
+      }
+      el.className = "cata-active";
+    }
   });
-  // console.log('Loaded new items');
 });
 // 开始监听
-// intersectionObserver.observe(document.querySelector("#title-1") as HTMLElement);
 // intersectionObserver.observe(document.querySelector('#实例方法'));
-// intersectionObserver.observe(document.querySelector('#实例属性'));
 async function Catalog(list) {
-  console.log(arCatalog.value);
-  console.log(list);
+  // 开启目录监视和调整标题缩进
+  // console.log(list);
+  setTimeout(() => {
+    for (let index = 0; index < arCatalog.value.length; index++) {
+      intersectionObserver.observe(
+        document.querySelector(`#title-${index}`) as HTMLElement
+      );
+    }
+  }, 1000);
   for (
     let index = 0;
     index < list.length && index < arCatalog.value.length;
@@ -167,10 +182,19 @@ const likeAr = _.throttle(
   50,
   { trailing: false }
 );
-function gotoTitle(title: number) {
+async function gotoTitle(title: number) {
   // document.querySelector(`#title-${title}`)?.scrollIntoView(true);
   titleI.value = arCatalog.value[title];
   window.location.hash = `#title-${title}`;
+  const index = title;
+  const el = document.querySelector(`#arCatalog-${index}`) as HTMLElement;
+  for (let elIndex = 0; elIndex < arCatalog.value.length; elIndex++) {
+    const cataElement = document.querySelector(
+      `#arCatalog-${elIndex}`
+    ) as HTMLElement;
+    cataElement.className = "cata";
+  }
+  el.className = "cata-active";
 }
 function getTitle(html: string) {
   /*
@@ -330,6 +354,18 @@ onBeforeMount(async () => {
   text-overflow: ellipsis;
   white-space: nowrap;
   text-align: left;
+}
+.cata-active {
+  width: 100%;
+  min-height: 30px;
+  line-height: 30px;
+  padding: 10px 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: left;
+  color: #007fff;
+  font-weight: bold;
 }
 .catatitle {
   width: 100%;
