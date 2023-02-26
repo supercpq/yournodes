@@ -132,6 +132,7 @@ const intersectionObserver = new IntersectionObserver((entries) => {
         cataElement.className = "cata";
       }
       el.className = "cata-active";
+      // window.location.hash = `#arCatalog-${index}`;
     }
   });
 });
