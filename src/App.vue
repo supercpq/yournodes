@@ -54,6 +54,7 @@ const routerP = routerPathStore.$subscribe((mutations, state) => {
   opacity: 0;
 }
 .wrapper {
+  height: 90%;
   display: grid;
   grid-template-rows: 5% 90%;
   grid-gap: 10px;
