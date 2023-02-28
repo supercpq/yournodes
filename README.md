@@ -6,7 +6,7 @@
 
 ## 项目简介
 
-`yournodes` 是一个浏览器主页+博客网站的前端，使用`Vue3`、`Vite`、`Element-Plus`、`TypeScript`、`Pinia`、`scss`等主流技术开发。
+`yournodes` 是一个浏览器主页+博客网站的前端，使用`Vue3`、`Vite`、`Element-Plus`、`TypeScript`、`Pinia`、`scss`等主流技术开发，全部界面具有响应式设计。
 ## 尝试这个项目
 
 - install: `git clone https://github.com/supercpq/yournodes.git`
