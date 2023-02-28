@@ -158,4 +158,12 @@ onMounted(() => {
   grid-column-start: 2;
   background-color: rgba(255, 255, 255, 0.3);
 }
+@media only screen and (max-width: 767px) {
+  .tab .onetab {
+    height: 60px;
+  }
+  .tabTitle {
+    max-height: 80px;
+  }
+}
 </style>

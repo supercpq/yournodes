@@ -83,12 +83,13 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, ref, onMounted } from "vue";
+import { reactive, ref, onMounted, watch } from "vue";
 import { Plus } from "@element-plus/icons-vue";
 import { useUserStore } from "../store/modules/user";
 import type { UploadProps } from "element-plus";
 import { baseInfo, updatebaseinfo } from "../api/userinfo";
 import { getToken } from "../utils/user";
+import _ from "lodash";
 
 const imgUpdataUrl = ref("/myinfo/settingnewimg");
 const isSuccess = ref(0);
@@ -97,6 +98,7 @@ const labelPosition = ref("left");
 const avataralert = ref("");
 const userStore = useUserStore();
 const jwtoken = reactive({ Authorization: "" });
+const screenWidth = ref(document.body.clientWidth);
 const formLabelAlign = reactive({
   name: userStore.name,
   profession: userStore.profession,
@@ -169,6 +171,26 @@ onMounted(() => {
       console.log(err.message);
     }
   );
+  window.onresize = () => {
+    return (() => {
+      screenWidth.value = document.body.clientWidth;
+    })();
+  };
+});
+const changeLable = _.debounce(
+  (screenWidth: number) => {
+    if (screenWidth < 767) {
+      labelPosition.value = "top";
+    }
+  },
+  200,
+  {
+    leading: true,
+  }
+);
+watch(screenWidth, (newVal, oldVal) => {
+  //
+  changeLable(newVal);
 });
 </script>
 <style lang="scss" scoped>
@@ -252,5 +274,23 @@ onMounted(() => {
 }
 .masks h5 {
   text-align: center;
+}
+@media only screen and (max-width: 767px) {
+  .info-detail {
+    grid-template-columns: 100%;
+    grid-template-rows: 50% 50%;
+  }
+  .info-form {
+    grid-column-start: 1;
+    grid-row-start: 1;
+  }
+  .info-avatar {
+    grid-column-start: 1;
+    grid-row-start: 2;
+  }
+
+  .info-detail {
+    width: 80%;
+  }
 }
 </style>

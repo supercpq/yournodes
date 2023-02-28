@@ -80,7 +80,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { reactive, ref, onMounted } from "vue";
+import { reactive, ref, onMounted, watch } from "vue";
 import { useUserStore } from "../store/modules/user";
 import { emailCode, updatepwd } from "../api/user";
 import type { FormInstance } from "element-plus";
@@ -89,7 +89,8 @@ import { pwdRegex, pwdcheck } from "../utils/user";
 import { InfoFilled } from "@element-plus/icons-vue";
 import { getPublicKey } from "../api/user";
 import { JSEncrypt } from "jsencrypt";
-
+import _ from "lodash";
+const screenWidth = ref(document.body.clientWidth);
 const ruleFormRef = ref<FormInstance>();
 const isSuccess = ref(0);
 const labelPosition = ref("left");
@@ -216,6 +217,26 @@ onMounted(() => {
       console.log(err.message);
     }
   );
+  window.onresize = () => {
+    return (() => {
+      screenWidth.value = document.body.clientWidth;
+    })();
+  };
+});
+const changeLable = _.debounce(
+  (screenWidth: number) => {
+    if (screenWidth < 767) {
+      labelPosition.value = "top";
+    }
+  },
+  200,
+  {
+    leading: true,
+  }
+);
+watch(screenWidth, (newVal, oldVal) => {
+  //
+  changeLable(newVal);
 });
 </script>
 <style lang="scss" scoped>
@@ -233,5 +254,14 @@ onMounted(() => {
 .info-form {
   grid-column-start: 1;
   margin-left: 20px;
+}
+
+@media only screen and (max-width: 767px) {
+  .info-detail {
+    grid-template-columns: 100%;
+  }
+  .info-detail {
+    width: 80%;
+  }
 }
 </style>
