@@ -9,6 +9,7 @@ const arData = () => import("./articleData.vue");
 const error404 = () => import("./error404.vue");
 const login = () => import("./login.vue");
 const reguser = () => import("./reguser.vue");
+const chatG = () => import("./chatG.vue");
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
@@ -90,6 +91,15 @@ const routes: Array<RouteRecordRaw> = [
     meta: {
       keepAlive: false,
       title: "未知界面-yournotes",
+    },
+  },
+  {
+    path: "/AI",
+    name: "AI",
+    component: chatG,
+    meta: {
+      keepAlive: false,
+      title: "AI-yournotes",
     },
   },
   {

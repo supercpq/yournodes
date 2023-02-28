@@ -170,6 +170,18 @@ export default [
     },
   },
   {
+    url: "/my/chat",
+    method: "post",
+    timeout: 500,
+    response: () => {
+      return {
+        status: 0,
+        chat: "hello?hello?hello?hello?hello?hello?你好你好",
+        finishReason: "stop",
+      };
+    },
+  },
+  {
     url: "/myinfo/settingnewimg",
     method: "post",
     timeout: 500,

@@ -37,6 +37,14 @@ const messages = {
     editAr: "edit article",
     changeava: "click to change",
     qrinfo: "phone-reading",
+    illustrate: [
+      "Controls randomness: Lowering results in less random completions. As the temperatrue approaches zero,the model will become deterministic and repetitve.",
+      "The maximum number of tokens to generate.Requests can use up to 2,048 or 4,000 tokens shared between prompt and completion. The exact limit varies by model.(One token is roughly 4 characters for nolmal English text)",
+      "Control diversity via nucleus sampling:  means half of all likelihood-werghted options are considered.",
+      "How much to penalize new tokens based on their existing frequency in the text so far.Decreases the model's likelihood to repeat the same line verbatim.",
+      "How much to penalize new tokens based on whether they appear in the text so far.Increases the model's likelihood to talk about new topics.",
+    ],
+    setting: "Setting",
   },
   zh: {
     menu: ["首页", "个人中心", "创作中心", "写文章", "文章数据", "语言"],
@@ -67,6 +75,14 @@ const messages = {
     editAr: "编辑文章",
     changeava: "点击更换头像",
     qrinfo: "手机阅读",
+    illustrate: [
+      "控制随机性：降低随机完成的结果。 接近零，则模型将变得确定和重复。",
+      "要生成的令牌的最大数量。请求最多可以使用提示和完成之间共享的 2,048 或 4,000 个token。确切的限制因模型而异。（一个token大约是 4 个字符，用于正常的英文文本）",
+      "通过核采样控制多样性：意味着考虑了所有似然加权选项的一半。",
+      "到目前为止，根据新标记在文本中的现有频率对新标记进行多少损失。降低模型逐字重复同一行的可能性。",
+      "根据到目前为止它们是否出现在文本中，对新标记进行多少损失。增加模型谈论新主题的可能性。",
+    ],
+    setting: "设置",
   },
 };
 

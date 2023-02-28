@@ -16,6 +16,7 @@
       <el-menu-item index="creator/write">{{ $t("menu[3]") }}</el-menu-item>
       <el-menu-item index="creator/data">{{ $t("menu[4]") }}</el-menu-item>
     </el-sub-menu>
+    <el-menu-item index="AI">AI</el-menu-item>
     <el-sub-menu index="lang">
       <template #title
         ><el-icon><Switch /></el-icon>
