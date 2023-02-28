@@ -227,6 +227,8 @@ const changeLable = _.debounce(
   (screenWidth: number) => {
     if (screenWidth < 767) {
       labelPosition.value = "top";
+    } else {
+      labelPosition.value = "left";
     }
   },
   200,
