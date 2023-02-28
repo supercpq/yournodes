@@ -5,7 +5,7 @@
       <el-switch v-model="gitstore.loading" />
     </div> -->
       <el-skeleton
-        style="width: 600px; text-align: left"
+        style="width: 400px; text-align: left"
         :loading="loading"
         animated
         :rows="6"
@@ -188,5 +188,11 @@ li {
   text-align: left;
   //   background-color: rgba(255, 255, 255, 0.1);
   margin-left: 20px;
+}
+@media only screen and (max-width: 767px) {
+  .outsideLike {
+    min-width: 300px;
+    max-width: 360px;
+  }
 }
 </style>

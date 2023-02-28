@@ -123,4 +123,19 @@ function setInfo() {
     background-color: rgba(255, 255, 255, 0.2);
   }
 }
+
+@media only screen and (max-width: 767px) {
+  .outside {
+    max-width: 430px;
+    min-width: 360px;
+    height: 200px;
+    background-color: rgba(255, 255, 255, 0.15);
+  }
+  .avatar {
+    border-radius: 50%;
+    max-height: 60px;
+    max-width: 60px;
+    transform: rotate(0deg);
+  }
+}
 </style>
