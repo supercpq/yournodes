@@ -20,7 +20,7 @@ import { useUserStoreHook } from "../../store/modules/user";
 
 const defaultConfig: AxiosRequestConfig = {
   baseURL: "",
-  timeout: 10000,
+  timeout: 20000,
   headers: {
     Accept: "application/json, text/plain, */*",
     "Content-Type": "application/json",
