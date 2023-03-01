@@ -166,9 +166,6 @@ interface githubHotItem {
   stars: number;
   forks: number;
 }
-const load1 = () => {
-  // 目前还没做懒加载
-};
 
 const hellogit = _.debounce(
   (lang = "vue") => {
