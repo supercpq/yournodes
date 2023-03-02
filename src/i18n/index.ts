@@ -45,6 +45,7 @@ const messages = {
       "How much to penalize new tokens based on whether they appear in the text so far.Increases the model's likelihood to talk about new topics.",
     ],
     setting: "Setting",
+    logOutPrompt: "Really? Are you sure to logout?",
   },
   zh: {
     menu: ["首页", "个人中心", "创作中心", "写文章", "文章数据", "语言"],
@@ -83,6 +84,7 @@ const messages = {
       "根据到目前为止它们是否出现在文本中，对新标记进行多少损失。增加模型谈论新主题的可能性。",
     ],
     setting: "设置",
+    logOutPrompt: "真的要退出登录吗？",
   },
 };
 

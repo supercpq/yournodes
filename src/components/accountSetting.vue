@@ -51,7 +51,7 @@
           cancel-button-text="No"
           :icon="InfoFilled"
           icon-color="#626AEF"
-          title="Really? Are you sure to logout?"
+          :title="$t('logOutPrompt')"
           @confirm="confirmEvent"
           @cancel="cancelEvent"
         >
