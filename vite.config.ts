@@ -18,8 +18,7 @@ export default defineConfig({
     }),
     viteMockServe({
       mockPath: "mock",
-      // localEnabled: true,
-      // // 以下是新增，上面两行为build后mock不加入生产环境
+      // 以下是新增，上面两行为build后mock不加入生产环境
       // prodEnabled: true, // 生产打包开关 // 这样可以控制关闭mock的时候不让mock打包到最终代码内
       // injectCode: ` import { setupProdMockServer } from './mockProdServer'; setupProdMockServer(); `,
       // logger: false, //是否在控制台显示请求日志
