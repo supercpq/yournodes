@@ -13,6 +13,17 @@
         size="large"
         :change="changeTheme()"
       />
+      <el-button type="info" :icon="RefreshLeft" circle @click="undoChat()" />
+
+      <el-switch
+        v-model="local"
+        class="mt-2"
+        style="margin-left: 24px"
+        inline-prompt
+        active-text="local"
+        size="large"
+        :change="changeLocal()"
+      />
       <el-button type="info" :icon="Refresh" circle @click="clearChat()" />
     </div>
     <div class="slider-demo-block spacing">
@@ -60,11 +71,18 @@
 <script setup lang="ts">
 import { chatAiStore } from "../store/modules/chatAiPinia";
 import { ref } from "vue";
-import { Sunny, Moon, Refresh } from "@element-plus/icons-vue";
+import { Sunny, Moon, Refresh, RefreshLeft } from "@element-plus/icons-vue";
 const chatStore = chatAiStore();
+const local = ref(chatStore.local);
 const theme = ref(chatStore.theme);
 function changeTheme() {
   chatStore.setTheme(theme.value);
+}
+function changeLocal() {
+  chatStore.setLocal(local.value);
+}
+function undoChat() {
+  chatStore.undoAiChat();
 }
 function clearChat() {
   chatStore.prompt = [
