@@ -158,6 +158,7 @@ onMounted(() => {
 }
 .ai-light {
   margin: 10px;
+  padding: 6px;
   background-color: white;
   color: black;
   border-style: solid;
@@ -168,6 +169,7 @@ onMounted(() => {
 }
 .ai-dark {
   margin: 10px;
+  padding: 6px;
   background-color: dimgrey;
   border-radius: 6px;
   text-align: left;
@@ -179,6 +181,7 @@ onMounted(() => {
 }
 .human-chat {
   margin: 10px;
+  padding: 6px;
   color: black;
   border-style: solid;
   border-radius: 6px;
