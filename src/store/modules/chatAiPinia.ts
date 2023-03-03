@@ -1,5 +1,7 @@
 import { defineStore } from "pinia";
 import { chatAi } from "../../api/chatAi";
+import axios from "axios";
+// import https from "https";
 type Theme = "light" | "dark";
 
 // 保存用于跳转的路由
@@ -12,6 +14,7 @@ export const chatAiStore = defineStore("chatAi", {
       TopP: 1,
       frequencyPenalty: 0,
       presencePenalty: 0.6,
+      local: true,
       prompt: [
         "AI: I am an AI. How can I help you today?(Recommended language: English)",
       ],
@@ -24,44 +27,115 @@ export const chatAiStore = defineStore("chatAi", {
     },
   },
   actions: {
-    submitChat(hInput: string) {
-      this.disable = true;
-      const input = "Human:" + hInput;
-      this.prompt.push(input);
-      const chatData = {
-        Temperature: this.Temperature,
-        MaxLength: this.MaxLength,
-        TopP: this.TopP,
-        frequencyPenalty: this.frequencyPenalty,
-        presencePenalty: this.presencePenalty,
-        prompt: this.prompt,
-      };
-      if (this.prompt.length > 60) {
-        this.prompt = this.prompt.slice(-30);
-      }
-      chatAi(chatData).then(
-        (res: any) => {
-          if (res.status == 0) {
-            const index = this.prompt.length;
-            this.prompt.push(res.chat[0]);
-            let i = 1;
-            const timer = setInterval(() => {
-              this.prompt[index] += res.chat[i++];
-              if (this.prompt[index].length === res.chat.length) {
-                clearInterval(timer);
-              }
-            }, 20);
-            this.disable = false;
-          } else {
-            this.prompt.push(res.message);
-            this.disable = false;
-          }
-        },
-        (err) => {
-          this.prompt.push(err.message);
-          this.disable = false;
+    async submitChat(hInput: string) {
+      if (this.local) {
+        this.localChat(hInput);
+      } else {
+        const input = "Human:" + hInput;
+        this.prompt.push(input);
+        const chatData = {
+          Temperature: this.Temperature,
+          MaxLength: this.MaxLength,
+          TopP: this.TopP,
+          frequencyPenalty: this.frequencyPenalty,
+          presencePenalty: this.presencePenalty,
+          prompt: this.prompt,
+        };
+        if (this.prompt.length > 60) {
+          this.prompt = this.prompt.slice(-30);
         }
-      );
+        chatAi(chatData).then(
+          (res: any) => {
+            if (res.status == 0) {
+              const index = this.prompt.length;
+              this.prompt.push(res.chat[0]);
+              let i = 1;
+              const timer = setInterval(() => {
+                this.prompt[index] += res.chat[i++];
+                if (this.prompt[index].length === res.chat.length) {
+                  clearInterval(timer);
+                }
+              }, 20);
+            } else {
+              this.prompt.push(res.message);
+            }
+          },
+          (err) => {
+            this.prompt.push(err.message);
+          }
+        );
+      }
+    },
+    async localChat(input: string) {
+      let index = 0;
+      this.prompt.push(input);
+      interface oneChat {
+        role: string;
+        content: string;
+      }
+      const pro: Array<oneChat> = [];
+      this.prompt.forEach((element) => {
+        if (index++ % 2 == 0) {
+          pro.push({
+            role: "assistant",
+            content: element.slice(3, element.length),
+          });
+        } else {
+          pro.push({
+            role: "user",
+            content: element.slice(6, element.length),
+          });
+        }
+      });
+      const dataString = JSON.stringify({
+        messages: pro,
+        tokensLength: this.MaxLength,
+        model: "gpt-3.5-turbo",
+      });
+      // const agent = new https.Agent({
+      //   rejectUnauthorized: false,
+      // });
+      const customConfig = {
+        headers: {
+          Accept: "application/json, text/plain, */*",
+          "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8",
+          Connection: "keep-alive",
+          "Content-Type": "application/json",
+          Origin: "https://chat.forchange.cn",
+          Referer: "https://chat.forchange.cn/",
+          "Sec-Fetch-Dest": "empty",
+          "Sec-Fetch-Mode": "cors",
+          "Sec-Fetch-Site": "cross-site",
+        },
+      };
+      const url = "https://api.aioschat.com/";
+      // 在 axios 请求时，选择性忽略 SSL
+      axios
+        .post(url, dataString, { ...customConfig })
+        .then((res) => {
+          const chat = res.data.choices[0].text || "";
+          const index = this.prompt.length;
+          this.prompt.push(chat[0]);
+          let i = 1;
+          const timer = setInterval(() => {
+            this.prompt[index] += chat[i++];
+            if (this.prompt[index].length === chat.length) {
+              clearInterval(timer);
+            }
+          }, 20);
+        })
+        .catch((err) => {
+          this.prompt.push(err.message);
+        });
+    },
+    undoAiChat() {
+      if (this.prompt.length > 2) {
+        this.prompt = this.prompt.slice(0, this.prompt.length - 2);
+        console.log(this.prompt);
+      }
+    },
+    setLocal(isLocal: boolean) {
+      this.local = isLocal;
     },
     setTheme(th: Theme) {
       const themeList: Array<Theme> = ["light", "dark"];
