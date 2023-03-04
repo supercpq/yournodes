@@ -78,7 +78,7 @@ export const chatAiStore = defineStore("chatAi", {
         if (index++ % 2 == 0) {
           pro.push({
             role: "assistant",
-            content: element.slice(3, element.length),
+            content: element.slice(0, 6),
           });
         } else {
           pro.push({
