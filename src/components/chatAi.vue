@@ -42,7 +42,7 @@
           :autosize="{ minRows: 1, maxRows: 3 }"
           type="textarea"
           maxlength="900"
-          placeholder="Please input"
+          placeholder="Please input and Ctrl + enter to send"
           @keyup.ctrl.enter.exact="submit()"
           show-word-limit
         />
