@@ -3,7 +3,7 @@ import { chatAi } from "../../api/chatAi";
 import axios from "axios";
 // import https from "https";
 type Theme = "light" | "dark";
-
+let timer: ReturnType<typeof setTimeout>;
 // 保存用于跳转的路由
 export const chatAiStore = defineStore("chatAi", {
   state: () => {
@@ -15,6 +15,7 @@ export const chatAiStore = defineStore("chatAi", {
       frequencyPenalty: 0,
       presencePenalty: 0.6,
       local: true,
+      timer,
       prompt: [
         "AI: I am an AI. How can I help you today?(Recommended language: English)",
       ],
@@ -50,10 +51,10 @@ export const chatAiStore = defineStore("chatAi", {
               const index = this.prompt.length;
               this.prompt.push(res.chat[0]);
               let i = 1;
-              const timer = setInterval(() => {
+              this.timer = setInterval(() => {
                 this.prompt[index] += res.chat[i++];
                 if (this.prompt[index].length === res.chat.length) {
-                  clearInterval(timer);
+                  clearInterval(this.timer);
                 }
               }, 20);
             } else {
@@ -117,10 +118,10 @@ export const chatAiStore = defineStore("chatAi", {
           const index = this.prompt.length;
           this.prompt.push(chat[0]);
           let i = 1;
-          const timer = setInterval(() => {
+          this.timer = setInterval(() => {
             this.prompt[index] += chat[i++];
             if (this.prompt[index].length === chat.length) {
-              clearInterval(timer);
+              clearInterval(this.timer);
             }
           }, 20);
         })
@@ -130,9 +131,16 @@ export const chatAiStore = defineStore("chatAi", {
     },
     undoAiChat() {
       if (this.prompt.length > 2) {
+        clearInterval(this.timer);
         this.prompt = this.prompt.slice(0, this.prompt.length - 2);
         console.log(this.prompt);
       }
+    },
+    clear() {
+      clearInterval(this.timer);
+      this.prompt = [
+        "AI: I am an AI. How can I help you today?(Recommended language: English)",
+      ];
     },
     setLocal(isLocal: boolean) {
       this.local = isLocal;

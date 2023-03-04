@@ -85,9 +85,7 @@ function undoChat() {
   chatStore.undoAiChat();
 }
 function clearChat() {
-  chatStore.prompt = [
-    "AI: I am an AI. How can I help you today?(Recommended language: English)",
-  ];
+  chatStore.clear();
 }
 </script>
 <style scoped lang="scss">
