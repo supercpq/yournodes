@@ -5,9 +5,8 @@
       <showsearchInputVue :isSelf="true" />
       <el-dialog
         v-model="dialogTableVisible"
-        title="Shipping address"
         class="dialog"
-        width="100%"
+        width="90%"
         top="0"
       >
         <dataChats />

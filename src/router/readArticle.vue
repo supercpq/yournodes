@@ -142,7 +142,7 @@ const intersectionObserver = new IntersectionObserver((entries) => {
       }
       if (catalogPhone?.parentNode?.parentNode) {
         (catalogPhone.parentNode.parentNode as HTMLElement).scrollTop! =
-          itemSrollTop * 50;
+          itemSrollTop * 40;
       }
       // window.location.hash = `#arCatalog-${index}`;
     }
