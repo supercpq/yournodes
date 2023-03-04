@@ -15,6 +15,7 @@
             v-model.trim="formLabelAlign.email"
             placeholder="email"
             maxlength="60"
+            @keydown.enter="getEmailChangeCheck()"
           />
           <button
             @click="getEmailChangeCheck()"
@@ -107,27 +108,29 @@ const rules = reactive({
 });
 
 function getEmailChangeCheck() {
-  butttonDisable.value = true;
-  let times = 60;
-  let timer = setInterval(() => {
-    times--;
-    checkable.value = `${times}s `;
-  }, 1000);
-  setTimeout(() => {
-    butttonDisable.value = false;
-    checkable.value = "";
-    clearInterval(timer);
-  }, times * 1000);
-  // 通知后端发送邮箱验证码
-  // 并获取后端返回的修改ID
-  emailCode({ email: formLabelAlign.email }).then(
-    (res: any) => {
-      code.value = res.code;
-    },
-    (err) => {
-      console.log(err.message);
-    }
-  );
+  if (!butttonDisable.value) {
+    butttonDisable.value = true;
+    let times = 60;
+    let timer = setInterval(() => {
+      times--;
+      checkable.value = `${times}s `;
+    }, 1000);
+    setTimeout(() => {
+      butttonDisable.value = false;
+      checkable.value = "";
+      clearInterval(timer);
+    }, times * 1000);
+    // 通知后端发送邮箱验证码
+    // 并获取后端返回的修改ID
+    emailCode({ email: formLabelAlign.email }).then(
+      (res: any) => {
+        code.value = res.code;
+      },
+      (err) => {
+        console.log(err.message);
+      }
+    );
+  }
 }
 
 function changeEmail(formEl: FormInstance | undefined) {
