@@ -55,7 +55,7 @@
       <div class="catatitle">
         <b>{{ $t("catalog") }}</b>
       </div>
-      <div class="catalog">
+      <div class="catalog" id="catalog">
         <div
           class="cata"
           v-for="(item, index) in arCatalog"
@@ -121,7 +121,7 @@ const intersectionObserver = new IntersectionObserver((entries) => {
   entries.forEach((item) => {
     if (item.intersectionRatio > 0) {
       // console.log(item.target.id);
-      const index = item.target.id.slice(6, 9);
+      const index = item.target.id.slice(6, item.target.id.length);
       const el = document.querySelector(`#arCatalog-${index}`) as HTMLElement;
       // console.log(el.title);
       titleI.value = el.title;
@@ -132,6 +132,13 @@ const intersectionObserver = new IntersectionObserver((entries) => {
         cataElement.className = "cata";
       }
       el.className = "cata-active";
+      const catalog = document.getElementById("catalog");
+      const itemSrollTop = Number(index) - 3 > 0 ? Number(index) - 3 : 0;
+      const catalogItem = document.getElementById(`arCatalog-${index}`);
+      if (catalog && catalogItem) {
+        // catalog.scrollTop = itemSrollTop * 50;
+        catalog.scrollTo({ top: itemSrollTop * 50, behavior: "smooth" });
+      }
       // window.location.hash = `#arCatalog-${index}`;
     }
   });
