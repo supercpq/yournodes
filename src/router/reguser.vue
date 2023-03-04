@@ -30,6 +30,7 @@
             maxlength="20"
             autocomplete="off"
             placeholder="new password"
+            @keydown.enter="changeEmail(ruleFormRef)"
           />
         </el-form-item>
         <el-form-item :label="$t('verification')" prop="check">
@@ -37,6 +38,7 @@
             v-model.trim="formLabelAlign.check"
             placeholder="verification code"
             maxlength="10"
+            @keydown.enter="changeEmail(ruleFormRef)"
           />
         </el-form-item>
       </el-form>

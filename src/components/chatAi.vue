@@ -43,6 +43,7 @@
           type="textarea"
           maxlength="900"
           placeholder="Please input"
+          @keyup.ctrl.enter.exact="submit()"
           show-word-limit
         />
       </div>

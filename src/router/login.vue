@@ -11,7 +11,11 @@
       label-position="top"
     >
       <el-form-item :label="$t('email')" prop="email">
-        <el-input v-model.trim="ruleForm.email" placeholder="email" />
+        <el-input
+          v-model.trim="ruleForm.email"
+          placeholder="email"
+          @keydown.enter="submitForm(ruleFormRef)"
+        />
       </el-form-item>
       <el-form-item :label="$t('newpassword')" prop="pass">
         <el-input
@@ -20,6 +24,7 @@
           type="password"
           autocomplete="off"
           show-password="true"
+          @keydown.enter="submitForm(ruleFormRef)"
         />
       </el-form-item>
       <el-form-item>
