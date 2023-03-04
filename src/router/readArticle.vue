@@ -24,6 +24,7 @@
             v-model="titleI"
           >
             <el-option
+              id="phone-catalog"
               v-for="(item, index) in arCatalog"
               :key="index"
               :label="item"
@@ -134,10 +135,14 @@ const intersectionObserver = new IntersectionObserver((entries) => {
       el.className = "cata-active";
       const catalog = document.getElementById("catalog");
       const itemSrollTop = Number(index) - 3 > 0 ? Number(index) - 3 : 0;
-      const catalogItem = document.getElementById(`arCatalog-${index}`);
-      if (catalog && catalogItem) {
+      const catalogPhone = document.getElementById("phone-catalog");
+      if (catalog) {
         // catalog.scrollTop = itemSrollTop * 50;
         catalog.scrollTo({ top: itemSrollTop * 50, behavior: "smooth" });
+      }
+      if (catalogPhone?.parentNode?.parentNode) {
+        (catalogPhone.parentNode.parentNode as HTMLElement).scrollTop! =
+          itemSrollTop * 50;
       }
       // window.location.hash = `#arCatalog-${index}`;
     }
