@@ -19,6 +19,7 @@
         <div class="transoptions">
           <el-select
             class="m-2"
+            ref="phoneCatalog"
             placeholder="Select"
             size="small"
             v-model="titleI"
@@ -91,6 +92,7 @@ import { getuseid } from "../utils/user";
 import { mdStore } from "../store/modules/mdEditorPinia";
 import editorTheme from "../components/editorTheme.vue";
 
+// const phoneCatalog = ref<any>(null);
 const mdEditorStore = mdStore();
 // import { useI18n } from "vue-i18n";
 // const { t } = useI18n({
@@ -140,6 +142,8 @@ const intersectionObserver = new IntersectionObserver((entries) => {
         // catalog.scrollTop = itemSrollTop * 50;
         catalog.scrollTo({ top: itemSrollTop * 50, behavior: "smooth" });
       }
+      // (phoneCatalog.value as HTMLElement).scrollTop = itemSrollTop * 40;
+      // console.log(phoneCatalog.value);
       if (catalogPhone?.parentNode?.parentNode) {
         (catalogPhone.parentNode.parentNode as HTMLElement).scrollTop! =
           itemSrollTop * 40;
