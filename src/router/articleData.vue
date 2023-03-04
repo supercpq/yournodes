@@ -6,7 +6,7 @@
       <el-dialog
         v-model="dialogTableVisible"
         class="dialog"
-        width="90%"
+        width="100%"
         top="0"
       >
         <dataChats />
