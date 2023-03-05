@@ -100,13 +100,7 @@ export const chatAiStore = defineStore("chatAi", {
         headers: {
           Accept: "application/json, text/plain, */*",
           "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8",
-          Connection: "keep-alive",
           "Content-Type": "application/json",
-          Origin: "https://chat.forchange.cn",
-          Referer: "https://chat.forchange.cn/",
-          "Sec-Fetch-Dest": "empty",
-          "Sec-Fetch-Mode": "cors",
-          "Sec-Fetch-Site": "cross-site",
         },
       };
       const url = "https://api.aioschat.com/";
