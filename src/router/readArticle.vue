@@ -41,7 +41,6 @@
         :previewTheme="mdEditorStore.getPreviewTheme"
         :theme="mdEditorStore.getTheme"
         :readOnly="true"
-        ref="editorRef"
         :previewOnly="true"
         :sanitize="(html: string) => {
           return getTitle(html);
@@ -54,8 +53,8 @@
       />
     </main>
     <aside class="directory">
-      <div class="catatitle">
-        <b>{{ $t("catalog") }}</b>
+      <div class="catatitle" @click="backTop" :title="$t('backTop')">
+        <strong>{{ $t("catalog") }}</strong>
       </div>
       <div class="catalog" id="catalog">
         <div
@@ -79,7 +78,6 @@
     </aside>
   </div>
 </template>
-
 <script setup lang="ts">
 import { useRoute } from "vue-router";
 import { arLikes, getArContent, getArLikes, getQr } from "../api/readAr";
@@ -91,6 +89,7 @@ import _ from "lodash"; //防抖节流
 import { getuseid } from "../utils/user";
 import { mdStore } from "../store/modules/mdEditorPinia";
 import editorTheme from "../components/editorTheme.vue";
+// import type { ExposeParam } from "md-editor-v3";
 
 // const phoneCatalog = ref<any>(null);
 const mdEditorStore = mdStore();
@@ -98,8 +97,7 @@ const mdEditorStore = mdStore();
 // const { t } = useI18n({
 //   useScope: "global",
 // });
-// import type { ExposeParam } from "md-editor-v3";
-// const editorRef = ref<ExposeParam>(); color: cornflowerblue;
+// const editorRef = ref();
 const arCatalog = ref<Array<string>>([]);
 const titleI = ref("目录  catalog");
 const $route = useRoute();
@@ -120,6 +118,7 @@ const options = ref<useroptions[]>([]);
 const intersectionObserver = new IntersectionObserver((entries) => {
   // 如果 intersectionRatio 为 0，则目标在视野外，
   // 我们不需要做任何事情。
+  // console.log("editorRef.value", editorRef.value, editorRef);
   if (entries[0].intersectionRatio <= 0) return;
   entries.forEach((item) => {
     if (item.intersectionRatio > 0) {
@@ -202,6 +201,10 @@ const likeAr = _.throttle(
   50,
   { trailing: false }
 );
+async function backTop() {
+  window.location.hash = `#title-1`;
+  window.location.hash = `#title-0`;
+}
 async function gotoTitle(title: number) {
   // document.querySelector(`#title-${title}`)?.scrollIntoView(true);
   titleI.value = arCatalog.value[title];
@@ -393,6 +396,9 @@ onBeforeMount(async () => {
   width: 100%;
   font-size: larger;
   background-color: rgba(255, 255, 255, 0.15);
+  :hover {
+    cursor: pointer;
+  }
 }
 .img-icon {
   width: 30px;
