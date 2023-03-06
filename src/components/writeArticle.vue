@@ -119,14 +119,18 @@ onBeforeMount(() => {
   border: 1px solid #ddd;
   border-radius: 5px;
   text-align: left;
-  height: 800px;
+  display: grid;
+  grid-template-rows: 90% 10%;
+  height: 100%;
 }
 .md-editor {
-  height: 700px;
+  grid-row-start: 1;
+  height: 100%;
 }
 
 .setting {
   display: flex;
+  grid-row-start: 2;
   justify-items: auto;
   margin: 10px;
 }
