@@ -76,7 +76,7 @@ onMounted(() => {
       for (var i in res.items) {
         var a: tool = {
           url: res.items[i].url,
-          img: res.items[i].img || "./bock.svg",
+          img: res.items[i].img || "/bock.svg",
           title: res.items[i].title,
         };
         toolList.value.push(a);
