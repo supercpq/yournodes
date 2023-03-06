@@ -107,14 +107,11 @@ export default [
     response: () => {
       return {
         items: [
-          // {
-          //   url: "https://space.bilibili.com/511481687?plat_id=1&share_from=space&share_medium=android&share_plat=android&share_session_id=2e9848a8-25e6-4352-9dfa-b68fcebe1ea0&share_source=WEIXIN&share_tag=s_i&timestamp=1675262554&unique_k=4oHcOgX",
-          //   title: "朋友B站",
-          // },
-          // {
-          //   url: "https://www.bing.com/translator?ref=TThis&text=&from=zh-Hans&to=en",
-          //   title: "fanyi",
-          // },
+          {
+            url: "https://tbghg.top/",
+            img: "./bock.svg",
+            title: "学长博客",
+          },
         ],
       };
     },
