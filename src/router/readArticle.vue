@@ -346,9 +346,9 @@ onBeforeMount(async () => {
   opacity: 0.8;
   padding: 0 20px;
 }
-:v-deep(.md-editor) {
+:deep(.md-editor) {
   ::-webkit-scrollbar {
-    width: 3px;
+    width: 0px;
   }
 }
 .catalog {
