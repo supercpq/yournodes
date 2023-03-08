@@ -34,31 +34,30 @@ export default defineConfig({
     svgLoader(),
   ],
   // 后端开发时候连本地node用，生产环境有nginx解决跨域
-  server: {
-    proxy: {
-      "/api": {
-        target: "http://127.0.0.1:3600", //目标url
-        changeOrigin: true, //支持跨域
-        rewrite: (path) => path.replace(/^\/api/, ""),
-      },
-      "/user": {
-        target: "http://127.0.0.1:8888", //目标url
-        changeOrigin: true, //支持跨域
-      },
-      "/myinfo": {
-        target: "http://127.0.0.1:8888", //目标url
-        changeOrigin: true, //支持跨域
-      },
-      "/my": {
-        target: "http://127.0.0.1:8888", //目标url
-        changeOrigin: true, //支持跨域
-      },
-      "/reading": {
-        target: "http://127.0.0.1:8888", //目标url
-        changeOrigin: true, //支持跨域
-      },
-    },
-  },
+  // server: {
+  //   proxy: {
+  //     "/api": {
+  //       target: "http://127.0.0.1:8888", //目标url
+  //       changeOrigin: true, //支持跨域
+  //     },
+  //     "/user": {
+  //       target: "http://127.0.0.1:8888", //目标url
+  //       changeOrigin: true, //支持跨域
+  //     },
+  //     "/myinfo": {
+  //       target: "http://127.0.0.1:8888", //目标url
+  //       changeOrigin: true, //支持跨域
+  //     },
+  //     "/my": {
+  //       target: "http://127.0.0.1:8888", //目标url
+  //       changeOrigin: true, //支持跨域
+  //     },
+  //     "/reading": {
+  //       target: "http://127.0.0.1:8888", //目标url
+  //       changeOrigin: true, //支持跨域
+  //     },
+  //   },
+  // },
 });
 /*
 viteMockServe({// 更多配置见最下方
