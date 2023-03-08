@@ -99,8 +99,8 @@ onMounted(() => {
 });
 </script>
 <style scoped>
-::v-deep transoptions {
-  background-color: rgba(255, 255, 255, 0.5);
+:deep(.transoptions) {
+  /* background-color: rgba(255, 255, 255, 0.5); */
   color: #000000;
 }
 .theme-contain {
