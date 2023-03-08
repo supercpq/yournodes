@@ -40,6 +40,7 @@
         v-model="Ar_content"
         :previewTheme="mdEditorStore.getPreviewTheme"
         :theme="mdEditorStore.getTheme"
+        :language="mdEditorStore.getLang"
         :readOnly="true"
         :previewOnly="true"
         :sanitize="(html: string) => {
