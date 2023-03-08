@@ -39,7 +39,13 @@ export const useUserStore = defineStore({
       // 目前只有0 3 4 其他的后续添加
       userMail,
       currentPage: 0,
+      disabled: false,
     };
+  },
+  getters: {
+    getDisabled: (state) => {
+      return state.disabled;
+    },
   },
   actions: {
     SET_TOKEN(token) {
@@ -73,6 +79,7 @@ export const useUserStore = defineStore({
         .then(
           (res: any) => res.pubkey,
           (err) => {
+            this.shake();
             console.log(err.message);
           }
         )
@@ -88,9 +95,13 @@ export const useUserStore = defineStore({
                   if (res.status === 0) {
                     setToken(res);
                     location.href = "myinfo";
+                    this.disabled = false;
+                  } else {
+                    this.shake();
                   }
                 },
                 (err) => {
+                  this.shake();
                   console.log(err.message);
                 }
               );
@@ -133,6 +144,12 @@ export const useUserStore = defineStore({
         }
       });
     },
+    shake() {
+      this.disabled = true;
+      setTimeout(() => {
+        this.disabled = false;
+      }, 1500);
+    },
     // 注册
     reguser(data) {
       getPublicKey()
@@ -155,6 +172,9 @@ export const useUserStore = defineStore({
                   if (res.status === 0) {
                     setToken(res);
                     location.href = "myinfo";
+                    this.disabled = false;
+                  } else {
+                    this.shake();
                   }
                 },
                 (err) => {
@@ -164,6 +184,7 @@ export const useUserStore = defineStore({
             }
           },
           (err) => {
+            this.shake();
             console.log(err.message);
           }
         );
