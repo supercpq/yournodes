@@ -87,9 +87,10 @@ import { ref, onBeforeMount } from "vue";
 import "md-editor-v3/lib/style.css";
 import MdEditor from "md-editor-v3";
 import _ from "lodash"; //防抖节流
-import { getuseid } from "../utils/user";
+import { getuseid, getToken } from "../utils/user";
 import { mdStore } from "../store/modules/mdEditorPinia";
 import editorTheme from "../components/editorTheme.vue";
+import jwtDecode from "jwt-decode";
 // import type { ExposeParam } from "md-editor-v3";
 
 // const phoneCatalog = ref<any>(null);
@@ -296,7 +297,12 @@ onBeforeMount(async () => {
   // 获取用户文字内容，评论，点赞等
   // console.log($route.query.ar_id, Ar_id.value);
   // let qrinfo = t("qrinfo");
-  let user = getuseid();
+  let user = ""; // getuseid();
+  const token = getToken();
+  if (token) {
+    const data: any = jwtDecode(token);
+    user = data.userid;
+  }
   getArContent({
     id: Ar_id.value,
     user,
