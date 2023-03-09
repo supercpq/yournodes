@@ -5,30 +5,41 @@
       <el-form
         :label-position="labelPosition"
         label-width="100px"
-        :rules="rules"
+        :rules="emailRules"
         :model="formLabelAlign"
         style="max-width: 460px"
-        ref="ruleFormRef"
+        ref="emailRuleFormRef"
       >
         <el-form-item :label="$t('email')" prop="email">
           <el-input
             v-model.trim="formLabelAlign.email"
             placeholder="email"
-            maxlength="60"
-            @keydown.enter="getEmailChangeCheck()"
+            :maxlength="60"
+            @keydown.enter="getEmailChangeCheck(emailRuleFormRef)"
           />
-          <button
-            @click="getEmailChangeCheck()"
-            style="float: left"
-            :disabled="butttonDisable"
-          >
-            {{ checkable }}{{ $t("getcode") }}
-          </button>
         </el-form-item>
+      </el-form>
+      <div class="submit" :class="{ shake: userStore.getDisabled }">
+        <button
+          @click="getEmailChangeCheck(emailRuleFormRef)"
+          style="float: left"
+          :disabled="butttonDisable"
+        >
+          {{ checkable }}{{ $t("getcode") }}
+        </button>
+      </div>
+      <el-form
+        :label-position="labelPosition"
+        label-width="100px"
+        :rules="rules"
+        :model="formLabelAlign"
+        style="max-width: 460px"
+        ref="ruleFormRef"
+      >
         <el-form-item :label="$t('newpassword')" prop="newpassword">
           <el-input
             v-model.trim="formLabelAlign.newpassword"
-            maxlength="20"
+            :maxlength="20"
             autocomplete="off"
             placeholder="new password"
             @keydown.enter="changeEmail(ruleFormRef)"
@@ -38,7 +49,7 @@
           <el-input
             v-model.trim="formLabelAlign.check"
             placeholder="verification code"
-            maxlength="10"
+            :maxlength="10"
             @keydown.enter="changeEmail(ruleFormRef)"
           />
         </el-form-item>
@@ -61,7 +72,9 @@ import { emailCode } from "../api/user";
 import type { FormInstance } from "element-plus";
 import { pwdRegex, pwdcheck, emailcheck } from "../utils/user";
 
+const lastEmail = ref("");
 const ruleFormRef = ref<FormInstance>();
+const emailRuleFormRef = ref<FormInstance>();
 const labelPosition = ref("left");
 const userStore = useUserStore();
 const checkable = ref("");
@@ -74,12 +87,14 @@ const formLabelAlign = reactive({
 
 const code = ref<number>();
 const checkemail = (rule: any, value: any, callback: any) => {
-  if (!value) {
+  if (value === "") {
     return callback(new Error("Please input the email"));
   } else {
     if (!emailcheck.test(formLabelAlign.email)) {
       callback(new Error("wrong email format"));
     } else {
+      if (!emailRuleFormRef.value) return;
+      emailRuleFormRef.value.validateField("email", () => null);
       callback();
     }
   }
@@ -102,35 +117,45 @@ const validatePass = async (rule: any, value: any, callback: any) => {
   }
 };
 const rules = reactive({
-  email: [{ required: true, validator: checkemail, trigger: "blur" }],
+  // email: [{ required: true, validator: checkemail, trigger: "blur" }],
   newpassword: [{ required: true, validator: validatePass, trigger: "blur" }],
   check: [{ required: true, message: "please input code", rigger: "blur" }],
 });
-
-function getEmailChangeCheck() {
-  if (!butttonDisable.value) {
-    butttonDisable.value = true;
-    let times = 60;
-    let timer = setInterval(() => {
-      times--;
-      checkable.value = `${times}s `;
-    }, 1000);
-    setTimeout(() => {
-      butttonDisable.value = false;
-      checkable.value = "";
-      clearInterval(timer);
-    }, times * 1000);
-    // 通知后端发送邮箱验证码
-    // 并获取后端返回的修改ID
-    emailCode({ email: formLabelAlign.email }).then(
-      (res: any) => {
-        code.value = res.code;
-      },
-      (err) => {
-        console.log(err.message);
+const emailRules = reactive({
+  email: [{ required: true, validator: checkemail, trigger: "blur" }],
+});
+function getEmailChangeCheck(formEl: FormInstance | undefined) {
+  if (!formEl) return;
+  formEl.validate((valid) => {
+    if (valid) {
+      if (!butttonDisable.value) {
+        lastEmail.value = formLabelAlign.email;
+        butttonDisable.value = true;
+        let times = 60;
+        let timer = setInterval(() => {
+          times--;
+          checkable.value = `${times}s `;
+        }, 1000);
+        setTimeout(() => {
+          butttonDisable.value = false;
+          checkable.value = "";
+          clearInterval(timer);
+        }, times * 1000);
+        // 通知后端发送邮箱验证码
+        // 并获取后端返回的修改ID
+        emailCode({ email: formLabelAlign.email }).then(
+          (res: any) => {
+            code.value = res.code;
+          },
+          (err) => {
+            console.log("err", err.message);
+          }
+        );
       }
-    );
-  }
+    } else {
+      return false;
+    }
+  });
 }
 
 function changeEmail(formEl: FormInstance | undefined) {
@@ -139,7 +164,9 @@ function changeEmail(formEl: FormInstance | undefined) {
   formEl.validate((valid) => {
     if (valid) {
       if (code.value != undefined) {
-        userStore.reguser({ ...formLabelAlign, code: code.value });
+        const registEmail = { ...formLabelAlign, code: code.value };
+        registEmail.email = lastEmail.value;
+        userStore.reguser(registEmail);
       }
     } else {
       return false;
