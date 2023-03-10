@@ -49,11 +49,12 @@ export const chatAiStore = defineStore("chatAi", {
           (res: any) => {
             if (res.status == 0) {
               const index = this.prompt.length;
-              this.prompt.push(res.chat[0]);
+              const chat = "AI:" + (res.chat || "");
+              this.prompt.push(chat[0]);
               let i = 1;
               this.timer = setInterval(() => {
-                this.prompt[index] += res.chat[i++];
-                if (this.prompt[index].length === res.chat.length) {
+                this.prompt[index] += chat[i++];
+                if (this.prompt[index].length === chat.length) {
                   clearInterval(this.timer);
                 }
               }, 20);
@@ -69,7 +70,7 @@ export const chatAiStore = defineStore("chatAi", {
     },
     async localChat(input: string) {
       let index = 0;
-      this.prompt.push(input);
+      this.prompt.push("Human:" + input);
       interface oneChat {
         role: string;
         content: string;
@@ -108,7 +109,7 @@ export const chatAiStore = defineStore("chatAi", {
       axios
         .post(url, dataString, { ...customConfig })
         .then((res) => {
-          const chat = res.data.choices[0].text || "";
+          const chat = "AI:" + (res.data.choices[0].text || "");
           const index = this.prompt.length;
           this.prompt.push(chat[0]);
           let i = 1;
