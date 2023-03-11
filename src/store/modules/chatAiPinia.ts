@@ -1,9 +1,11 @@
 import { defineStore } from "pinia";
 import { chatAi } from "../../api/chatAi";
+import _ from "lodash";
 import axios from "axios";
 // import https from "https";
 type Theme = "light" | "dark";
-let timer: ReturnType<typeof setTimeout>;
+// let timer: ReturnType<typeof setTimeout>;
+const timers: Array<NodeJS.Timer> = [];
 // 保存用于跳转的路由
 export const chatAiStore = defineStore("chatAi", {
   state: () => {
@@ -15,7 +17,9 @@ export const chatAiStore = defineStore("chatAi", {
       frequencyPenalty: 0,
       presencePenalty: 0.6,
       local: true,
-      timer,
+      timers,
+      finished: true,
+      // timer,
       prompt: [
         "AI: I am an AI. How can I help you today?(Recommended language: English)",
       ],
@@ -48,16 +52,18 @@ export const chatAiStore = defineStore("chatAi", {
         chatAi(chatData).then(
           (res: any) => {
             if (res.status == 0) {
+              // clearInterval(this.timer);
               const index = this.prompt.length;
               const chat = "AI:" + (res.chat || "");
-              this.prompt.push(chat[0]);
-              let i = 1;
-              this.timer = setInterval(() => {
-                this.prompt[index] += chat[i++];
-                if (this.prompt[index].length === chat.length) {
-                  clearInterval(this.timer);
-                }
-              }, 20);
+              this.setAiChat(index, chat);
+              // this.prompt.push(chat[0]);
+              // let i = 1;
+              // this.timer = setInterval(() => {
+              //   this.prompt[index] += chat[i++];
+              //   if (this.prompt[index].length === chat.length || !chat[i]) {
+              //     clearInterval(this.timer);
+              //   }
+              // }, 20);
             } else {
               this.prompt.push(res.message);
             }
@@ -67,6 +73,27 @@ export const chatAiStore = defineStore("chatAi", {
           }
         );
       }
+    },
+    setAiChat(index: number, chat: string) {
+      this.prompt.push(chat[0]);
+      let i = 1;
+      const timer: NodeJS.Timer = setInterval(() => {
+        this.prompt[index] += chat[i++];
+        if (this.prompt[index].length === chat.length || !chat[i]) {
+          // console.log(this.timers);
+          clearInterval(timer);
+          const lastTimer = this.timers.slice(-1);
+          const nowTimer = _.remove(this.timers, function (n) {
+            return n === timer;
+          });
+          if (nowTimer === lastTimer) {
+            this.finished = true;
+          }
+          // console.log(this.timers, timer);
+        }
+      }, 20);
+      this.timers.push(timer);
+      this.finished = false;
     },
     async localChat(input: string) {
       let index = 0;
@@ -109,30 +136,50 @@ export const chatAiStore = defineStore("chatAi", {
       axios
         .post(url, dataString, { ...customConfig })
         .then((res) => {
+          // clearInterval(this.timer);
           const chat = "AI:" + (res.data.choices[0].text || "");
           const index = this.prompt.length;
-          this.prompt.push(chat[0]);
-          let i = 1;
-          this.timer = setInterval(() => {
-            this.prompt[index] += chat[i++];
-            if (this.prompt[index].length === chat.length) {
-              clearInterval(this.timer);
-            }
-          }, 20);
+          this.setAiChat(index, chat);
+          // this.prompt.push(chat[0]);
+          // let i = 1;
+          // this.timer = setInterval(() => {
+          //   this.prompt[index] += chat[i++];
+
+          //   if (
+          //     this.prompt[index].length === chat.length ||
+          //     typeof chat[i] === "undefined"
+          //   ) {
+          //     // console.log(
+          //     //   this.prompt[index].length === chat.length,
+          //     //   typeof chat[i] === "undefined",
+          //     //   !chat[i]
+          //     // );
+          //     clearInterval(this.timer);
+          //   }
+          // }, 20);
         })
         .catch((err) => {
           this.prompt.push(err.message);
         });
     },
     undoAiChat() {
-      if (this.prompt.length > 2) {
-        clearInterval(this.timer);
+      if (this.prompt.length > 2 && this.prompt.length % 2 === 1) {
+        // clearInterval(this.timer);
+        if (!this.finished) {
+          const timer = this.timers.pop();
+          clearInterval(timer);
+        }
         this.prompt = this.prompt.slice(0, this.prompt.length - 2);
-        console.log(this.prompt);
+        // console.log(this.prompt);
       }
     },
     clear() {
-      clearInterval(this.timer);
+      // clearInterval(this.timer);
+      this.timers.forEach((ele) => {
+        clearInterval(ele);
+      });
+      this.timers.length = 0;
+      this.finished = true;
       this.prompt = [
         "AI: I am an AI. How can I help you today?(Recommended language: English)",
       ];
