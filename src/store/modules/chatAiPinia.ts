@@ -17,6 +17,7 @@ export const chatAiStore = defineStore("chatAi", {
       frequencyPenalty: 0,
       presencePenalty: 0.6,
       local: true,
+      md: false,
       timers,
       finished: true,
       // timer,
@@ -29,6 +30,9 @@ export const chatAiStore = defineStore("chatAi", {
   getters: {
     getChat: (state) => {
       return state.prompt;
+    },
+    getTimers: (state) => {
+      return state.timers.length > 0;
     },
   },
   actions: {
@@ -55,7 +59,11 @@ export const chatAiStore = defineStore("chatAi", {
               // clearInterval(this.timer);
               const index = this.prompt.length;
               const chat = "AI:" + (res.chat || "");
-              this.setAiChat(index, chat);
+              if (this.md) {
+                this.prompt.push(chat);
+              } else {
+                this.setAiChat(index, chat);
+              }
               // this.prompt.push(chat[0]);
               // let i = 1;
               // this.timer = setInterval(() => {
@@ -139,7 +147,11 @@ export const chatAiStore = defineStore("chatAi", {
           // clearInterval(this.timer);
           const chat = "AI:" + (res.data.choices[0].text || "");
           const index = this.prompt.length;
-          this.setAiChat(index, chat);
+          if (this.md) {
+            this.prompt.push(chat);
+          } else {
+            this.setAiChat(index, chat);
+          }
           // this.prompt.push(chat[0]);
           // let i = 1;
           // this.timer = setInterval(() => {
@@ -169,6 +181,8 @@ export const chatAiStore = defineStore("chatAi", {
           const timer = this.timers.pop();
           clearInterval(timer);
         }
+        const lastChat = this.prompt[this.prompt.length - 2];
+        navigator.clipboard.writeText(lastChat.slice(6, lastChat.length));
         this.prompt = this.prompt.slice(0, this.prompt.length - 2);
         // console.log(this.prompt);
       }
@@ -190,6 +204,9 @@ export const chatAiStore = defineStore("chatAi", {
     setTheme(th: Theme) {
       const themeList: Array<Theme> = ["light", "dark"];
       this.theme = themeList.includes(th) ? th : "light";
+    },
+    setmd(ismd: boolean) {
+      this.md = ismd;
     },
   },
 });

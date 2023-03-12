@@ -1,6 +1,6 @@
 <template>
   <div class="setting">
-    <div style="display: flex; justify-content: space-between">
+    <div style="display: flex; justify-content: space-between; flex-wrap: wrap">
       <el-switch
         v-model="theme"
         class="mt-2"
@@ -25,6 +25,16 @@
         :change="changeLocal()"
       />
       <el-button type="info" :icon="Refresh" circle @click="clearChat()" />
+      <el-switch
+        v-model="md"
+        class="mt-2"
+        style="margin-left: 24px"
+        inline-prompt
+        active-text="md"
+        size="large"
+        :disabled="chatStore.getTimers"
+        :change="changemd()"
+      />
     </div>
     <div class="slider-demo-block spacing">
       <div class="illustrate">
@@ -72,7 +82,11 @@
 import { chatAiStore } from "../store/modules/chatAiPinia";
 import { ref } from "vue";
 import { Sunny, Moon, Refresh, RefreshLeft } from "@element-plus/icons-vue";
+import "element-plus/es/components/message/style/css";
+import { ElMessage } from "element-plus";
+import i18n from "../i18n";
 const chatStore = chatAiStore();
+const md = ref(chatStore.md);
 const local = ref(chatStore.local);
 const theme = ref(chatStore.theme);
 function changeTheme() {
@@ -81,7 +95,15 @@ function changeTheme() {
 function changeLocal() {
   chatStore.setLocal(local.value);
 }
+function changemd() {
+  chatStore.setmd(md.value);
+}
 function undoChat() {
+  ElMessage({
+    showClose: true,
+    message: i18n.global.t("copied"),
+    type: "success",
+  });
   chatStore.undoAiChat();
 }
 function clearChat() {

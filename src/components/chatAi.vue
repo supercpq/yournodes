@@ -10,8 +10,19 @@
             :class="chatStore.theme == 'light' ? 'ai-light' : 'ai-dark'"
             v-show="index % 2 === 0"
           >
-            <span class="chat-content-a">
+            <span class="chat-content-a" v-if="!chatStore.md">
               {{ item }}
+            </span>
+            <span v-if="chatStore.md">
+              <md-editor
+                class="mgb20"
+                :editorId="`index${index}`"
+                v-model="chatStore.getChat[index]"
+                :previewTheme="`default`"
+                :language="mdEditorStore.getLang"
+                :readOnly="true"
+                :previewOnly="true"
+              />
             </span>
           </div>
         </div>
@@ -75,6 +86,9 @@ import { useUserStore } from "../store/modules/user";
 import { ref, onMounted } from "vue";
 import { Position, Setting } from "@element-plus/icons-vue";
 import chatSetting from "./chatSetting.vue";
+import MdEditor from "md-editor-v3";
+import { mdStore } from "../store/modules/mdEditorPinia";
+const mdEditorStore = mdStore();
 const disable = ref(false);
 const humanInput = ref("");
 const userStore = useUserStore();
