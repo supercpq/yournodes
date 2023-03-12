@@ -2,21 +2,21 @@
   <!-- <button @click="hellogit()">click</button>
   <br /> -->
   <div class="gitSelect">
-    <div v-show="gitstore.loading">
+    <div v-show="loading">
       <el-space direction="vertical" alignment="flex-start">
         <!-- <div>
       <el-switch v-model="gitstore.loading" />
     </div> -->
         <el-skeleton
           style="width: 300px; text-align: left"
-          :loading="gitstore.loading"
+          :loading="loading"
           animated
           :rows="2"
         >
         </el-skeleton>
       </el-space>
     </div>
-    <div v-show="!gitstore.loading" class="searchLi">
+    <div v-show="!loading" class="searchLi">
       <div class="langOptions">
         <div class="langOptionsItem">
           <a
@@ -49,7 +49,7 @@
         </div>
       </div>
       <ul class="ul-list-item">
-        <li v-for="item in gitstore.allList" :key="item.id" class="list-item">
+        <li v-for="item in list" :key="item.id" class="list-item">
           <div class="outsideI">
             <div class="outsideItem" @click="getfocus(item)">
               <div class="itemName">
@@ -84,9 +84,10 @@
 </template>
 
 <script lang="ts" setup>
-import { githubHotStore } from "../store/modules/searchGithubPinia";
+// import { githubHotStore } from "../store/modules/searchGithubPinia";
 import _ from "lodash";
-import { ref, watch, onMounted } from "vue";
+import { ref, watch, onMounted, computed } from "vue";
+import axios from "axios";
 const value = ref("Vue");
 const githublogo = "githublogo.svg";
 const options = [
@@ -155,7 +156,7 @@ const options = [
     label: "Shell",
   },
 ];
-const gitstore = githubHotStore();
+// const gitstore = githubHotStore();
 interface githubHotItem {
   id: number;
   name: string;
@@ -164,12 +165,16 @@ interface githubHotItem {
   stars: number;
   forks: number;
 }
-
+const list = ref<githubHotItem[]>([]);
+const loading = ref(true);
+const show = computed(() => {
+  return list.value.length > 0;
+});
 const hellogit = _.debounce(
   (lang = "vue") => {
-    gitstore.loading = true;
+    loading.value = true;
     localStorage.setItem("lang", lang);
-    gitstore.searchrepositories(lang);
+    searchrepositories(lang);
   },
   200,
   {
@@ -185,11 +190,71 @@ watch(value, (newValue, oldValue) => {
   // console.log("value变化", newValue, oldValue);
   hellogit(newValue);
 });
-
+function searchrepositories(lang = "vue") {
+  lang = lang.trim().slice(0, 20);
+  if (lang) {
+    axios
+      .get(
+        `https://api.github.com/search/repositories?q=language:${lang}&sort=stars`
+      )
+      .then(
+        (res) => {
+          console.log(typeof res.data.errors);
+          if (typeof res.data.errors == "undefined") {
+            list.value = [];
+            for (const i in res.data.items) {
+              const listItem: githubHotItem = {
+                id: res.data.items[i].id,
+                name: res.data.items[i].full_name,
+                picUrl: res.data.items[i].html_url,
+                description: res.data.items[i].description,
+                stars: res.data.items[i].stargazers_count,
+                forks: res.data.items[i].forks_count,
+              };
+              list.value.push(listItem);
+              // console.log(res.data.result.songs[i].id, res.data.result.songs[i].name, res.data.result.songs[i].al.picUrl)
+            }
+            loading.value = false;
+            // console.log(this.list);
+            // console.log(this.list.length);
+          } else {
+            if (!show.value) {
+              const listItem: githubHotItem = {
+                id: 0,
+                name: "nothing",
+                picUrl: "#",
+                description: "no data",
+                stars: 0,
+                forks: 0,
+              };
+              list.value.push(listItem);
+            }
+            loading.value = false;
+          }
+        },
+        (err) => {
+          // console.log('searchMusicListByName3')
+          if (!show.value) {
+            const listItem: githubHotItem = {
+              id: 0,
+              name: "nothing",
+              picUrl: "#",
+              description: "no data",
+              stars: 0,
+              forks: 0,
+            };
+            list.value.push(listItem);
+          }
+          console.log(err.message);
+          loading.value = false;
+        }
+      );
+  }
+}
 onMounted(() => {
   // console.log("11111111111111111111111", localStorage.getItem("lang"));
   value.value = localStorage.getItem("lang") ?? "Vue";
-  if (!gitstore.show) {
+  if (!show.value) {
     hellogit(value.value);
   }
 });
