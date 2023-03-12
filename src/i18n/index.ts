@@ -47,6 +47,7 @@ const messages = {
     setting: "Setting",
     logOutPrompt: "Really? Are you sure to logout?",
     backTop: "back to top",
+    copied: "Copied your last chat",
   },
   zh: {
     menu: ["首页", "个人中心", "创作中心", "写文章", "文章数据", "语言"],
@@ -87,6 +88,7 @@ const messages = {
     setting: "设置",
     logOutPrompt: "真的要退出登录吗？",
     backTop: "回到顶部",
+    copied: "已复制你的上一条聊天内容",
   },
 };
 
