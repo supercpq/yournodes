@@ -65,11 +65,11 @@ export const chatAiStore = defineStore("chatAi", {
               //   }
               // }, 20);
             } else {
-              this.prompt.push(res.message);
+              this.prompt.push("AI:" + res.message);
             }
           },
           (err) => {
-            this.prompt.push(err.message);
+            this.prompt.push("AI:" + err.message);
           }
         );
       }
@@ -159,7 +159,7 @@ export const chatAiStore = defineStore("chatAi", {
           // }, 20);
         })
         .catch((err) => {
-          this.prompt.push(err.message);
+          this.prompt.push("AI:" + err.message);
         });
     },
     undoAiChat() {
