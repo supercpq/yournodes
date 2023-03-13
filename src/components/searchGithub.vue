@@ -23,6 +23,7 @@
             href="https://github.com/supercpq/yournodes"
             target="_blank"
             title="your notes"
+            style="display: flex"
           >
             <span><img :src="githublogo" alt="github logo" /></span>
             <span> Github</span>
@@ -39,6 +40,23 @@
               >
                 <el-option
                   v-for="item in options"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                />
+              </el-select>
+            </div>
+          </span>
+          <span>
+            <div class="transoptions">
+              <el-select
+                v-model="sort"
+                class="m-2"
+                placeholder="Select"
+                size="small"
+              >
+                <el-option
+                  v-for="item in sortOptions"
                   :key="item.value"
                   :label="item.label"
                   :value="item.value"
@@ -69,7 +87,10 @@
                   ><el-icon><StarFilled /></el-icon>{{ item.stars }}
                 </span>
                 <span>
-                  &nbsp;<el-icon><Share /></el-icon> {{ item.forks }}
+                  <el-icon><Share /></el-icon> {{ item.forks }}
+                </span>
+                <span>
+                  <el-icon><UploadFilled /></el-icon>{{ item.updatedTime }}
                 </span>
               </div>
             </div>
@@ -89,7 +110,18 @@ import _ from "lodash";
 import { ref, watch, onMounted, computed } from "vue";
 import axios from "axios";
 const value = ref("Vue");
+const sort = ref("stars"); // stars or updated
 const githublogo = "githublogo.svg";
+const sortOptions = [
+  {
+    value: "stars",
+    label: "stars",
+  },
+  {
+    value: "updated",
+    label: "updated",
+  },
+];
 const options = [
   {
     value: "Vue",
@@ -164,6 +196,7 @@ interface githubHotItem {
   description: string;
   stars: number;
   forks: number;
+  updatedTime: string;
 }
 const list = ref<githubHotItem[]>([]);
 const loading = ref(true);
@@ -171,10 +204,10 @@ const show = computed(() => {
   return list.value.length > 0;
 });
 const hellogit = _.debounce(
-  (lang = "vue") => {
+  (lang = "vue", sort = "stars") => {
     loading.value = true;
     localStorage.setItem("lang", lang);
-    searchrepositories(lang);
+    searchrepositories(lang, sort);
   },
   200,
   {
@@ -188,14 +221,18 @@ const getfocus = (item: githubHotItem) => {
 };
 watch(value, (newValue, oldValue) => {
   // console.log("value变化", newValue, oldValue);
-  hellogit(newValue);
+  hellogit(newValue, sort.value);
 });
-function searchrepositories(lang = "vue") {
+watch(sort, (newValue, oldValue) => {
+  // console.log("value变化", newValue, oldValue);
+  hellogit(value.value, newValue);
+});
+function searchrepositories(lang = "vue", sort = "stars") {
   lang = lang.trim().slice(0, 20);
   if (lang) {
     axios
       .get(
-        `https://api.github.com/search/repositories?q=language:${lang}&sort=stars`
+        `https://api.github.com/search/repositories?q=language:${lang}&sort=${sort}`
       )
       .then(
         (res) => {
@@ -210,6 +247,7 @@ function searchrepositories(lang = "vue") {
                 description: res.data.items[i].description,
                 stars: res.data.items[i].stargazers_count,
                 forks: res.data.items[i].forks_count,
+                updatedTime: res.data.items[i].updated_at,
               };
               list.value.push(listItem);
               // console.log(res.data.result.songs[i].id, res.data.result.songs[i].name, res.data.result.songs[i].al.picUrl)
@@ -226,6 +264,7 @@ function searchrepositories(lang = "vue") {
                 description: "no data",
                 stars: 0,
                 forks: 0,
+                updatedTime: "-- --",
               };
               list.value.push(listItem);
             }
@@ -242,6 +281,7 @@ function searchrepositories(lang = "vue") {
               description: "no data",
               stars: 0,
               forks: 0,
+              updatedTime: "-- --",
             };
             list.value.push(listItem);
           }
@@ -272,6 +312,7 @@ onMounted(() => {
   display: flex;
   width: 400px;
   height: 20px;
+  justify-content: center;
 }
 .langOptions img {
   height: 20px;
@@ -280,7 +321,8 @@ onMounted(() => {
 .langOptionsItem {
   width: 175px;
   height: 15px;
-  margin: 10px;
+  margin: 10px 0;
+  display: flex;
 }
 ul li {
   list-style: none;
@@ -304,6 +346,7 @@ ul li {
 .ul-list-item {
   width: 380px;
   overflow: auto;
+  transform: translateX(-10px);
   /* display: none; */
 }
 .list-item {
@@ -342,6 +385,8 @@ ul li {
   width: 330px;
   height: 30px;
   margin: 2px;
+  display: flex;
+  justify-content: space-between;
 }
 .itemDescription {
   width: 350px;
