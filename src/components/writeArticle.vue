@@ -16,9 +16,20 @@
       </template>
     </md-editor>
     <div class="setting">
-      <el-button type="primary" class="submit" @click="onSubmit(true)">{{
-        $t("submit")
-      }}</el-button>
+      <el-button
+        type="primary"
+        class="submit"
+        v-if="!isPublish"
+        @click="onSubmit(true)"
+        >{{ $t("submit") }}</el-button
+      >
+      <el-button
+        type="primary"
+        class="submit"
+        v-else
+        @click="onSubmit(false)"
+        >{{ $t("privateAr") }}</el-button
+      >
       <el-popconfirm
         v-if="id && id != '-1'"
         confirm-button-text="Yes"
