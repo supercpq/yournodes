@@ -48,6 +48,8 @@ const messages = {
     logOutPrompt: "Really? Are you sure to logout?",
     backTop: "back to top",
     copied: "Copied your last chat",
+    deleteArPrompt: "Are you sure to delete this article?",
+    deleteAr: "Delete",
   },
   zh: {
     menu: ["首页", "个人中心", "创作中心", "写文章", "文章数据", "语言"],
@@ -89,6 +91,8 @@ const messages = {
     logOutPrompt: "真的要退出登录吗？",
     backTop: "回到顶部",
     copied: "已复制你的上一条聊天内容",
+    deleteArPrompt: "真的删除这篇文章吗？",
+    deleteAr: "删除",
   },
 };
 

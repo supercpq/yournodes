@@ -19,6 +19,22 @@
       <el-button type="primary" class="submit" @click="onSubmit(true)">{{
         $t("submit")
       }}</el-button>
+      <el-popconfirm
+        v-if="id && id != '-1'"
+        confirm-button-text="Yes"
+        cancel-button-text="No"
+        icon-color="#626AEF"
+        :title="$t('deleteArPrompt')"
+        @confirm="confirmEvent"
+        @cancel="cancelEvent"
+      >
+        <template #reference>
+          <el-button type="danger" class="submit">{{
+            $t("deleteAr")
+          }}</el-button>
+        </template>
+      </el-popconfirm>
+
       <editor-theme flexDisplay="column" />
     </div>
   </div>
@@ -40,6 +56,14 @@ const $route = useRoute();
 const text = ref("");
 const id = ref("");
 const isPublish = ref(false);
+const confirmEvent = () => {
+  text.value = "";
+  onSubmit(isPublish.value);
+  console.log("confirm!");
+};
+const cancelEvent = () => {
+  console.log("cancel!");
+};
 const onUploadImg = async (files, callback) => {
   const res = await Promise.all(
     files.map((file) => {
@@ -59,6 +83,7 @@ const onUploadImg = async (files, callback) => {
   );
   callback(res.map((item) => item.data.url));
 };
+
 const onSubmit = _.debounce((pub: boolean) => {
   if (id.value === "-1") return;
   // console.log("updata");
