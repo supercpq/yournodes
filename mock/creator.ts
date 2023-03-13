@@ -30,11 +30,19 @@ export default [
     timeout: 500,
     response: (data) => {
       // console.log(data.body);
-      return {
-        status: 0,
-        arid: "1234",
-        isPublish: data.body.isPublish,
-      };
+      if (data.body.content) {
+        return {
+          status: 0,
+          arid: "1234",
+          isPublish: data.body.isPublish,
+        };
+      } else {
+        return {
+          status: 0,
+          arid: "-1",
+          isPublish: data.body.isPublish,
+        };
+      }
     },
   },
   {
