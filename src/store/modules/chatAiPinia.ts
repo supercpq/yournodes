@@ -64,14 +64,6 @@ export const chatAiStore = defineStore("chatAi", {
               } else {
                 this.setAiChat(index, chat);
               }
-              // this.prompt.push(chat[0]);
-              // let i = 1;
-              // this.timer = setInterval(() => {
-              //   this.prompt[index] += chat[i++];
-              //   if (this.prompt[index].length === chat.length || !chat[i]) {
-              //     clearInterval(this.timer);
-              //   }
-              // }, 20);
             } else {
               this.prompt.push("AI:" + res.message);
             }
@@ -152,23 +144,6 @@ export const chatAiStore = defineStore("chatAi", {
           } else {
             this.setAiChat(index, chat);
           }
-          // this.prompt.push(chat[0]);
-          // let i = 1;
-          // this.timer = setInterval(() => {
-          //   this.prompt[index] += chat[i++];
-
-          //   if (
-          //     this.prompt[index].length === chat.length ||
-          //     typeof chat[i] === "undefined"
-          //   ) {
-          //     // console.log(
-          //     //   this.prompt[index].length === chat.length,
-          //     //   typeof chat[i] === "undefined",
-          //     //   !chat[i]
-          //     // );
-          //     clearInterval(this.timer);
-          //   }
-          // }, 20);
         })
         .catch((err) => {
           this.prompt.push("AI:" + err.message);
