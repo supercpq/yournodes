@@ -76,13 +76,153 @@
         </div>
         <editor-theme flexDisplay="column" />
       </div>
+      <div class="barr">
+        <!-- <el-dialog v-model="dialogVisible">
+          <div
+            style="
+              display: flex;
+              justify-content: space-between;
+              flex-wrap: wrap;
+            "
+          >
+            <el-switch
+              v-model="barrageShow"
+              class="mt-2"
+              :active-value="true"
+              :inactive-value="false"
+              style="margin-left: 24px"
+              inline-prompt
+              :active-icon="Operation"
+              :inactive-icon="Close"
+              size="large"
+              :change="changeShowBarrages()"
+            />
+            <el-color-picker v-model="color1" />
+          </div>
+        </el-dialog> -->
+
+        <el-input
+          v-model="input"
+          :placeholder="$t('sendBarrage')"
+          maxlength="20"
+          @keydown.enter="sendBarrages()"
+        />
+        <el-button
+          type="success"
+          :icon="Setting"
+          circle
+          @click="showSetting()"
+        />
+        <el-button
+          type="primary"
+          :icon="Position"
+          circle
+          @click="sendBarrages()"
+          :disabled="disable"
+        />
+      </div>
+      <Transition>
+        <div
+          style="display: flex; justify-content: space-between; flex-wrap: wrap"
+          v-show="dialogVisible"
+        >
+          <!-- <el-switch
+          v-model="barrageShow"
+          class="mt-2"
+          style="margin-left: 24px"
+          inline-prompt
+          :active-icon="Operation"
+          :inactive-icon="Close"
+          size="large"
+          :change="change()"
+        /> -->
+          <el-button
+            type="primary"
+            :icon="barrageShow ? Operation : Close"
+            circle
+            @click="change()"
+            :disabled="disable"
+          />
+          <el-color-picker v-model="color1" />
+          <div style="width: 100%">
+            <span>{{ $t("fontSize") }}: {{ fontSizeBarrages }}</span>
+            <el-slider
+              v-model="fontSizeBarrages"
+              :step="1"
+              :min="20"
+              :max="30"
+            />
+          </div>
+          <div style="width: 100%">
+            <span>{{ $t("opacity") }}: {{ opacityBarrages }}</span>
+            <el-slider
+              v-model="opacityBarrages"
+              :step="0.01"
+              :min="0"
+              :max="1"
+            />
+          </div>
+        </div>
+      </Transition>
     </aside>
+    <div class="barrage-wrap" v-show="barrageShow">
+      <div
+        v-for="item in barrages"
+        :key="item.id"
+        class="barrage"
+        :style="{
+          color: item.textColor,
+          'font-size': item.fontSize + 'px',
+          top: item.line + '0%',
+          'font-weight': 'bold',
+        }"
+        @mouseenter="rotateOver(item.id)"
+        @mouseleave="rotateOut(item.id)"
+        :id="`barrages-${item.id}`"
+      >
+        <p
+          :style="{
+            opacity: opacityBarrages,
+            'white-space': 'nowrap',
+            'min-width': 100 + 'px',
+          }"
+        >
+          {{ item.content }}
+        </p>
+        <Transition>
+          <div class="bartool">
+            <div class="triangle" v-if="item.stop"></div>
+            <div class="tools" v-if="item.stop">
+              <el-button
+                type="info"
+                :icon="DocumentCopy"
+                circle
+                @click="copyBarrage(item.content)"
+              />
+              <el-button
+                type="info"
+                :icon="Delete"
+                @click="deleteBarrage(item.id)"
+                circle
+                v-if="isedit"
+              />
+            </div>
+          </div>
+        </Transition>
+      </div>
+    </div>
   </div>
 </template>
 <script setup lang="ts">
 import { useRoute } from "vue-router";
-import { arLikes, getArContent, getArLikes, getQr } from "../api/readAr";
-import { ref, onBeforeMount } from "vue";
+import {
+  arLikes,
+  getArContent,
+  getArLikes,
+  getQr,
+  getBarr,
+} from "../api/readAr";
+import { ref, onBeforeMount, onBeforeUnmount, onDeactivated } from "vue";
 // import { useUserStore } from "../store/modules/user";
 import "md-editor-v3/lib/style.css";
 import MdEditor from "md-editor-v3";
@@ -91,8 +231,42 @@ import { getuseid, getToken } from "../utils/user";
 import { mdStore } from "../store/modules/mdEditorPinia";
 import editorTheme from "../components/editorTheme.vue";
 import jwtDecode from "jwt-decode";
-// import type { ExposeParam } from "md-editor-v3";
+import {
+  Delete,
+  DocumentCopy,
+  Position,
+  Setting,
+  Operation,
+  Close,
+} from "@element-plus/icons-vue";
 
+// import type { ExposeParam } from "md-editor-v3";
+interface Barrage {
+  content: string;
+  time: string;
+  textColor: string;
+  fontSize: number;
+  line: number; // fontend add
+  stop: boolean; // fontend add
+  distance: number; // fontend add
+  id: number;
+  move: boolean;
+}
+const barrages = ref<Array<Barrage>>([
+  // 需要渲染的弹幕列表
+]);
+const allBarrages = ref<Array<Barrage>>([
+  // 等待发送弹幕列表
+]);
+const waitClearList: Array<number> = [];
+const dialogVisible = ref(false);
+const disable = ref(false);
+const currentLine = ref(0);
+const opacityBarrages = ref(1);
+// const barrageShow = ref(false);
+const barrageShow = ref(false);
+const input = ref("");
+const fontSizeBarrages = ref(20);
 // const phoneCatalog = ref<any>(null);
 const mdEditorStore = mdStore();
 // import { useI18n } from "vue-i18n";
@@ -104,6 +278,7 @@ const arCatalog = ref<Array<string>>([]);
 const titleI = ref("目录  catalog");
 const $route = useRoute();
 const Ar_content = ref("");
+const color1 = ref("#409EFF");
 const isedit = ref(false);
 const Ar_id = ref($route.query.ar_id);
 const qr_svg = ref("");
@@ -117,42 +292,183 @@ interface useroptions {
   disactiveIcon: string;
 }
 const options = ref<useroptions[]>([]);
-const intersectionObserver = new IntersectionObserver((entries) => {
-  // 如果 intersectionRatio 为 0，则目标在视野外，
-  // 我们不需要做任何事情。
-  // console.log("editorRef.value", editorRef.value, editorRef);
-  if (entries[0].intersectionRatio <= 0) return;
-  entries.forEach((item) => {
-    if (item.intersectionRatio > 0) {
-      // console.log(item.target.id);
-      const index = item.target.id.slice(6, item.target.id.length);
-      const el = document.querySelector(`#arCatalog-${index}`) as HTMLElement;
-      // console.log(el.title);
-      titleI.value = el.title;
-      for (let elIndex = 0; elIndex < arCatalog.value.length; elIndex++) {
-        const cataElement = document.querySelector(
-          `#arCatalog-${elIndex}`
-        ) as HTMLElement;
-        cataElement.className = "cata";
-      }
-      el.className = "cata-active";
-      const catalog = document.getElementById("catalog");
-      const itemSrollTop = Number(index) - 3 > 0 ? Number(index) - 3 : 0;
-      const catalogPhone = document.getElementById("phone-catalog");
-      if (catalog) {
-        // catalog.scrollTop = itemSrollTop * 50;
-        catalog.scrollTo({ top: itemSrollTop * 50, behavior: "smooth" });
-      }
-      // (phoneCatalog.value as HTMLElement).scrollTop = itemSrollTop * 40;
-      // console.log(phoneCatalog.value);
-      if (catalogPhone?.parentNode?.parentNode) {
-        (catalogPhone.parentNode.parentNode as HTMLElement).scrollTop! =
-          itemSrollTop * 40;
-      }
-      // window.location.hash = `#arCatalog-${index}`;
+function copyBarrage(content: string) {
+  navigator.clipboard.writeText(content);
+}
+function showBar() {
+  // 循环播放
+  setInterval;
+}
+function change() {
+  barrageShow.value = !barrageShow.value;
+}
+function getIndex(id: number) {
+  for (let i = 0; i < barrages.value.length; i++) {
+    if (barrages.value[i].id === id) {
+      return i;
     }
-  });
+  }
+  return -1;
+}
+const intersectionObserver = new IntersectionObserver(
+  (entries) => {
+    // 如果 intersectionRatio 为 0，则目标在视野外，
+    // 我们不需要做任何事情。
+    // console.log("editorRef.value", editorRef.value, editorRef);
+    if (entries[0].intersectionRatio <= 0) return;
+    entries.forEach((item) => {
+      if (item.intersectionRatio > 0) {
+        // console.log(item.target.id);
+        const index = item.target.id.slice(6, item.target.id.length);
+        const el = document.querySelector(`#arCatalog-${index}`) as HTMLElement;
+        // console.log(el.title);
+        titleI.value = el.title;
+        for (let elIndex = 0; elIndex < arCatalog.value.length; elIndex++) {
+          const cataElement = document.querySelector(
+            `#arCatalog-${elIndex}`
+          ) as HTMLElement;
+          cataElement.className = "cata";
+        }
+        el.className = "cata-active";
+        const catalog = document.getElementById("catalog");
+        const itemSrollTop = Number(index) - 3 > 0 ? Number(index) - 3 : 0;
+        const catalogPhone = document.getElementById("phone-catalog");
+        if (catalog) {
+          // catalog.scrollTop = itemSrollTop * 50;
+          catalog.scrollTo({ top: itemSrollTop * 50, behavior: "smooth" });
+        }
+        // (phoneCatalog.value as HTMLElement).scrollTop = itemSrollTop * 40;
+        // console.log(phoneCatalog.value);
+        if (catalogPhone?.parentNode?.parentNode) {
+          (catalogPhone.parentNode.parentNode as HTMLElement).scrollTop! =
+            itemSrollTop * 40;
+        }
+        // window.location.hash = `#arCatalog-${index}`;
+      }
+    });
+  },
+  { threshold: 1.0 }
+);
+onBeforeUnmount(() => {
+  //
+  barrages.value = [];
 });
+
+function deleteBarrage(id: number) {
+  _.remove(barrages.value, function (n) {
+    return n.id === id;
+  });
+  currentLine.value = -1;
+  const nextBarrage = allBarrages.value.shift();
+  if (nextBarrage) {
+    // console.log("删除！", barrages.value, id, nextBarrage);
+    barrages.value.push(nextBarrage);
+    setTimeout(() => {
+      barragesMove(nextBarrage.id);
+    }, 1000);
+  }
+}
+function showSetting() {
+  dialogVisible.value = !dialogVisible.value;
+}
+function sendBarrages() {
+  // 发给服务器，并将新弹幕放入数组第一个
+}
+function rotateOver(id: number) {
+  currentLine.value = id;
+  for (let i = 0; i < barrages.value.length; i++) {
+    if (barrages.value[i].id === id) {
+      barrages.value[i].stop = true;
+      break;
+    }
+  }
+}
+
+function rotateOut(id: number) {
+  currentLine.value = -1;
+  for (let i = 0; i < barrages.value.length; i++) {
+    if (barrages.value[i].id === id) {
+      barrages.value[i].stop = false;
+      break;
+    }
+  }
+  barragesMove(id);
+}
+
+function barragesMove(barrageId: number) {
+  // 弹幕移动
+  let barrageIndex = getIndex(barrageId);
+  // console.log(barrageIndex, "动了");
+  const element = document.getElementById(`barrages-${barrageId}`);
+  let start, previousTimeStamp;
+  let done = false;
+  function step(timestamp) {
+    barrageIndex = getIndex(barrageId);
+    if (barrages.value[barrageIndex].stop) return;
+    if (start === undefined) {
+      start = timestamp;
+    }
+    const elapsed = timestamp - start;
+    if (previousTimeStamp !== timestamp) {
+      // 这里使用 `Math.min()` 确保元素刚好停在 3000px 的位置。
+      barrages.value[barrageIndex].distance = Math.min(
+        barrages.value[barrageIndex].distance + 1.5,
+        3000
+      );
+      // console.log(element);
+      if (element) {
+        element.style.transform =
+          "translateX(-" + barrages.value[barrageIndex].distance + "px)";
+      } else {
+        // console.log(element);
+        return;
+      }
+      if (barrages.value[barrageIndex].distance >= 3000) done = true;
+    }
+    if (elapsed < 20000) {
+      previousTimeStamp = timestamp;
+      if (!done) {
+        window.requestAnimationFrame(step);
+      } else {
+        barrageIndex = getIndex(barrageId);
+        // // let barr = barrages.value;
+        // // _.pullAt(barr, barrageIndex);
+        // // barrages.value = barr;
+        // console.log(barrages.value[barrageIndex].id, "到了");
+        waitClearList.push(barrages.value[barrageIndex].id);
+        if (currentLine.value === -1) {
+          // 证明没有被悬停的，可以清理
+          currentLine.value = 0;
+          // console.log(waitClearList, barrages.value);
+          // alert(123);
+          waitClearList.forEach((ele) => {
+            let justFinishBar = _.remove(barrages.value, function (n) {
+              return n.id === ele;
+            });
+            justFinishBar[0].distance = 0;
+            // // cancelAnimationFrame(justFinishBar.id);
+            allBarrages.value.push(justFinishBar[0]);
+            let next = allBarrages.value.shift();
+            if (next) {
+              // console.log(next, justFinishBar[0]);
+              barrages.value.push(next);
+              setTimeout(() => {
+                if (next) {
+                  barragesMove(next.id);
+                }
+              }, 1000);
+            }
+          });
+          waitClearList.length = 0;
+          currentLine.value = -1;
+        }
+        // 把播放完的这条弹幕pop出来并且重新push到弹幕列表最底下，并且barrages.value[barrageIndex].distance = 0
+      }
+    }
+  }
+  // console.log("here");
+  window.requestAnimationFrame(step);
+}
 // 开始监听
 // intersectionObserver.observe(document.querySelector('#实例方法'));
 async function Catalog(list) {
@@ -336,8 +652,54 @@ onBeforeMount(async () => {
   );
   getQr({ url: window.location.href }).then(
     (res: any) => {
-      //更新options
       qr_svg.value = res.svg_string;
+    },
+    (err) => {
+      console.log(err.message);
+    }
+  );
+  getBarr().then(
+    (res: any) => {
+      //更新弹幕
+      if (res.status === 0) {
+        let allBar = res.list;
+        for (let index = 0; index < allBar.length; index++) {
+          const distance = Math.floor(Math.random() * (200 + 1));
+          // console.log(distance);
+          if (index < 6) {
+            barrages.value.push({
+              content: allBar[index].content,
+              time: allBar[index].time,
+              textColor: allBar[index].textColor,
+              fontSize: allBar[index].fontSize,
+              line: (index + 1) % 7,
+              stop: false,
+              distance: distance,
+              id: index,
+              move: false,
+            });
+          } else {
+            allBarrages.value.push({
+              content: allBar[index].content,
+              time: allBar[index].time,
+              textColor: allBar[index].textColor,
+              fontSize: allBar[index].fontSize,
+              line: (index + 1) % 7,
+              stop: false,
+              distance: distance,
+              id: index,
+              move: false,
+            });
+          }
+        }
+        currentLine.value = -1;
+        setTimeout(() => {
+          for (let index = 0; index < barrages.value.length; index++) {
+            barragesMove(barrages.value[index].id);
+          }
+        }, 2000);
+        // allBarrages.value = res.list
+      }
     },
     (err) => {
       console.log(err.message);
@@ -347,8 +709,58 @@ onBeforeMount(async () => {
 </script>
 
 <style lang="scss" scoped>
+.bartool {
+  transform: translateY(-20px);
+  margin: 0 auto;
+  width: 100px;
+}
+.triangle {
+  margin: 0 auto;
+  transform: translateY(-19px);
+  width: 0;
+  height: 0;
+  border-bottom: 10px solid rgba(0, 0, 0, 0.6);
+  border-top: 10px solid transparent;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+}
+.barr {
+  display: flex;
+}
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
+.tools {
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 10px;
+  padding: 10px 0;
+  margin-top: -30px;
+  transform: scale(0.6);
+}
+.barrage-wrap {
+  height: 500px;
+  pointer-events: none;
+  width: 80%;
+  // margin-left: -200px;
+  position: absolute;
+  overflow: hidden;
+  z-index: 3;
+}
+.barrage {
+  position: absolute;
+  pointer-events: auto;
+  transform: rotateX(30deg);
+  left: 100%;
+}
 .md-editor {
-  height: 850px;
+  // height: 850px;
+  height: 100%;
   text-align: left;
   opacity: 0.8;
   padding: 0 20px;
@@ -521,6 +933,9 @@ onBeforeMount(async () => {
   }
   .directory {
     display: none !important;
+  }
+  .barrage-wrap {
+    width: 90%;
   }
 }
 

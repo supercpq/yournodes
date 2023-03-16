@@ -153,37 +153,37 @@ export default [
         status: 0,
         list: [
           {
-            content: "654321",
+            content: "Pinia好用！",
             time: "",
             textColor: "#409EFF",
             fontSize: 30,
           },
           {
-            content: "rhsdsdg1235",
+            content: "深度学习！",
             time: "",
             textColor: "rgb(255,0,0)",
             fontSize: 30,
           },
           {
-            content: "00000122512",
+            content: "2023.3.17发一条！！",
             time: "",
             textColor: "#409EFF",
             fontSize: 30,
           },
           {
-            content: "666rhsdsdg",
+            content: "666666",
             time: "",
             textColor: "rgb(255,0,0)",
             fontSize: 30,
           },
           {
-            content: "122512",
+            content: "哈哈哈哈哈哈哈哈哈哈哈哈",
             time: "",
             textColor: "#409EFF",
             fontSize: 30,
           },
           {
-            content: "rhsdsdg",
+            content: "放飞自我！！",
             time: "",
             textColor: "rgb(255,0,0)",
             fontSize: 30,
