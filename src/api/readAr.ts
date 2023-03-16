@@ -25,3 +25,8 @@ export const getArLikes = (params?: object) => {
 export const getQr = (data: object) => {
   return http.request("post", "/api/qr-code", { data });
 };
+
+// 获取弹幕
+export const getBarr = (params?: object) => {
+  return http.request("get", "/api/getbarrages", { params });
+};

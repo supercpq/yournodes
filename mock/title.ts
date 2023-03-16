@@ -144,4 +144,88 @@ export default [
       };
     },
   },
+  {
+    url: "/api/getbarrages",
+    method: "get",
+    timeout: 500,
+    response: () => {
+      return {
+        status: 0,
+        list: [
+          {
+            content: "654321",
+            time: "",
+            textColor: "#409EFF",
+            fontSize: 30,
+          },
+          {
+            content: "rhsdsdg1235",
+            time: "",
+            textColor: "rgb(255,0,0)",
+            fontSize: 30,
+          },
+          {
+            content: "00000122512",
+            time: "",
+            textColor: "#409EFF",
+            fontSize: 30,
+          },
+          {
+            content: "666rhsdsdg",
+            time: "",
+            textColor: "rgb(255,0,0)",
+            fontSize: 30,
+          },
+          {
+            content: "122512",
+            time: "",
+            textColor: "#409EFF",
+            fontSize: 30,
+          },
+          {
+            content: "rhsdsdg",
+            time: "",
+            textColor: "rgb(255,0,0)",
+            fontSize: 30,
+          },
+          {
+            content: "supercpq",
+            time: "",
+            textColor: "rgb(0,0,255)",
+            fontSize: 30,
+          },
+          {
+            content: "hello hello",
+            time: "",
+            textColor: "rgb(255,0,255)",
+            fontSize: 30,
+          },
+          {
+            content: "I'm happpy!!!!!!!!!!!!!!!!!!",
+            time: "",
+            textColor: "rgb(255,255,0)",
+            fontSize: 30,
+          },
+          {
+            content: "Vue.js + TS",
+            time: "",
+            textColor: "rgb(0,135,255)",
+            fontSize: 30,
+          },
+          {
+            content: "学React",
+            time: "",
+            textColor: "rgb(108,252,255)",
+            fontSize: 30,
+          },
+          {
+            content: "用用tailwind",
+            time: "",
+            textColor: "rgb(125,0,255)",
+            fontSize: 30,
+          },
+        ],
+      };
+    },
+  },
 ] as MockMethod[];

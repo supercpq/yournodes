@@ -52,6 +52,8 @@ const messages = {
     deleteAr: "Delete",
     privateAr: "private",
     sendBarrage: "clockwork barrage",
+    fontSize: "fontSize",
+    opacity: "opacity",
   },
   zh: {
     menu: ["首页", "个人中心", "创作中心", "写文章", "文章数据", "语言"],
@@ -97,6 +99,8 @@ const messages = {
     deleteAr: "删除",
     privateAr: "自己可见",
     sendBarrage: "发条弹幕",
+    fontSize: "字体大小",
+    opacity: "透明度",
   },
 };
 
