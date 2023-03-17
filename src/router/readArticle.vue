@@ -105,7 +105,7 @@
           v-model="input"
           :placeholder="$t('sendBarrage')"
           maxlength="20"
-          @keydown.enter="sendBarrages()"
+          @keydown.enter="sendBarrage()"
         />
         <el-button
           type="success"
@@ -117,7 +117,7 @@
           type="primary"
           :icon="Position"
           circle
-          @click="sendBarrages()"
+          @click="sendBarrage()"
           :disabled="disable"
         />
       </div>
@@ -221,6 +221,8 @@ import {
   getArLikes,
   getQr,
   getBarr,
+  sendBarr,
+  deleteBarr,
 } from "../api/readAr";
 import { ref, onBeforeMount, onBeforeUnmount, onDeactivated } from "vue";
 // import { useUserStore } from "../store/modules/user";
@@ -246,11 +248,12 @@ interface Barrage {
   time: string;
   textColor: string;
   fontSize: number;
+  barrId: string | number;
   line: number; // fontend add
   stop: boolean; // fontend add
   distance: number; // fontend add
-  id: number;
-  move: boolean;
+  id: number; // fontend add
+  move: boolean; // fontend add
 }
 const barrages = ref<Array<Barrage>>([
   // 需要渲染的弹幕列表
@@ -355,7 +358,7 @@ onBeforeUnmount(() => {
 });
 
 function deleteBarrage(id: number) {
-  _.remove(barrages.value, function (n) {
+  const justBarr = _.remove(barrages.value, function (n) {
     return n.id === id;
   });
   currentLine.value = -1;
@@ -367,12 +370,62 @@ function deleteBarrage(id: number) {
       barragesMove(nextBarrage.id);
     }, 1000);
   }
+  if (justBarr[0]) {
+    deleteBarr({ arid: Ar_id.value, id: justBarr[0].barrId }).then(
+      (res) => {
+        //
+      },
+      (err) => {
+        console.log(err.message);
+      }
+    );
+  }
 }
 function showSetting() {
   dialogVisible.value = !dialogVisible.value;
 }
+const sendBarrage = _.throttle(
+  function () {
+    sendBarrages();
+  },
+  3000,
+  { trailing: false }
+);
 function sendBarrages() {
-  // 发给服务器，并将新弹幕放入数组第一个
+  // 发给服务器，并将新弹幕放入数组第一个，要等服务器返回barrid后再放入
+  const inputBar = input.value;
+  input.value = "";
+  sendBarr({
+    content: input.value,
+    textColor: color1.value,
+    fontSize: fontSizeBarrages.value,
+  }).then(
+    (res: any) => {
+      if (res.status === 0) {
+        const next: Barrage = {
+          content: inputBar,
+          time: res.time,
+          textColor: color1.value,
+          fontSize: fontSizeBarrages.value,
+          barrId: res.barrId,
+          line: Math.floor(Math.random() * (6 + 1)), // fontend add
+          stop: false, // fontend add
+          distance: Math.floor(Math.random() * (200 + 1)), // fontend add
+          id: barrages.value.length + allBarrages.value.length, // fontend add
+          move: false, // fontend add
+        };
+        barrages.value.push(next);
+        setTimeout(() => {
+          if (next) {
+            barragesMove(next.id);
+          }
+        }, 1000);
+      }
+    },
+    (err) => {
+      console.log(err.message);
+    }
+  );
 }
 function rotateOver(id: number) {
   currentLine.value = id;
@@ -672,6 +725,7 @@ onBeforeMount(async () => {
               time: allBar[index].time,
               textColor: allBar[index].textColor,
               fontSize: allBar[index].fontSize,
+              barrId: allBar[index].barrId,
               line: (index + 1) % 7,
               stop: false,
               distance: distance,
@@ -684,6 +738,7 @@ onBeforeMount(async () => {
               time: allBar[index].time,
               textColor: allBar[index].textColor,
               fontSize: allBar[index].fontSize,
+              barrId: allBar[index].barrId,
               line: (index + 1) % 7,
               stop: false,
               distance: distance,

@@ -30,3 +30,13 @@ export const getQr = (data: object) => {
 export const getBarr = (params?: object) => {
   return http.request("get", "/api/getbarrages", { params });
 };
+
+// 发送弹幕
+export const sendBarr = (data: object) => {
+  return http.request("post", "/sendbarrages", { data });
+};
+
+// 删除弹幕
+export const deleteBarr = (data: object) => {
+  return http.request("post", "/deletebarrages", { data });
+};

@@ -157,74 +157,108 @@ export default [
             time: "",
             textColor: "#409EFF",
             fontSize: 30,
+            barrId: "1",
           },
           {
             content: "深度学习！",
             time: "",
             textColor: "rgb(255,0,0)",
             fontSize: 30,
+            barrId: "2",
           },
           {
             content: "2023.3.17发一条！！",
             time: "",
             textColor: "#409EFF",
             fontSize: 30,
+            barrId: "3",
           },
           {
             content: "666666",
             time: "",
             textColor: "rgb(255,0,0)",
             fontSize: 30,
+            barrId: "4",
           },
           {
             content: "哈哈哈哈哈哈哈哈哈哈哈哈",
             time: "",
             textColor: "#409EFF",
             fontSize: 30,
+            barrId: "5",
           },
           {
             content: "放飞自我！！",
             time: "",
             textColor: "rgb(255,0,0)",
             fontSize: 30,
+            barrId: "6",
           },
           {
             content: "supercpq",
             time: "",
             textColor: "rgb(0,0,255)",
             fontSize: 30,
+            barrId: "7",
           },
           {
             content: "hello hello",
             time: "",
             textColor: "rgb(255,0,255)",
             fontSize: 30,
+            barrId: "8",
           },
           {
             content: "I'm happpy!!!!!!!!!!!!!!!!!!",
             time: "",
             textColor: "rgb(255,255,0)",
             fontSize: 30,
+            barrId: "9",
           },
           {
             content: "Vue.js + TS",
             time: "",
             textColor: "rgb(0,135,255)",
             fontSize: 30,
+            barrId: "10",
           },
           {
             content: "学React",
             time: "",
             textColor: "rgb(108,252,255)",
             fontSize: 30,
+            barrId: "11",
           },
           {
             content: "用用tailwind",
             time: "",
             textColor: "rgb(125,0,255)",
             fontSize: 30,
+            barrId: "12",
           },
         ],
+      };
+    },
+  },
+  {
+    url: "/sendbarrages",
+    method: "post",
+    timeout: 500,
+    response: () => {
+      return {
+        status: 0,
+        time: Date.parse(new Date().toString()),
+        barrId: Date.parse(new Date().toString()),
+      };
+    },
+  },
+  {
+    url: "/deletebarrages",
+    method: "post",
+    timeout: 500,
+    response: () => {
+      return {
+        status: 0,
       };
     },
   },
