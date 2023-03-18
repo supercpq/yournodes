@@ -241,7 +241,7 @@ export default [
     },
   },
   {
-    url: "/sendbarrages",
+    url: "/my/sendbarrages",
     method: "post",
     timeout: 500,
     response: () => {
@@ -253,7 +253,7 @@ export default [
     },
   },
   {
-    url: "/deletebarrages",
+    url: "/my/deletebarrages",
     method: "post",
     timeout: 500,
     response: () => {
