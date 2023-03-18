@@ -393,7 +393,7 @@ function sendBarrages() {
   input.value = "";
   sendBarr({
     arid: Ar_id.value,
-    content: input.value,
+    content: inputBar,
     textColor: color1.value,
     fontSize: fontSizeBarrages.value,
   }).then(
@@ -708,7 +708,7 @@ onBeforeMount(async () => {
       console.log(err.message);
     }
   );
-  getBarr().then(
+  getBarr({ arid: Ar_id.value }).then(
     (res: any) => {
       //更新弹幕
       if (res.status === 0) {
