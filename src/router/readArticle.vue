@@ -392,6 +392,7 @@ function sendBarrages() {
   const inputBar = input.value;
   input.value = "";
   sendBarr({
+    arid: Ar_id.value,
     content: input.value,
     textColor: color1.value,
     fontSize: fontSizeBarrages.value,
