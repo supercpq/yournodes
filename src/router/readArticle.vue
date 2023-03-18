@@ -224,12 +224,12 @@ import {
   sendBarr,
   deleteBarr,
 } from "../api/readAr";
-import { ref, onBeforeMount, onBeforeUnmount, onDeactivated } from "vue";
+import { ref, onBeforeMount, onBeforeUnmount } from "vue";
 // import { useUserStore } from "../store/modules/user";
 import "md-editor-v3/lib/style.css";
 import MdEditor from "md-editor-v3";
 import _ from "lodash"; //防抖节流
-import { getuseid, getToken } from "../utils/user";
+import { getToken } from "../utils/user";
 import { mdStore } from "../store/modules/mdEditorPinia";
 import editorTheme from "../components/editorTheme.vue";
 import jwtDecode from "jwt-decode";
