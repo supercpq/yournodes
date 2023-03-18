@@ -298,10 +298,6 @@ const options = ref<useroptions[]>([]);
 function copyBarrage(content: string) {
   navigator.clipboard.writeText(content);
 }
-function showBar() {
-  // 循环播放
-  setInterval;
-}
 function change() {
   barrageShow.value = !barrageShow.value;
 }
