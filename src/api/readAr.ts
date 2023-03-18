@@ -33,10 +33,10 @@ export const getBarr = (params?: object) => {
 
 // 发送弹幕
 export const sendBarr = (data: object) => {
-  return http.request("post", "/sendbarrages", { data });
+  return http.request("post", "/my/sendbarrages", { data });
 };
 
 // 删除弹幕
 export const deleteBarr = (data: object) => {
-  return http.request("post", "/deletebarrages", { data });
+  return http.request("post", "/my/deletebarrages", { data });
 };
