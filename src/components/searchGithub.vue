@@ -66,10 +66,15 @@
           </span>
         </div>
       </div>
-      <ul class="ul-list-item">
-        <li v-for="item in list" :key="item.id" class="list-item">
+      <ul class="ul-list-item" @click="getfocus">
+        <li
+          v-for="(item, index) in list"
+          :key="item.id"
+          :data-index="index"
+          class="list-item"
+        >
           <div class="outsideI">
-            <div class="outsideItem" @click="getfocus(item)">
+            <div class="outsideItem">
               <div class="itemName">
                 <h4>
                   <a :href="item.picUrl" target="_blank">
@@ -215,9 +220,17 @@ const hellogit = _.debounce(
   }
 );
 
-const getfocus = (item: githubHotItem) => {
-  // console.log("1aaaaaaaaaa1");
-  window.open(item.picUrl, "_blank");
+const getfocus = (e) => {
+  let el = e.target;
+  // 查询父元素是否为li
+  while (!el.matches("li")) {
+    el = el.parentNode;
+    if (!el) {
+      break;
+    }
+  }
+  const index = el.dataset.index;
+  window.open(list.value[index].picUrl, "_blank");
 };
 watch(value, (newValue, oldValue) => {
   // console.log("value变化", newValue, oldValue);
@@ -236,7 +249,7 @@ function searchrepositories(lang = "vue", sort = "stars") {
       )
       .then(
         (res) => {
-          console.log(typeof res.data.errors);
+          // console.log(typeof res.data.errors);
           if (typeof res.data.errors == "undefined") {
             list.value = [];
             for (const i in res.data.items) {

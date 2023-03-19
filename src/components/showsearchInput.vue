@@ -27,13 +27,14 @@
       @scroll="handleScroll"
       ref="myList"
     >
-      <ul class="ul-list-item-ar">
+      <ul class="ul-list-item-ar" @click="getfocus">
         <li
           class="list-item-ar"
-          v-for="item in searchinputStore.allList"
+          v-for="(item, index) in searchinputStore.allList"
           :key="item.id"
+          :data-index="index"
         >
-          <div class="outsideIt-ar" @click="getfocus(item)">
+          <div class="outsideIt-ar">
             <div class="imglinks">
               <!-- TODO -->
               <img
@@ -159,9 +160,18 @@ const lazySearch = _.throttle(
   { trailing: false }
 );
 
-const getfocus = (item: searchInputItem) => {
+const getfocus = (e) => {
+  let el = e.target;
+  // 查询父元素是否为li
+  while (!el.matches("li")) {
+    el = el.parentNode;
+    if (!el) {
+      break;
+    }
+  }
+  const index = el.dataset.index;
+  const item = searchinputStore.allList[index];
   if (props.isSelf) {
-    // TODO：获取文章数据
     ardata.getline(item.id, item.title);
   } else {
     let routerPa =
