@@ -53,7 +53,8 @@ export default [
       return {
         status: 0,
         name: "superCPQ",
-        accessToken: "thisistokenstring.superCPQ",
+        accessToken:
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InN1cGVyY3BxQG91dGxvb2suY29tIiwidXNlcmlkIjoiMTY3NjA5NDkyMjE0NyIsImlhdCI6MTY3ODM2MzA2NSwiZXhwIjoxNzA5OTIwNjY1fQ.GHrfslcrcNyAutAASLqcXvLuOr1X64M7Vsfb5vgOAnY",
         expires: "32285982150", // 2024-02-02T12:04:14.000Z
         id: "123456",
       };
@@ -67,7 +68,8 @@ export default [
       return {
         status: 0,
         name: "superCPQ",
-        accessToken: "thisistokenstring.superCPQ",
+        accessToken:
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InN1cGVyY3BxQG91dGxvb2suY29tIiwidXNlcmlkIjoiMTY3NjA5NDkyMjE0NyIsImlhdCI6MTY3ODM2MzA2NSwiZXhwIjoxNzA5OTIwNjY1fQ.GHrfslcrcNyAutAASLqcXvLuOr1X64M7Vsfb5vgOAnY",
         expires: "32285982150", // 2024-02-02T12:04:14.000Z
         id: "123456",
       };
@@ -81,7 +83,8 @@ export default [
       return {
         status: 0,
         name: "superCPQ",
-        accessToken: "thisistokenstring.superCPQ",
+        accessToken:
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InN1cGVyY3BxQG91dGxvb2suY29tIiwidXNlcmlkIjoiMTY3NjA5NDkyMjE0NyIsImlhdCI6MTY3ODM2MzA2NSwiZXhwIjoxNzA5OTIwNjY1fQ.GHrfslcrcNyAutAASLqcXvLuOr1X64M7Vsfb5vgOAnY",
         expires: "32285982150", // 2024-02-02T12:04:14.000Z
         id: "123456",
       };
