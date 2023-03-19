@@ -104,7 +104,9 @@
       </ul>
     </div>
   </div>
-  <a href="https://beian.miit.gov.cn/" target="_blank" class="icp">备案号</a>
+  <a href="https://beian.miit.gov.cn/" target="_blank" class="icp"
+    >辽ICP备2022003671号-2</a
+  >
 
   <!-- <p>No more</p> -->
 </template>
@@ -222,6 +224,9 @@ const hellogit = _.debounce(
 
 const getfocus = (e) => {
   let el = e.target;
+  if (el.matches("ul")) {
+    return;
+  }
   // 查询父元素是否为li
   while (!el.matches("li")) {
     el = el.parentNode;

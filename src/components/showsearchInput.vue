@@ -162,6 +162,9 @@ const lazySearch = _.throttle(
 
 const getfocus = (e) => {
   let el = e.target;
+  if (el.matches("ul")) {
+    return;
+  }
   // 查询父元素是否为li
   while (!el.matches("li")) {
     el = el.parentNode;
