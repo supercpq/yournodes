@@ -473,7 +473,8 @@ function barragesMove(barrageId: number) {
         // console.log(element);
         return;
       }
-      if (barrages.value[barrageIndex].distance >= 3000) done = true;
+      if (barrages.value[barrageIndex].distance >= 3000 || elapsed >= 19999)
+        done = true;
     }
     if (elapsed < 20000) {
       previousTimeStamp = timestamp;
