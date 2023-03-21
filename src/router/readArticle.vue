@@ -642,7 +642,7 @@ function getTitle(html: string) {
     let index = changeHtml.search(geta);
     let codeindex = changeHtml.indexOf("<code>");
     let titleEnd = changeHtml.indexOf(">");
-    console.log(`"title-${title}">`, codeindex, index, titleEnd);
+    // console.log(`"title-${title}">`, codeindex, index, titleEnd);
     if (codeindex !== -1 && codeindex < index && dirty) {
       // 说明标题里面有code标签没有a标签
       title++;
