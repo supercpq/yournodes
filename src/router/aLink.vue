@@ -37,7 +37,7 @@ onBeforeMount(() => {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.6);
   width: 50%;
   border-radius: 15px;
   display: flex;
@@ -50,7 +50,7 @@ onBeforeMount(() => {
 .alink {
   opacity: 0.7;
   flex: 1 auto;
-  font-size: 13px;
+  font-size: 16px;
   margin: 0 auto;
   display: -webkit-box;
   -webkit-line-clamp: 2;
