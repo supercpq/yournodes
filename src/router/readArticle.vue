@@ -309,45 +309,42 @@ function getIndex(id: number) {
   }
   return -1;
 }
-const intersectionObserver = new IntersectionObserver(
-  (entries) => {
-    // 如果 intersectionRatio 为 0，则目标在视野外，
-    // 我们不需要做任何事情。
-    // console.log("editorRef.value", editorRef.value, editorRef);
-    if (entries[0].intersectionRatio <= 0) return;
-    entries.forEach((item) => {
-      if (item.intersectionRatio > 0) {
-        // console.log(item.target.id);
-        const index = item.target.id.slice(6, item.target.id.length);
-        const el = document.querySelector(`#arCatalog-${index}`) as HTMLElement;
-        // console.log(el.title);
-        titleI.value = el.title;
-        for (let elIndex = 0; elIndex < arCatalog.value.length; elIndex++) {
-          const cataElement = document.querySelector(
-            `#arCatalog-${elIndex}`
-          ) as HTMLElement;
-          cataElement.className = "cata";
-        }
-        el.className = "cata-active";
-        const catalog = document.getElementById("catalog");
-        const itemSrollTop = Number(index) - 3 > 0 ? Number(index) - 3 : 0;
-        const catalogPhone = document.getElementById("phone-catalog");
-        if (catalog) {
-          // catalog.scrollTop = itemSrollTop * 50;
-          catalog.scrollTo({ top: itemSrollTop * 50, behavior: "smooth" });
-        }
-        // (phoneCatalog.value as HTMLElement).scrollTop = itemSrollTop * 40;
-        // console.log(phoneCatalog.value);
-        if (catalogPhone?.parentNode?.parentNode) {
-          (catalogPhone.parentNode.parentNode as HTMLElement).scrollTop! =
-            itemSrollTop * 40;
-        }
-        // window.location.hash = `#arCatalog-${index}`;
+const intersectionObserver = new IntersectionObserver((entries) => {
+  // 如果 intersectionRatio 为 0，则目标在视野外，
+  // 我们不需要做任何事情。
+  // console.log("editorRef.value", editorRef.value, editorRef);
+  if (entries[0].intersectionRatio <= 0) return;
+  entries.forEach((item) => {
+    if (item.intersectionRatio > 0) {
+      // console.log(item.target.id);
+      const index = item.target.id.slice(6, item.target.id.length);
+      const el = document.querySelector(`#arCatalog-${index}`) as HTMLElement;
+      // console.log(el.title);
+      titleI.value = el.title;
+      for (let elIndex = 0; elIndex < arCatalog.value.length; elIndex++) {
+        const cataElement = document.querySelector(
+          `#arCatalog-${elIndex}`
+        ) as HTMLElement;
+        cataElement.className = "cata";
       }
-    });
-  },
-  { threshold: 1.0 }
-);
+      el.className = "cata-active";
+      const catalog = document.getElementById("catalog");
+      const itemSrollTop = Number(index) - 3 > 0 ? Number(index) - 3 : 0;
+      const catalogPhone = document.getElementById("phone-catalog");
+      if (catalog) {
+        // catalog.scrollTop = itemSrollTop * 50;
+        catalog.scrollTo({ top: itemSrollTop * 50, behavior: "smooth" });
+      }
+      // (phoneCatalog.value as HTMLElement).scrollTop = itemSrollTop * 40;
+      // console.log(phoneCatalog.value);
+      if (catalogPhone?.parentNode?.parentNode) {
+        (catalogPhone.parentNode.parentNode as HTMLElement).scrollTop! =
+          itemSrollTop * 40;
+      }
+      // window.location.hash = `#arCatalog-${index}`;
+    }
+  });
+});
 onBeforeUnmount(() => {
   //
   barrages.value = [];
