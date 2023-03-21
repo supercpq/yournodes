@@ -619,6 +619,7 @@ function getTitle(html: string) {
   let title = 0;
   // let hello = new Array<string>();
   arCatalog.value.length = 0; //防止因markdown内容改变重复渲染目录
+  let dirty = true; // 防止出现多个code标签在a标签引起的标题跳转错误
   while (changeHtml.search(geta) !== -1) {
     // 先处理h再处理a
     // 处理h和把标题名加入数组
@@ -641,7 +642,7 @@ function getTitle(html: string) {
     let index = changeHtml.search(geta);
     let codeindex = changeHtml.indexOf("<code>");
     let titleEnd = changeHtml.indexOf(">");
-    if (codeindex !== -1 && codeindex < index) {
+    if (codeindex !== -1 && codeindex < index && dirty) {
       // 说明标题里面有code标签没有a标签
       title++;
       arHtml += changeHtml.slice(0, titleEnd + 1);
@@ -650,6 +651,7 @@ function getTitle(html: string) {
           ? changeHtml
           : changeHtml.slice(titleEnd + 1, changeHtml.length);
       // console.log(arHtml, "\n\n\n", changeHtml);
+      dirty = false;
       continue;
     }
     arHtml +=
@@ -672,6 +674,7 @@ function getTitle(html: string) {
         : changeHtml.slice(changeHtml.search(geth), changeHtml.length);
     // console.log("A处理结束", title, changeHtml);
     title++;
+    dirty = true;
   }
   // console.log(arHtml, "\n\n", html, "\n\n", hello);
   // console.log(hello);
