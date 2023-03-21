@@ -575,7 +575,7 @@ function watch(source,obj){
 }
 \u0060\u0060\u0060
 通过选项参数\u0060immdiate\u0060来指定回调是否需要立即执行,当\u0060immediate\u0060选项存在并且为\u0060true\u0060时，回调函数会在该\u0060watch\u0060创建时立即执行一次
- ### 过期的副作用
+ ### 过期的副\`作\`用
  竞态问题:
 
 ![image.png](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/56c16569ebec4e459a93340a6608bd6e~tplv-k3u1fbpfcp-watermark.image?)
