@@ -10,6 +10,7 @@ const error404 = () => import("./error404.vue");
 const login = () => import("./login.vue");
 const reguser = () => import("./reguser.vue");
 const chatG = () => import("./chatG.vue");
+const aLink = () => import("./aLink.vue");
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
@@ -100,6 +101,15 @@ const routes: Array<RouteRecordRaw> = [
     meta: {
       keepAlive: false,
       title: "AI-yournotes",
+    },
+  },
+  {
+    path: "/link",
+    name: "link",
+    component: aLink,
+    meta: {
+      keepAlive: false,
+      title: "link-yournotes",
     },
   },
   {

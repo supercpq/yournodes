@@ -54,6 +54,8 @@ const messages = {
     sendBarrage: "clockwork barrage(3s)",
     fontSize: "fontSize",
     opacity: "opacity",
+    link: "About to leave 'your notes', please pay attention to account security",
+    commitLink: "Confirm access",
   },
   zh: {
     menu: ["首页", "个人中心", "创作中心", "写文章", "文章数据", "语言"],
@@ -101,6 +103,8 @@ const messages = {
     sendBarrage: "发条弹幕(3s)",
     fontSize: "字体大小",
     opacity: "透明度",
+    link: "即将离开your notes，请注意账号安全",
+    commitLink: "确认访问",
   },
 };
 
