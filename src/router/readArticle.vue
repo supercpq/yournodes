@@ -521,25 +521,24 @@ function barragesMove(barrageId: number) {
   window.requestAnimationFrame(step);
 }
 // 开始监听
-// intersectionObserver.observe(document.querySelector('#实例方法'));
 async function Catalog(list) {
   // 开启目录监视和调整标题缩进
   // console.log(list);
   setTimeout(() => {
     for (let index = 0; index < arCatalog.value.length; index++) {
-      intersectionObserver.observe(
-        document.querySelector(`#title-${index}`) as HTMLElement
-      );
+      try {
+        intersectionObserver.observe(
+          document.querySelector(`#title-${index}`) as HTMLElement
+        );
+      } catch (e) {
+        continue;
+      }
     }
   }, 1000);
-  for (
-    let index = 0;
-    index < list.length && index < arCatalog.value.length;
-    index++
-  ) {
+  for (let index = 0; index < list.length; index++) {
     const blankString = "\u3000";
-    arCatalog.value[index] =
-      blankString.repeat(list[index].level - 1) + arCatalog.value[index];
+    let title = blankString.repeat(list[index].level - 1) + list[index].text;
+    arCatalog.value.push(title);
   }
 }
 const likeAr = _.throttle(
@@ -574,6 +573,21 @@ async function backTop() {
   window.location.hash = `#title-1`;
   window.location.hash = `#title-0`;
 }
+// const markedHeadingId = (text, level, index) => `title-${index}`;
+
+MdEditor.config({
+  markedRenderer(renderer) {
+    renderer.link = (href, title, text) => {
+      const thisHost = window.location.protocol + "//" + window.location.host;
+      if (href && !href.startsWith(thisHost)) {
+        href = thisHost + "/link?target=" + href;
+      }
+      return `<a href="${href}" target="_blank">${text}</a>`;
+    };
+    return renderer;
+  },
+});
+
 async function gotoTitle(title: number) {
   // document.querySelector(`#title-${title}`)?.scrollIntoView(true);
   titleI.value = arCatalog.value[title];
@@ -615,16 +629,29 @@ function getTitle(html: string) {
     //   changeHtml.slice(changeHtml.search(geta), changeHtml.search(geta) + 30)
     // );
     let test = changeHtml.match(geth)?.[0];
-    let h = changeHtml.match(geth)?.[0][2];
+    let h = changeHtml.match(geth)?.[0][2]; // 获取这是几级标题
     let titleindex = test?.slice(8, test?.length - 2); // 各个小标题名
     if (typeof titleindex === "string") {
-      arCatalog.value.push(titleindex);
+      // arCatalog.value.push(titleindex);
     }
     // console.log("title", title, changeHtml);
     changeHtml = changeHtml.replace(geth, `<h${h} id="title-${title}">`);
     arHtml += changeHtml.slice(0, 6);
     changeHtml = changeHtml.slice(6, changeHtml.length);
     let index = changeHtml.search(geta);
+    let codeindex = changeHtml.indexOf("<code>");
+    let titleEnd = changeHtml.indexOf(">");
+    if (codeindex !== -1 && codeindex < index) {
+      // 说明标题里面有code标签没有a标签
+      title++;
+      arHtml += changeHtml.slice(0, titleEnd + 1);
+      changeHtml =
+        index === -1
+          ? changeHtml
+          : changeHtml.slice(titleEnd + 1, changeHtml.length);
+      // console.log(arHtml, "\n\n\n", changeHtml);
+      continue;
+    }
     arHtml +=
       index === -1 ? changeHtml : changeHtml.slice(0, changeHtml.search(geta));
     changeHtml =
