@@ -479,9 +479,6 @@ function barragesMove(barrageId: number) {
         window.requestAnimationFrame(step);
       } else {
         barrageIndex = getIndex(barrageId);
-        // // let barr = barrages.value;
-        // // _.pullAt(barr, barrageIndex);
-        // // barrages.value = barr;
         // console.log(barrages.value[barrageIndex].id, "到了");
         waitClearList.push(barrages.value[barrageIndex].id);
         if (currentLine.value === -1) {
