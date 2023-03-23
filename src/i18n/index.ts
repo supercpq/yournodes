@@ -56,6 +56,8 @@ const messages = {
     opacity: "opacity",
     link: "About to leave 'your notes', please pay attention to account security",
     commitLink: "Confirm access",
+    localOn: "local preview only",
+    localOff: "save to your account",
   },
   zh: {
     menu: ["首页", "个人中心", "创作中心", "写文章", "文章数据", "语言"],
@@ -105,6 +107,8 @@ const messages = {
     opacity: "透明度",
     link: "即将离开your notes，请注意账号安全",
     commitLink: "确认访问",
+    localOn: "仅本地预览",
+    localOff: "保存到您的账户",
   },
 };
 
