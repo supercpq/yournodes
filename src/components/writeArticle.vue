@@ -62,6 +62,7 @@ import axios from "axios";
 import TimeNow from "./timeNow.vue";
 import { mdStore } from "../store/modules/mdEditorPinia";
 import editorTheme from "./editorTheme.vue";
+import { zhLang, enLang } from "../i18n/mdEditor";
 const mdEditorStore = mdStore();
 const $route = useRoute();
 const text = ref("");
@@ -95,6 +96,15 @@ const onUploadImg = async (files, callback) => {
   callback(res.map((item) => item.data.url));
 };
 
+MdEditor.config({
+  editorConfig: {
+    // 语言
+    languageUserDefined: {
+      "zh-CN": zhLang,
+      "en-US": enLang,
+    },
+  },
+});
 const onSubmit = _.debounce((pub: boolean) => {
   if (id.value === "-1") return;
   // console.log("updata");

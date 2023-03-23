@@ -77,30 +77,6 @@
         <editor-theme flexDisplay="column" />
       </div>
       <div class="barr">
-        <!-- <el-dialog v-model="dialogVisible">
-          <div
-            style="
-              display: flex;
-              justify-content: space-between;
-              flex-wrap: wrap;
-            "
-          >
-            <el-switch
-              v-model="barrageShow"
-              class="mt-2"
-              :active-value="true"
-              :inactive-value="false"
-              style="margin-left: 24px"
-              inline-prompt
-              :active-icon="Operation"
-              :inactive-icon="Close"
-              size="large"
-              :change="changeShowBarrages()"
-            />
-            <el-color-picker v-model="color1" />
-          </div>
-        </el-dialog> -->
-
         <el-input
           v-model="input"
           :placeholder="$t('sendBarrage')"
@@ -126,16 +102,6 @@
           style="display: flex; justify-content: space-between; flex-wrap: wrap"
           v-show="dialogVisible"
         >
-          <!-- <el-switch
-          v-model="barrageShow"
-          class="mt-2"
-          style="margin-left: 24px"
-          inline-prompt
-          :active-icon="Operation"
-          :inactive-icon="Close"
-          size="large"
-          :change="change()"
-        /> -->
           <el-button
             type="primary"
             :icon="barrageShow ? Operation : Close"
@@ -233,6 +199,7 @@ import { getToken } from "../utils/user";
 import { mdStore } from "../store/modules/mdEditorPinia";
 import editorTheme from "../components/editorTheme.vue";
 import jwtDecode from "jwt-decode";
+import { zhLang, enLang } from "../i18n/mdEditor";
 import {
   Delete,
   DocumentCopy,
@@ -581,7 +548,15 @@ MdEditor.config({
     return renderer;
   },
 });
-
+MdEditor.config({
+  editorConfig: {
+    // 语言
+    languageUserDefined: {
+      "zh-CN": zhLang,
+      "en-US": enLang,
+    },
+  },
+});
 async function gotoTitle(title: number) {
   // document.querySelector(`#title-${title}`)?.scrollIntoView(true);
   titleI.value = arCatalog.value[title];
