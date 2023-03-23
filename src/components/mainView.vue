@@ -61,8 +61,14 @@ onMounted(() => {
   let lang = localStorage.getItem("lang-zh-en") || "zh";
   if (langSet.indexOf(lang) === -1) {
     locale.value = "zh";
+    mdEditorStore.setLang("zh-CN");
   } else {
     locale.value = lang;
+    if (lang === "zh") {
+      mdEditorStore.setLang("zh-CN");
+    } else if (lang === "en") {
+      mdEditorStore.setLang("en-US");
+    }
   }
 });
 </script>
