@@ -46,7 +46,7 @@
         </template>
       </el-popconfirm>
 
-      <editor-theme flexDisplay="column" />
+      <editor-theme flexDisplay="column" :is-edit="true" />
     </div>
   </div>
 </template>
@@ -77,6 +77,7 @@ const cancelEvent = () => {
   console.log("cancel!");
 };
 const onUploadImg = async (files, callback) => {
+  if (!mdEditorStore.getLocal) return;
   const res = await Promise.all(
     files.map((file) => {
       return new Promise((rev, rej) => {
@@ -106,6 +107,7 @@ MdEditor.config({
   },
 });
 const onSubmit = _.debounce((pub: boolean) => {
+  if (!mdEditorStore.getLocal) return;
   if (id.value === "-1") return;
   // console.log("updata");
   isPublish.value = pub;

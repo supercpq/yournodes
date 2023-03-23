@@ -7,6 +7,7 @@ export const mdStore = defineStore("mdStore", {
       theme: "light" as Theme,
       previewTheme: "cyanosis",
       Lang: "zh-CN",
+      local: true,
     };
   },
   getters: {
@@ -20,6 +21,9 @@ export const mdStore = defineStore("mdStore", {
     },
     getLang: (state) => {
       return state.Lang;
+    },
+    getLocal: (state) => {
+      return state.local;
     },
   },
   actions: {
@@ -42,6 +46,9 @@ export const mdStore = defineStore("mdStore", {
     },
     setLang(lang: string) {
       this.Lang = lang;
+    },
+    setLocal(Local: boolean) {
+      this.local = Local;
     },
   },
 });
