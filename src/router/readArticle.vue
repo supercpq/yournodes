@@ -13,7 +13,7 @@
         <img :src="item.activeIcon" v-else alt="" class="img-icon" />
       </div>
     </aside>
-    <main class="content">
+    <main class="mgb20">
       <div class="editor-theme">
         <editor-theme flexDisplay="row" />
         <div class="transoptions">
@@ -36,7 +36,6 @@
         </div>
       </div>
       <md-editor
-        class="mgb20"
         v-model="Ar_content"
         :previewTheme="mdEditorStore.getPreviewTheme"
         :theme="mdEditorStore.getTheme"
@@ -915,7 +914,7 @@ onBeforeMount(async () => {
 }
 .content {
   grid-template-columns: 2;
-  max-height: 100%;
+  max-height: 105%;
   overflow: hidden;
   background-color: rgba(255, 255, 255, 0.3);
 }
@@ -941,6 +940,10 @@ onBeforeMount(async () => {
 .transoptions {
   position: relative;
   top: 6px;
+}
+.mgb20 {
+  height: 100%;
+  overflow: auto;
 }
 //pc端
 @media only screen and (min-width: 1150px) {
@@ -975,12 +978,15 @@ onBeforeMount(async () => {
 @media only screen and (max-width: 767px) {
   .grid-content {
     grid-template-columns: 100%;
+    height: 850px;
   }
   .likes {
     display: none !important;
   }
   .content {
     grid-template-columns: 1;
+    max-height: none;
+    height: 850px;
   }
   .editor-theme {
     display: flex;
