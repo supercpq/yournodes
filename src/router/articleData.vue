@@ -35,7 +35,7 @@ ardata.$subscribe((mutations, state) => {
 
 <style scoped>
 .wrapperT {
-  max-width: 1280px;
+  max-width: 100%;
   display: grid;
   grid-template-columns: 61% 39%;
   grid-gap: 10px;

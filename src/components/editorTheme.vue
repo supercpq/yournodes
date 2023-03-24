@@ -72,6 +72,7 @@ const props = defineProps({
     default: false,
   },
 });
+const isWrap = props.flexDisplay === "row" ? "nowrap" : "wrap";
 const options = [
   {
     value: "light" as Theme,
@@ -130,10 +131,11 @@ onMounted(() => {
 .theme-contain {
   display: flex;
   flex-flow: v-bind("props.flexDisplay");
+  flex-wrap: v-bind("isWrap");
 }
 .langOptionsItem {
   width: 100px;
   height: 15px;
-  margin: 10px;
+  margin: 6px;
 }
 </style>

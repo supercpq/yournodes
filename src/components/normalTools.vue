@@ -155,4 +155,10 @@ onMounted(() => {
     }
   }
 }
+
+@media (prefers-color-scheme: dark) {
+  .tool-title {
+    color: #eee;
+  }
+}
 </style>

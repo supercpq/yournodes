@@ -162,6 +162,10 @@ const lazySearch = _.throttle(
 
 const getfocus = (e) => {
   let el = e.target;
+  if (el.matches("h4")) {
+    // 点击连接跳转
+    return;
+  }
   if (el.matches("ul")) {
     return;
   }
@@ -209,8 +213,7 @@ ul li {
 }
 .searchSelect-ar {
   height: 800px;
-  // width: 710px;
-  width: 100%;
+  width: 98%;
   min-width: 360px;
   padding: 20px;
 }
@@ -220,22 +223,23 @@ ul li {
 }
 
 .searchLi-ar {
-  height: 800px;
-  // width: 730px;
+  height: 100%;
   width: 100%;
   min-width: 360px;
   container-type: inline-size;
   overflow: auto;
+  border-radius: 10px;
   background-color: rgba(255, 255, 255, 0.15);
 }
 /* overflow-y:auto; */
 .ul-list-item-ar {
-  width: 690px;
+  width: 100%;
   overflow: auto;
   /* display: none; */
 }
 .list-item-ar {
-  width: 670px;
+  // width: 670px;
+  width: 90%;
 }
 
 .outsideIt-ar {
@@ -244,7 +248,8 @@ ul li {
   grid-template-columns: 20% 80%;
   padding: 6px;
   cursor: pointer;
-  width: 650px;
+  // width: 650px;
+  width: 100%;
 }
 
 .outseideItem-ar {
@@ -273,7 +278,7 @@ ul li {
   cursor: pointer;
 }
 .itemTitle {
-  width: 500px;
+  width: 70%;
   height: 30px;
   font-size: large;
   overflow: hidden;
@@ -282,7 +287,7 @@ ul li {
   margin: 2px;
 }
 .itemDecri {
-  width: 500px;
+  width: 90%;
   height: 70px;
   overflow: hidden;
   text-overflow: ellipsis;

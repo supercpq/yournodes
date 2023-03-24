@@ -71,7 +71,7 @@
       </div>
       <div class="aside-setting">
         <div>
-          <div style="width: 100px; height: 100px" v-html="qr_svg"></div>
+          <div class="qr" v-html="qr_svg"></div>
           <p style="text-align: left; font-size: smaller">{{ $t("qrinfo") }}</p>
         </div>
         <editor-theme flexDisplay="column" />
@@ -915,7 +915,8 @@ onBeforeMount(async () => {
 }
 .content {
   grid-template-columns: 2;
-  height: 850px;
+  max-height: 100%;
+  overflow: hidden;
   background-color: rgba(255, 255, 255, 0.3);
 }
 .directory {
@@ -991,7 +992,15 @@ onBeforeMount(async () => {
     width: 90%;
   }
 }
-
+.qr {
+  width: 100px;
+  height: 100px;
+}
+@media (prefers-color-scheme: dark) {
+  .qr {
+    background-color: #fff;
+  }
+}
 .aside-setting {
   display: flex;
   justify-items: auto;

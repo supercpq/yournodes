@@ -224,6 +224,11 @@ const hellogit = _.debounce(
 
 const getfocus = (e) => {
   let el = e.target;
+  console.log(el);
+  if (el.matches("span")) {
+    // 点击连接跳转
+    return;
+  }
   if (el.matches("ul")) {
     return;
   }
@@ -347,7 +352,8 @@ ul li {
 }
 .gitSelect {
   height: 800px;
-  width: 430px;
+  // width: 430px;
+  width: 100%;
   padding: 20px;
 }
 ::-webkit-scrollbar {
@@ -356,19 +362,20 @@ ul li {
 }
 .searchLi {
   height: 800px;
-  width: 430px;
+  width: 100%;
   overflow: auto;
+  border-radius: 10px;
   background-color: rgba(255, 255, 255, 0.15);
 }
 /* overflow-y:auto; */
 .ul-list-item {
-  width: 380px;
+  width: 100%;
   overflow: auto;
   transform: translateX(-10px);
   /* display: none; */
 }
 .list-item {
-  width: 350px;
+  width: 85%;
 }
 .descri {
   color: var(--jjext-color-secondary-app);
@@ -382,12 +389,12 @@ ul li {
 }
 .outsideI {
   padding: 6px;
-  width: 350px;
+  width: 100%;
 }
 .outsideItem {
   text-align: left;
   flex-grow: 1;
-  width: 350px;
+  width: 100%;
   overflow: hidden;
   display: flex;
   padding: 2px;

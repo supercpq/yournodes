@@ -28,9 +28,10 @@ import nomalTool from "../components/normalTools.vue";
 
 <style scoped>
 .wrapperT {
-  max-width: 1280px;
+  max-width: 100%;
   display: grid;
   grid-template-rows: 5% 90%;
+  height: 100%;
   grid-gap: 10px;
 }
 
@@ -44,20 +45,24 @@ import nomalTool from "../components/normalTools.vue";
   display: grid;
   grid-gap: 10px;
   grid-row-start: 2;
+  height: 100%;
   grid-template-columns: 33% 60% 7%;
 }
 
 .two {
   /* grid-row-start: 3; */
   grid-column-start: 1;
+  height: 100%;
   /* margin-left: 20px; */
 }
 .three {
   /* grid-row-start: 3; */
+  height: 100%;
   grid-column-start: 2;
 }
 .four {
   /* grid-row-start: 3; */
+  height: 100%;
   grid-column-start: 3;
 }
 

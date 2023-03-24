@@ -151,6 +151,7 @@ const handleScroll = _.throttle(
   max-height: 500px;
   min-width: 660px;
   max-width: 800px;
+  border-radius: 10px;
   background-color: rgba(255, 255, 255, 0.1);
 }
 li {

@@ -92,6 +92,16 @@ button:focus-visible {
   /* padding: 2rem; */
   text-align: center;
 }
+::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
+}
+
+@media only screen and (min-width: 1150px) {
+  #app {
+    max-width: 80%;
+  }
+}
 
 @media (prefers-color-scheme: light) {
   :root {
@@ -103,6 +113,12 @@ button:focus-visible {
   }
   button {
     background-color: #f9f9f9;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  body {
+    /* background: rgba(60, 60, 60, 0.3); */
+    color: #eee;
   }
 }
 
