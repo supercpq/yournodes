@@ -233,6 +233,8 @@ export default [
         content: `
 # VUE.JS 设计与实现 响应式系统 笔记
 [这是一个跳转](http://localhost:5173/reading?ar_id=10)
+[这是一个跳转](http://localhost:4173/reading?ar_id=10)
+
 ## 响应式系统的作用与实现
 ### 响应式\`数据与副作用函数\`
 \`数据与副作用函数\`
