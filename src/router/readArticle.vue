@@ -940,7 +940,7 @@ onBeforeMount(async () => {
 }
 .transoptions {
   position: relative;
-  top: 10px;
+  top: 6px;
 }
 //pc端
 @media only screen and (min-width: 1150px) {
