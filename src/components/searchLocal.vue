@@ -45,6 +45,7 @@
       >
         <li
           class="autoIn"
+          style="color: black"
           v-for="(item, index) in inputSuggestion"
           :key="index"
           @click="
@@ -136,7 +137,7 @@ const hellogit = _.debounce(
   }
 );
 function setFocus(focus: boolean) {
-  console.log(" setFocus", focus);
+  // console.log(" setFocus", focus);
   isFocus.value = focus;
 }
 const getSuggestion = _.debounce(
