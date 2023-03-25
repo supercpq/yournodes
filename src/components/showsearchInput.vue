@@ -228,12 +228,13 @@ ul li {
   min-width: 360px;
   container-type: inline-size;
   overflow: auto;
+  overflow-x: hidden;
   border-radius: 10px;
   background-color: rgba(255, 255, 255, 0.15);
 }
 /* overflow-y:auto; */
 .ul-list-item-ar {
-  width: 100%;
+  width: 95%;
   overflow: auto;
   /* display: none; */
 }
@@ -289,15 +290,12 @@ ul li {
 .itemDecri {
   width: 90%;
   height: 70px;
-  overflow: hidden;
-  text-overflow: ellipsis;
   line-height: 22px;
   padding: 5px;
 }
 .descri {
   flex: 1 0 auto;
   font-size: 13px;
-  line-height: 22px;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -332,7 +330,8 @@ h4 {
   }
   .ul-list-item-ar {
     max-width: 400px;
-    width: 100%;
+    width: 88%;
+    overflow-x: hidden;
   }
   .itemTitle {
     max-width: 400px;
@@ -340,7 +339,7 @@ h4 {
   }
   .itemDecri {
     max-width: 400px;
-    width: 100%;
+    width: 95%;
   }
   .list-item-ar {
     max-width: 400px;
