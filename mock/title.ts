@@ -79,6 +79,21 @@ export default [
     },
   },
   {
+    url: "/api/inputsuggestion",
+    method: "get",
+    timeout: 500,
+    response: () => {
+      return {
+        status: 0,
+        suggest: [
+          { label: "hello111" },
+          { label: "hello222" },
+          { label: "hello333" },
+        ],
+      };
+    },
+  },
+  {
     url: "/api/article/getarticle",
     method: "get",
     timeout: 500,
