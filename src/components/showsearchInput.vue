@@ -56,7 +56,7 @@
                   <a :href="item.url" target="_blank">
                     <h4
                       style="
-                        width: 400px;
+                        width: 95%;
                         overflow: hidden;
                         text-overflow: ellipsis;
                         white-space: nowrap;
@@ -279,7 +279,7 @@ ul li {
   cursor: pointer;
 }
 .itemTitle {
-  width: 70%;
+  width: 80%;
   height: 30px;
   font-size: large;
   overflow: hidden;
