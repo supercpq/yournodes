@@ -35,8 +35,6 @@ export const useUserStore = defineStore({
       id: "",
       profession,
       avatarLink,
-      // 登录显示组件判断 0：登录 1：手机登录 2：二维码登录 3：注册 4：忘记密码，默认0：登录
-      // 目前只有0 3 4 其他的后续添加
       userMail,
       currentPage: 0,
       disabled: false,
