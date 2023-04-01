@@ -1,12 +1,8 @@
 <script setup lang="ts">
 import mainView from "./components/mainView.vue";
-import searchGithub from "./components/searchGithub.vue";
-import searchLocal from "./components/searchLocal.vue";
-import { onMounted } from "vue";
 import { routerStore } from "./store/modules/routerPinia";
-import { useRouter, useRoute } from "vue-router";
+import { useRouter } from "vue-router";
 const router = useRouter();
-const route = useRoute();
 const routerPathStore = routerStore();
 const routerP = routerPathStore.$subscribe((mutations, state) => {
   // localStorage.setItem("router", state.routerPath);
