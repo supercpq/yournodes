@@ -649,8 +649,9 @@ function getTitle(html: string) {
   // console.log(hello);
   if (isedit.value) {
     let editPath = window.location.protocol + "//" + window.location.host;
+    let edit = mdEditorStore.getLang === "zh-CN" ? "编辑" : "edit";
     arHtml =
-      `<a href='${editPath}/creator/write?arid=${Ar_id.value}'>edit<a>` +
+      `<a href='${editPath}/creator/write?arid=${Ar_id.value}'>${edit}<a>` +
       arHtml;
   }
   return arHtml;
