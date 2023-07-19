@@ -1,7 +1,6 @@
 # your notes —— 一个浏览器主页兼博客网站的前端
 
 [点我查看项目预览(可使用版)](https://supercpq.top/)   <br>
-[点我查看项目预览(mock返回数据预览版)](https://www.wxhdxw.top/)   <br>
 [点我查看项目总结](https://supercpq.top/reading?ar_id=1675782974279)
 
 ## 项目简介
