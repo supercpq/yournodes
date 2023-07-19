@@ -118,7 +118,9 @@ button:focus-visible {
 @media (prefers-color-scheme: dark) {
   body {
     /* background: rgba(60, 60, 60, 0.3); */
-    color: #eee;
+    /* color: #eee; */
+    color: #213547;
+    background-color: #ffffff;
   }
 }
 
